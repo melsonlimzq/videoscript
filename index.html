@@ -3,320 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Script Evaluator — Financial Education</title>
+<title>Video Script Evaluator</title>
 <style>
-:root{color-scheme:light}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f9f8f6;color:#1a1a1a;font-size:15px;line-height:1.6}
-.page{max-width:860px;margin:0 auto;padding:28px 24px 80px}
-.top-title{font-size:18px;font-weight:500;margin-bottom:3px}
-.top-sub{font-size:13px;color:#888;margin-bottom:20px}
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9f8f6; color: #1a1a1a; font-size: 15px; line-height: 1.6; }
 
-/* Form */
-textarea,input[type=text],input[type=password],select{width:100%;font-size:14px;line-height:1.65;padding:11px 13px;border:1px solid #e0ded8;border-radius:9px;background:#fff;color:#1a1a1a;outline:none;font-family:inherit;-webkit-appearance:none}
-textarea{resize:vertical}
-textarea:focus,input:focus,select:focus{border-color:#aaa}
-textarea::placeholder,input::placeholder{color:#bbb}
-select{cursor:pointer}
-label.field-label{font-size:12px;font-weight:500;color:#555;display:block;margin-bottom:5px;letter-spacing:.03em}
+.page { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
 
-/* Meta grid */
-.meta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-bottom:12px}
-
-/* Platform note */
-.platform-note{font-size:12px;color:#4a9eca;margin-top:5px;min-height:16px;line-height:1.4}
-
-/* LP section */
-.lp-section{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:16px 18px;margin-bottom:12px;display:none}
-.lp-section.visible{display:block}
-.lp-section h3{font-size:13px;font-weight:500;color:#555;margin-bottom:12px}
-.lp-fields{display:flex;flex-direction:column;gap:8px}
-
-/* Script area */
-.script-wrap{margin-top:4px}
-.script-wrap textarea{min-height:180px}
-.word-count{font-size:12px;color:#aaa;margin-top:6px;min-height:18px}
-
-/* Buttons */
-.btn-row{display:flex;justify-content:flex-end;margin-top:12px;gap:10px;flex-wrap:wrap;align-items:center}
-button{font-size:14px;font-weight:500;padding:9px 22px;border-radius:8px;border:1px solid #1a1a1a;background:#1a1a1a;color:#fff;cursor:pointer;font-family:inherit}
-button:hover{opacity:.85}
-button:disabled{opacity:.4;cursor:not-allowed}
-.btn-ghost{background:#fff;color:#1a1a1a}
-.btn-sm{font-size:13px;padding:6px 14px}
-.btn-link{background:none;border:none;color:#aaa;font-size:13px;padding:0;cursor:pointer;text-decoration:underline;font-family:inherit}
-.btn-link:hover{color:#333}
-
-/* Loading */
-.spinner-wrap{display:flex;align-items:center;gap:10px;color:#888;font-size:14px}
-.spinner{width:16px;height:16px;border:2px solid #ddd;border-top-color:#555;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-.progress-bar{width:100%;height:3px;background:#e5e3de;border-radius:2px;margin-top:10px;overflow:hidden}
-.progress-fill{height:100%;background:#1a1a1a;border-radius:2px;transition:width .8s ease}
-.stage-label{font-size:12px;color:#aaa;margin-top:6px}
-.error-box{background:#fdecea;border-radius:8px;padding:13px 16px;font-size:14px;color:#a02020;margin-top:12px;display:none;line-height:1.6}
+/* App header */
+.app-header { margin-bottom: 28px; }
+.app-title { font-size: 20px; font-weight: 600; color: #1a1a1a; }
+.app-sub { font-size: 13px; color: #888; margin-top: 2px; }
 
 /* API key */
-#api-screen{background:#fff;border:1px solid #e5e3de;border-radius:12px;padding:18px 20px;margin-bottom:14px}
-#api-screen h2{font-size:15px;font-weight:500;margin-bottom:4px}
-#api-screen p{font-size:13px;color:#555;margin-bottom:12px;line-height:1.6}
-.api-key-row{display:flex;gap:8px}
-.api-key-row input{flex:1}
-.key-saved{font-size:12px;color:#1a6e3c;margin-top:6px;display:none}
+.key-section { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
+.key-label { font-size: 12px; font-weight: 500; color: #888; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+.key-row { display: flex; gap: 8px; }
+.key-row input { flex: 1; border: 1px solid #d5d3ce; border-radius: 7px; padding: 8px 12px; font-size: 14px; font-family: monospace; outline: none; }
+.key-row input:focus { border-color: #888; }
+.key-row button { background: #1a1a1a; color: #fff; border: none; border-radius: 7px; padding: 8px 18px; font-size: 13px; font-weight: 500; cursor: pointer; }
+.key-row button:hover { background: #333; }
+.key-hint { font-size: 12px; color: #888; margin-top: 6px; }
 
 /* History panel */
-.history-panel{background:#fff;border:1px solid #e5e3de;border-radius:12px;margin-bottom:14px;overflow:hidden;display:none}
-.history-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;cursor:pointer;user-select:none}
-.history-header:hover{background:#faf9f7}
-.history-title{font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px}
-.history-count{font-size:11px;font-weight:600;padding:2px 7px;border-radius:10px;background:#f0eeeb;color:#666}
-.history-chev{font-size:11px;color:#aaa;transition:transform .2s}
-.history-chev.open{transform:rotate(180deg)}
-.history-body{display:none;border-top:1px solid #f0eeeb}
-.history-body.open{display:block}
-.history-list{max-height:320px;overflow-y:auto}
-.history-item{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid #f5f4f2;cursor:pointer;transition:background .1s}
-.history-item:last-of-type{border-bottom:none}
-.history-item:hover{background:#faf9f7}
-.history-item-content{flex:1;min-width:0}
-.history-item-meta{font-size:11px;color:#aaa;margin-bottom:3px}
-.history-item-preview{font-size:13px;color:#333;line-height:1.45;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.history-item-score{font-size:12px;color:#888}
-.history-item-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
-.history-delete{background:none;border:none;color:#ccc;font-size:17px;padding:0 2px;cursor:pointer;line-height:1}
-.history-delete:hover{color:#e05a20;opacity:1}
-.history-footer{padding:10px 18px;display:flex;justify-content:flex-end;border-top:1px solid #f0eeeb}
-.history-empty{padding:14px 18px;font-size:13px;color:#aaa}
+.history-panel { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+.history-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; cursor: pointer; user-select: none; }
+.history-header:hover { background: #faf9f7; }
+.history-title { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+.history-count { font-size: 12px; color: #888; font-weight: 400; }
+.history-chev { font-size: 12px; color: #888; }
+.history-body { display: none; border-top: 1px solid #e5e3de; }
+.history-list { max-height: 280px; overflow-y: auto; }
+.history-empty { padding: 20px; font-size: 13px; color: #aaa; text-align: center; }
+.history-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #f0eee9; }
+.history-item:hover { background: #faf9f7; }
+.history-item:last-child { border-bottom: none; }
+.history-item-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.history-item-name { font-size: 13px; color: #1a1a1a; font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.history-item-score { font-size: 13px; font-weight: 600; color: #1a1a1a; white-space: nowrap; }
+.history-item-meta { font-size: 11px; color: #aaa; margin-top: 2px; }
+.history-footer { padding: 10px 20px; border-top: 1px solid #f0eee9; }
+.btn-link { background: none; border: none; font-size: 12px; color: #888; cursor: pointer; padding: 0; text-decoration: underline; }
+.btn-link:hover { color: #c0392b; }
 
-/* Weights panel */
-.weights-panel{background:#fff;border:1px solid #e5e3de;border-radius:12px;margin-top:12px;margin-bottom:0;overflow:hidden}
-.weights-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;cursor:pointer;user-select:none}
-.weights-header:hover{background:#faf9f7}
-.weights-title{font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px}
-.weights-badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:#e5f0ff;color:#1a52a8;display:none}
-.weights-badge.visible{display:inline-block}
-.weights-chev{font-size:11px;color:#aaa;transition:transform .2s}
-.weights-chev.open{transform:rotate(180deg)}
-.weights-body{display:none;padding:6px 18px 16px;border-top:1px solid #f0eeeb}
-.weights-body.open{display:block}
-.wt-row{display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid #f5f4f2}
-.wt-row:last-of-type{border-bottom:none}
-.wt-name{font-size:13px;color:#333;flex:0 0 240px}
-.wt-slider{flex:1;min-width:80px;-webkit-appearance:none;height:4px;border-radius:2px;background:#e5e3de;outline:none;cursor:pointer}
-.wt-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:#1a1a1a;cursor:pointer}
-.wt-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#1a1a1a;cursor:pointer;border:none}
-.wt-val{font-size:12px;font-weight:500;color:#1a1a1a;min-width:32px;text-align:right}
-.weights-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:10px;border-top:1px solid #f0eeeb}
-.weights-note{font-size:12px;color:#aaa}
+/* Input section */
+.input-section { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 24px; margin-bottom: 16px; }
+
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+@media(max-width:600px) { .meta-grid { grid-template-columns: 1fr; } }
+.meta-field { display: flex; flex-direction: column; gap: 5px; }
+.field-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; }
+.meta-field input, .meta-field select { border: 1px solid #d5d3ce; border-radius: 7px; padding: 8px 12px; font-size: 14px; font-family: inherit; outline: none; background: #fff; color: #1a1a1a; }
+.meta-field input:focus, .meta-field select:focus { border-color: #888; }
+.platform-note { font-size: 11px; color: #888; line-height: 1.5; margin-top: 2px; }
+
+.mode-toggle-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.mode-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; }
+.mode-toggle { display: flex; background: #f3f1ee; border-radius: 8px; padding: 3px; gap: 2px; }
+.mode-btn { background: none; border: none; border-radius: 6px; padding: 6px 16px; font-size: 13px; font-weight: 500; cursor: pointer; color: #666; transition: all 0.15s; }
+.mode-btn.active { background: #fff; color: #1a1a1a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+
+.weights-section { border: 1px solid #e5e3de; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+.weights-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; cursor: pointer; background: #faf9f7; font-size: 13px; color: #555; user-select: none; }
+.weights-header:hover { background: #f3f1ee; }
+.weights-chev { font-size: 11px; }
+.weights-body { padding: 16px; display: none; }
+.weights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:600px) { .weights-grid { grid-template-columns: 1fr; } }
+.weight-row { display: flex; flex-direction: column; gap: 4px; }
+.weight-name { font-size: 12px; color: #555; }
+.weight-controls { display: flex; align-items: center; gap: 8px; }
+.weight-controls input[type=range] { flex: 1; }
+.weight-val { font-size: 12px; font-weight: 600; color: #1a1a1a; width: 16px; text-align: right; }
+
+textarea#script-input { width: 100%; min-height: 200px; border: 1px solid #d5d3ce; border-radius: 8px; padding: 12px 14px; font-size: 14px; font-family: inherit; line-height: 1.7; resize: vertical; outline: none; }
+textarea#script-input:focus { border-color: #888; }
+
+.eval-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; }
+.eval-btn { background: #1a1a1a; color: #fff; border: none; border-radius: 8px; padding: 11px 28px; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+.eval-btn:hover { background: #333; }
+.eval-btn:disabled { background: #ccc; cursor: not-allowed; }
+.char-count { font-size: 12px; color: #aaa; }
+
+/* Progress */
+.progress-wrap { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+.progress-bar-bg { background: #f0eee9; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 10px; }
+.progress-bar-fill { background: #1a1a1a; height: 100%; border-radius: 100px; transition: width 0.4s ease; width: 0%; }
+.progress-label { font-size: 13px; color: #666; }
+
+/* Error */
+.error-box { background: #fdecea; border: 1px solid #f5c6c6; border-radius: 10px; padding: 16px 20px; font-size: 14px; color: #a02020; margin-bottom: 16px; white-space: pre-wrap; word-break: break-word; }
 
 /* Results */
-.results{display:none;margin-top:28px}
-.score-hero{background:#fff;border:1px solid #e5e3de;border-radius:12px;padding:20px 24px;margin-bottom:20px}
-.hero-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.hero-left{flex:1;min-width:220px}
-.verdict-pill{display:inline-block;font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;margin-bottom:10px}
-.verdict-text{font-size:14px;color:#444;line-height:1.65;max-width:500px}
-.hero-scores{display:flex;gap:16px;flex-wrap:wrap}
-.score-block{text-align:right}
-.score-big{font-size:52px;font-weight:500;line-height:1}
-.score-denom{font-size:20px;color:#888}
-.score-lbl{font-size:12px;color:#888;margin-top:2px}
-.score-weighted-note{font-size:11px;color:#4a9eca;margin-top:2px}
-.verdict-strong{background:#e6f5ec;color:#1a6e3c}.verdict-good{background:#e5f0ff;color:#1a52a8}.verdict-avg{background:#fff4e0;color:#a05c00}.verdict-weak{background:#fdecea;color:#a02020}
-.rec-use-row{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
-.rec-use-label{font-size:12px;color:#888}
-.rec-use-pill{font-size:12px;font-weight:500;padding:3px 10px;border-radius:20px;background:#f0eeeb;color:#333}
-.platform-hero-pill{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#fff;margin-left:6px}
+.result-header { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 24px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.result-header-left { flex: 1; }
+.result-script-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+.result-script-name { font-size: 18px; font-weight: 500; color: #1a1a1a; margin-bottom: 12px; }
+.result-header-right { text-align: right; flex-shrink: 0; }
+.score-num-wrap { line-height: 1; }
+.score-num { font-size: 52px; font-weight: 500; color: #1a1a1a; }
+.score-denom { font-size: 22px; color: #888; font-weight: 400; }
+.score-label { font-size: 12px; color: #888; margin-top: 2px; margin-bottom: 12px; }
+.download-btn { background: #fff; border: 1px solid #d5d3ce; border-radius: 7px; padding: 7px 14px; font-size: 12px; color: #555; cursor: pointer; }
+.download-btn:hover { background: #f3f1ee; }
 
-/* Tabs */
-.tab-row{display:flex;border-bottom:1px solid #e5e3de;margin-bottom:20px;flex-wrap:wrap}
-.tab{font-size:13px;padding:8px 13px;cursor:pointer;color:#888;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
-.tab:hover{color:#333}
-.tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* Section label */
-.sec-label{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#888;border-bottom:1px solid #e5e3de;padding-bottom:8px;margin:20px 0 14px}
-.sec-label:first-child{margin-top:0}
+.verdict-pill { display: inline-block; font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 10px; }
+.verdict-avg { background: #fff4e0; color: #a05c00; }
+.verdict-good { background: #e5f0ff; color: #1a52a8; }
+.verdict-strong { background: #e6f5ec; color: #1a6e3c; }
+.verdict-weak { background: #fdecea; color: #a02020; }
+.verdict-text { font-size: 14px; color: #555; line-height: 1.65; }
 
 /* Framework card */
-.framework-card{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:16px 18px;margin-bottom:14px}
-.fw-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-.fw-name{font-size:15px;font-weight:500}
-.fw-fit{font-size:13px;color:#555}
-.fw-stars{color:#e09a20;font-size:14px;margin-right:4px}
-.fw-diagnosis{font-size:14px;color:#333;line-height:1.7;white-space:pre-wrap}
+.framework-card { background: #fff; border: 1px solid #e5e3de; border-left: 3px solid #1a1a1a; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 16px; }
+.fw-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+.fw-name { font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+.fw-rationale { font-size: 13px; color: #666; }
 
-/* Diagnostic */
-.diag-grid{display:flex;flex-direction:column;gap:8px}
-.diag-card{background:#fff;border:1px solid #e5e3de;border-radius:9px;padding:12px 15px;display:flex;align-items:flex-start;gap:12px}
-.diag-num{font-size:12px;font-weight:600;color:#aaa;min-width:22px;margin-top:1px}
-.diag-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
-.diag-yes{background:#e6f5ec;color:#1a6e3c}.diag-no{background:#fdecea;color:#a02020}.diag-part{background:#fff4e0;color:#a05c00}
-.diag-text{font-size:13px;color:#444;line-height:1.55}
+/* Tabs */
+.tab-row { display: flex; gap: 0; border-bottom: 1px solid #e5e3de; margin-bottom: 0; flex-wrap: wrap; background: #fff; border-radius: 10px 10px 0 0; border: 1px solid #e5e3de; border-bottom: none; overflow: hidden; }
+.tab { font-size: 13px; padding: 11px 18px; cursor: pointer; color: #888; border-bottom: 2px solid transparent; transition: color 0.15s; white-space: nowrap; background: #faf9f7; }
+.tab:hover { color: #333; background: #f3f1ee; }
+.tab.active { color: #1a1a1a; border-bottom-color: #1a1a1a; font-weight: 500; background: #fff; }
+.tab-panel { display: none; background: #fff; border: 1px solid #e5e3de; border-top: none; border-radius: 0 0 10px 10px; padding: 24px; }
+.tab-panel.active { display: block; }
 
-/* Score table */
-.score-table-wrap{overflow-x:auto;margin-bottom:20px}
-.score-table{width:100%;border-collapse:collapse;font-size:14px}
-.score-table th{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#888;text-align:left;padding:8px 12px;border-bottom:1px solid #e5e3de;background:#faf9f7}
-.score-table td{padding:10px 12px;border-bottom:1px solid #f5f4f2;vertical-align:top}
-.score-table tr:last-child td{border-bottom:none}
-.score-table tr:hover td{background:#faf9f7}
-.sc-name{font-weight:500;color:#1a1a1a}
-.sc-dots{display:flex;gap:4px;align-items:center;margin-top:4px}
-.dot{width:9px;height:9px;border-radius:50%;background:#e5e3de}
-.dot.s5{background:#2d8c56}.dot.s4{background:#4a9eca}.dot.s3{background:#e09a20}.dot.s2{background:#e05a20}.dot.s1{background:#c0392b}
-.sc-val{font-size:12px;color:#888;margin-left:4px}
-.sc-comment{font-size:13px;color:#555;line-height:1.55}
-.score-table-mode-label{font-size:12px;font-weight:500;color:#888;margin-bottom:8px;padding:6px 12px;background:#faf9f7;border-radius:6px;display:inline-block}
+/* Score grid */
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.score-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 14px 16px; }
+.score-card-name { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 8px; }
+.dots { display: flex; gap: 5px; align-items: center; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: #e5e3de; flex-shrink: 0; }
+.dot.filled-5 { background: #2d8c56; }
+.dot.filled-4 { background: #4a9eca; }
+.dot.filled-3 { background: #e09a20; }
+.dot.filled-2 { background: #e05a20; }
+.dot.filled-1 { background: #c0392b; }
+.score-val { font-size: 12px; color: #888; margin-left: 6px; }
 
-/* Detail breakdown */
-.detail-block{background:#fff;border:1px solid #e5e3de;border-radius:10px;margin-bottom:10px;overflow:hidden}
-.detail-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#faf9f7;border-bottom:1px solid #e5e3de;cursor:pointer;user-select:none}
-.detail-head:hover{background:#f3f1ee}
-.detail-crit{font-size:14px;font-weight:500}
-.dbadge{font-size:12px;font-weight:500;padding:3px 10px;border-radius:20px}
-.b5{background:#e6f5ec;color:#1a6e3c}.b4{background:#e5f0ff;color:#1a52a8}.b3{background:#fff4e0;color:#a05c00}.b2,.b1{background:#fdecea;color:#a02020}
-.detail-body{padding:16px;display:none}
-.detail-body.open{display:block}
-.sub-label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#888;margin:12px 0 4px}
-.sub-label:first-child{margin-top:0}
-.sub-text{font-size:14px;color:#333;line-height:1.65}
-.chev{font-size:11px;color:#aaa;margin-left:10px;display:inline-block;transition:transform .2s}
-.chev.open{transform:rotate(180deg)}
-.rubric-toggle{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;background:#f5f4f2;border-radius:8px;cursor:pointer;margin-top:14px;font-size:13px;color:#555;user-select:none}
-.rubric-toggle:hover{background:#eeece9}
-.rubric-toggle-chev{font-size:11px;color:#aaa;transition:transform .2s}
-.rubric-toggle-chev.open{transform:rotate(180deg)}
-.rubric-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13px}
-.rubric-table tr td{padding:7px 10px;border-bottom:1px solid #f0eeeb;vertical-align:top}
-.rubric-table tr:last-child td{border-bottom:none}
-.rubric-table tr.current-score td{background:#e5f0ff}
-.rubric-score-badge{font-weight:600;color:#555;white-space:nowrap}
-.rubric-table tr.current-score .rubric-score-badge{color:#1a52a8}
+/* Detail blocks (breakdown) */
+.detail-block { margin-bottom: 10px; border: 1px solid #e5e3de; border-radius: 10px; overflow: hidden; background: #fff; }
+.detail-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #faf9f7; border-bottom: 1px solid #e5e3de; cursor: pointer; user-select: none; }
+.detail-header:hover { background: #f3f1ee; }
+.detail-crit-name { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+.detail-score-badge { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+.badge-5 { background: #e6f5ec; color: #1a6e3c; }
+.badge-4 { background: #e5f0ff; color: #1a52a8; }
+.badge-3 { background: #fff4e0; color: #a05c00; }
+.badge-2 { background: #fdecea; color: #a02020; }
+.badge-1 { background: #fdecea; color: #a02020; }
+.detail-body { padding: 18px; display: none; }
+.detail-body.open { display: block; }
+.detail-subsection { margin-bottom: 14px; }
+.detail-subsection:last-child { margin-bottom: 0; }
+.detail-sublabel { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; margin-bottom: 5px; }
+.detail-text { font-size: 14px; color: #333; line-height: 1.65; }
+.chevron { font-size: 12px; color: #888; transition: transform 0.2s; }
+.chevron.open { transform: rotate(180deg); }
 
 /* Issues */
-.issue-card{border-left:3px solid #e05a20;background:#fff8f5;border-radius:0 8px 8px 0;padding:11px 15px;margin-bottom:9px;font-size:14px;color:#333;line-height:1.6}
-.improve-card{border-left:3px solid #4a9eca;background:#f5f9ff;border-radius:0 8px 8px 0;padding:11px 15px;margin-bottom:9px;font-size:14px;color:#333;line-height:1.6}
+.issue-card { border-left: 3px solid #e05a20; background: #fff8f5; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 10px; font-size: 14px; color: #333; line-height: 1.65; }
+.improve-card { border-left: 3px solid #4a9eca; background: #f5f9ff; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 10px; font-size: 14px; color: #333; line-height: 1.65; }
+.improve-card strong, .issue-card strong { color: #1a1a1a; }
 
 /* Compliance */
-.flag-card{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:15px 17px;margin-bottom:10px}
-.flag-type-row{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
-.platform-badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#fff}
-.platform-badge-meta{background:#1877f2}
-.platform-badge-tiktok{background:#ff0050}
-.platform-badge-google{background:#4285f4}
-.platform-badge-all{background:#555}
-.pattern-tag{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;background:#fff4e0;color:#a05c00}
-.flag-line{font-size:14px;color:#a02020;font-style:italic;padding:8px 12px;background:#fdecea;border-radius:6px;margin-bottom:8px;line-height:1.6}
-.flag-why{font-size:13px;color:#777;margin-bottom:8px;line-height:1.55}
-.flag-arrow{font-size:11px;color:#aaa;margin-bottom:4px}
-.flag-fix{font-size:14px;color:#1a6e3c;font-weight:500;padding:8px 12px;background:#e6f5ec;border-radius:6px;line-height:1.6}
-.compliance-verdict{padding:12px 15px;border-radius:8px;font-size:14px;font-weight:500;margin-bottom:16px;line-height:1.6}
-.cv-safe{background:#e6f5ec;color:#1a6e3c}
-.cv-moderate{background:#fff4e0;color:#a05c00}
-.cv-high{background:#fdecea;color:#a02020}
-.ok-banner{background:#e6f5ec;border-radius:8px;padding:12px 15px;font-size:14px;color:#1a6e3c;line-height:1.6;margin-bottom:10px}
-.ad-risk-level{padding:12px 15px;border-radius:8px;font-size:14px;font-weight:500;margin-bottom:16px;line-height:1.6}
-.ar-low{background:#e6f5ec;color:#1a6e3c}
-.ar-medium{background:#fff4e0;color:#a05c00}
-.ar-high{background:#fdecea;color:#a02020}
-
-/* Performance tab — emotional arc */
-.arc-timeline{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;align-items:stretch}
-.arc-arrow{display:flex;align-items:center;color:#ccc;font-size:16px;flex-shrink:0;padding-top:6px}
-.arc-seg{border-radius:8px;padding:10px 12px;min-width:110px;flex:1;border:1px solid transparent}
-.arc-seg-pain{background:#fdecea;border-color:#f5c6c2;color:#a02020}
-.arc-seg-tension{background:#fff0e5;border-color:#f5d5b8;color:#c04a00}
-.arc-seg-curiosity{background:#f3eeff;border-color:#d8c4f5;color:#6a2db0}
-.arc-seg-reframe{background:#e5f0ff;border-color:#b8d4f5;color:#1a52a8}
-.arc-seg-hope{background:#e6f5ec;border-color:#b8dfc7;color:#1a6e3c}
-.arc-seg-urgency{background:#fff4e0;border-color:#f5dfa0;color:#a05c00}
-.arc-seg-excitement{background:#e5faf5;border-color:#b8e8d8;color:#0d7a5f}
-.arc-seg-neutral{background:#f5f4f2;border-color:#e0ded8;color:#666}
-.arc-emotion{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
-.arc-excerpt{font-size:12px;font-style:italic;margin-bottom:4px;opacity:.85;line-height:1.4}
-.arc-note{font-size:12px;line-height:1.45;opacity:.9}
-.arc-summary{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:16px 18px;margin-bottom:14px}
-.arc-score-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.arc-score-num{font-size:32px;font-weight:500;line-height:1}
-.arc-score-max{font-size:14px;color:#888}
-.arc-missing{font-size:13px;color:#a05c00;background:#fff4e0;padding:8px 12px;border-radius:6px;margin-top:8px;line-height:1.6}
-.arc-diagnosis{font-size:14px;color:#333;line-height:1.7}
-/* Drop-off map */
-.drop-seg{border-radius:0 8px 8px 0;padding:11px 15px;margin-bottom:8px;border-left:3px solid}
-.drop-high{border-left-color:#c0392b;background:#fff8f7}
-.drop-medium{border-left-color:#e09a20;background:#fffbf3}
-.drop-low{border-left-color:#2d8c56;background:#f5faf7}
-.drop-excerpt{font-size:14px;color:#1a1a1a;font-style:italic;margin-bottom:5px;line-height:1.6}
-.drop-reason{font-size:13px;color:#777;margin-bottom:4px;line-height:1.5}
-.drop-fix{font-size:13px;color:#1a6e3c;font-weight:500;line-height:1.5}
-.drop-risk-badge{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:4px;margin-bottom:6px;display:inline-block}
-.drop-risk-high{background:#fdecea;color:#a02020}
-.drop-risk-medium{background:#fff4e0;color:#a05c00}
-.drop-risk-low{background:#e6f5ec;color:#1a6e3c}
-/* Cold audience test */
-.cold-score-card{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:16px 18px;margin-bottom:14px}
-.cold-score-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.cold-score-num{font-size:36px;font-weight:500;line-height:1}
-.cold-score-max{font-size:16px;color:#888}
-.cold-diagnosis{font-size:14px;color:#333;line-height:1.7}
-.cold-card{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:13px 16px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
-.cold-verdict{font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;margin-top:1px;flex-shrink:0}
-.cold-yes{background:#e6f5ec;color:#1a6e3c}
-.cold-partial{background:#fff4e0;color:#a05c00}
-.cold-no{background:#fdecea;color:#a02020}
-.cold-label{font-size:13px;font-weight:500;margin-bottom:3px}
-.cold-note{font-size:13px;color:#555;line-height:1.55}
-.cold-jargon-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.cold-jargon-tag{font-size:12px;padding:3px 10px;background:#fdecea;color:#a02020;border-radius:10px}
-
-/* Visual notes */
-.vis-card{background:#fff;border:1px solid #e5e3de;border-radius:9px;padding:12px 15px;margin-bottom:8px;font-size:14px;color:#333;line-height:1.6;display:flex;gap:10px;align-items:flex-start}
-.vis-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-
-/* LP match */
-.lp-match-card{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:18px 20px;margin-bottom:16px}
-.lp-score-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.lp-score-num{font-size:36px;font-weight:500;line-height:1}
-.lp-score-max{font-size:16px;color:#888}
-.lp-match-detail{font-size:14px;color:#333;line-height:1.65;margin-bottom:8px}
-.lp-mismatch{font-size:13px;color:#a02020;background:#fdecea;padding:8px 12px;border-radius:6px;margin-bottom:8px;line-height:1.6}
-.lp-improve{font-size:13px;color:#1a52a8;background:#e5f0ff;padding:8px 12px;border-radius:6px;line-height:1.6}
-.lp-na{font-size:14px;color:#888;font-style:italic}
+.flag-ok { background: #e6f5ec; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #1a6e3c; margin-bottom: 8px; line-height: 1.65; }
+.flag-warn { background: #fdecea; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #a02020; margin-bottom: 8px; line-height: 1.65; }
+.flag-medium { background: #fff4e0; color: #a05c00; }
+.compliance-flags { margin-top: 12px; }
+.visual-suggestions { margin-top: 12px; }
+.visual-item { font-size: 14px; color: #333; padding: 8px 12px; background: #faf9f7; border-radius: 6px; margin-bottom: 6px; line-height: 1.6; }
 
 /* Rewrites */
-.hook-card{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:14px 16px;margin-bottom:9px}
-.hook-num{font-size:11px;font-weight:600;color:#888;letter-spacing:.05em;margin-bottom:5px}
-.hook-text{font-size:14px;color:#1a1a1a;line-height:1.85;white-space:pre-wrap;font-style:italic}
-.rbox{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:18px 20px;margin-bottom:14px}
-.rbox-label{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#888;margin-bottom:8px}
-.rsub{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4a9eca;margin:16px 0 5px}
-.rsub:first-child{margin-top:0}
-.rtext{font-size:14px;color:#1a1a1a;line-height:1.85;white-space:pre-wrap}
-.rnote{font-size:13px;color:#555;background:#faf9f7;border:1px solid #e5e3de;border-radius:8px;padding:12px 15px;margin-top:14px;line-height:1.65}
-.final-rec-card{background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:18px 20px;margin-bottom:16px}
-.final-rec-text{font-size:14px;color:#333;line-height:1.75;white-space:pre-wrap}
+.hook-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 18px; margin-bottom: 10px; }
+.hook-num { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.05em; margin-bottom: 8px; text-transform: uppercase; }
+.hook-text { font-size: 14px; color: #1a1a1a; line-height: 1.85; white-space: pre-line; font-style: italic; }
+.rewrite-block { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 18px 20px; }
+.rewrite-text { font-size: 14px; color: #1a1a1a; line-height: 1.85; white-space: pre-line; }
+.rewrite-note { font-size: 13px; color: #666; line-height: 1.65; background: #fff; border-radius: 8px; padding: 12px 16px; margin-top: 16px; border: 1px solid #e5e3de; }
 
-/* Reset row */
-.reset-row{margin-top:24px;padding-top:16px;border-top:1px solid #e5e3de;display:flex;gap:10px;flex-wrap:wrap}
+/* Sec label */
+.sec-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #888; margin-bottom: 14px; border-bottom: 1px solid #e5e3de; padding-bottom: 8px; }
+
+/* Overview */
+.overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+@media(max-width:600px) { .overview-grid { grid-template-columns: 1fr; } }
+.overview-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px; }
+.ov-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; margin-bottom: 12px; }
+.ov-item { font-size: 13px; color: #1a1a1a; padding: 6px 0; border-bottom: 1px solid #f0eee9; display: flex; align-items: center; gap: 8px; }
+.ov-item:last-child { border-bottom: none; }
+.ov-score { font-size: 12px; font-weight: 600; background: #e5e3de; border-radius: 4px; padding: 2px 7px; }
+.ov-weak .ov-score { background: #fdecea; color: #a02020; }
+.ov-strong .ov-score { background: #e6f5ec; color: #1a6e3c; }
+.ov-verdict-text { font-size: 14px; color: #555; line-height: 1.7; background: #faf9f7; border-radius: 8px; padding: 14px 16px; border: 1px solid #e5e3de; }
+
+/* Performance — Emotional Arc */
+.arc-summary { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; }
+.arc-score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.arc-score-label { font-size: 12px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+.arc-score-val { font-size: 22px; font-weight: 600; }
+.arc-pattern { font-size: 13px; color: #555; font-style: italic; }
+.arc-missing { font-size: 13px; color: #a05c00; background: #fff4e0; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; }
+.arc-diagnosis { font-size: 14px; color: #444; line-height: 1.65; }
+
+.arc-timeline { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; margin-bottom: 8px; }
+.arc-seg { flex: 1; min-width: 100px; padding: 12px 14px; border-radius: 8px; margin: 3px; }
+.arc-arrow { display: flex; align-items: center; color: #ccc; font-size: 16px; flex-shrink: 0; padding: 0 4px; }
+.arc-emotion { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.arc-excerpt { font-size: 12px; color: #444; font-style: italic; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.arc-note { font-size: 11px; color: #666; line-height: 1.5; }
+
+/* Performance — Drop-off */
+.drop-seg { border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; border: 1px solid transparent; }
+.drop-high { background: #fdecea; border-color: #f5c6c6; }
+.drop-medium { background: #fff4e0; border-color: #fde8b0; }
+.drop-low { background: #e6f5ec; border-color: #b8e0c6; }
+.drop-risk-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 4px; margin-bottom: 8px; }
+.drop-risk-high { background: #c0392b; color: #fff; }
+.drop-risk-medium { background: #e09a20; color: #fff; }
+.drop-risk-low { background: #2d8c56; color: #fff; }
+.drop-excerpt { font-size: 13px; font-style: italic; color: #333; margin-bottom: 6px; }
+.drop-reason { font-size: 13px; color: #555; margin-bottom: 4px; }
+.drop-fix { font-size: 13px; color: #1a6e3c; font-weight: 500; }
+
+/* Performance — Cold audience */
+.cold-score-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; }
+.cold-score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.cold-score-label { font-size: 12px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+.cold-score-val { font-size: 22px; font-weight: 600; }
+.cold-diagnosis { font-size: 14px; color: #444; line-height: 1.65; }
+.cold-card { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+.cold-label { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 6px; }
+.cold-verdict { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-bottom: 6px; }
+.cold-yes { background: #e6f5ec; color: #1a6e3c; }
+.cold-partial { background: #fff4e0; color: #a05c00; }
+.cold-no { background: #fdecea; color: #a02020; }
+.cold-note { font-size: 13px; color: #555; line-height: 1.6; }
+.cold-jargon-list { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.cold-jargon-tag { background: #fdecea; color: #a02020; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 4px; }
 </style>
 </head>
 <body>
 <div class="page">
-  <div class="top-title">Video Script Evaluator</div>
-  <div class="top-sub">Expert evaluation for financial education scripts — paid ads and organic content.</div>
+
+  <div class="app-header">
+    <div class="app-title">Video Script Evaluator</div>
+    <div class="app-sub">Financial education · Paid ads &amp; organic content</div>
+  </div>
 
   <!-- API KEY -->
-  <div id="api-screen">
-    <h2>Anthropic API key</h2>
-    <p>Calls Claude directly from your browser. Key saved locally, only sent to Anthropic.<br><a href="https://console.anthropic.com/keys" target="_blank" style="color:#1a52a8;">Get your key at console.anthropic.com →</a></p>
-    <div class="api-key-row">
-      <input type="password" id="api-key-input" placeholder="sk-ant-..." />
-      <button class="btn-sm" onclick="saveKey()">Save key</button>
+  <div class="key-section">
+    <div class="key-label">Anthropic API key</div>
+    <div class="key-row">
+      <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off" />
+      <button onclick="saveKey()">Save key</button>
     </div>
-    <div class="key-saved" id="key-saved">✓ Key saved</div>
+    <div class="key-hint" id="key-hint">Your key is stored in your browser only and never sent anywhere except the Anthropic API.</div>
   </div>
 
   <!-- HISTORY PANEL -->
@@ -327,55 +270,33 @@ button:disabled{opacity:.4;cursor:not-allowed}
     </div>
     <div class="history-body" id="history-body">
       <div class="history-list" id="history-list"></div>
-      <div class="history-footer">
-        <button class="btn-link" onclick="clearHistory()">Clear all history</button>
-      </div>
+      <div class="history-footer"><button class="btn-link" onclick="clearHistory()">Clear all history</button></div>
     </div>
   </div>
 
   <!-- INPUT SECTION -->
-  <div id="input-section">
-    <!-- Meta fields -->
+  <div class="input-section" id="input-section">
     <div class="meta-grid">
       <div class="meta-field">
+        <label class="field-label">Script name</label>
+        <input type="text" id="script-name" placeholder="e.g. Volume vs Indicators v3" />
+      </div>
+      <div class="meta-field">
         <label class="field-label">Content type</label>
-        <select id="content-type" onchange="onContentTypeChange()">
-          <option value="notsure">Not sure (evaluate both)</option>
-          <option value="paid">Paid Ad</option>
-          <option value="organic">Organic Content</option>
+        <select id="content-type">
+          <option value="webinar">Webinar / free session</option>
+          <option value="course">Course / program</option>
+          <option value="lead">Lead magnet / freebie</option>
+          <option value="call">Sales call / strategy session</option>
+          <option value="community">Community / membership</option>
+          <option value="general">General / brand awareness</option>
         </select>
       </div>
       <div class="meta-field">
-        <label class="field-label">Content goal</label>
-        <select id="content-goal">
-          <option value="class">Free 2-hour class sign-up</option>
-          <option value="click">Landing page click</option>
-          <option value="watchtime">Watch time / retention</option>
-          <option value="engagement">Engagement / comments</option>
-          <option value="education">Education / trust-building</option>
-          <option value="growth">Follower growth</option>
-          <option value="notsure">Not sure</option>
-        </select>
-      </div>
-      <div class="meta-field">
-        <label class="field-label">Framework</label>
-        <select id="framework">
-          <option value="auto">Auto-recommend</option>
-          <optgroup label="Paid Ad Frameworks">
-            <option value="PAS">PAS — Problem → Agitate → Solution</option>
-            <option value="AIDA">AIDA — Attention → Interest → Desire → Action</option>
-            <option value="PASTOR">PASTOR — Problem → Amplify → Story → Transformation → Offer → Response</option>
-            <option value="BAB">Before–After–Bridge</option>
-            <option value="PMMPC">Problem–Myth–Method–Proof–CTA</option>
-          </optgroup>
-          <optgroup label="Organic Frameworks">
-            <option value="HVT">Hook–Value–Takeaway</option>
-            <option value="MTL">Myth–Truth–Lesson</option>
-            <option value="MCF">Mistake–Consequence–Fix</option>
-            <option value="SLA">Story–Lesson–Application</option>
-            <option value="POV">POV / Hot Take</option>
-            <option value="TWA">Teach With Analogy</option>
-          </optgroup>
+        <label class="field-label">Has landing page section</label>
+        <select id="has-lp">
+          <option value="yes">Yes — bridges to landing page</option>
+          <option value="no">No — standalone script</option>
         </select>
       </div>
       <div class="meta-field">
@@ -390,75 +311,64 @@ button:disabled{opacity:.4;cursor:not-allowed}
       </div>
     </div>
 
-    <!-- Landing page fields -->
-    <div class="lp-section" id="lp-section">
-      <h3>Landing page message <span style="font-weight:400;color:#aaa;">(optional but recommended)</span></h3>
-      <div class="lp-fields">
-        <div>
-          <label class="field-label">Headline</label>
-          <input type="text" id="lp-headline" placeholder="e.g. Learn the 3-Step Framework Busy Professionals Use to Read Charts With Confidence" />
-        </div>
-        <div>
-          <label class="field-label">Free class promise</label>
-          <textarea id="lp-promise" style="min-height:60px;" placeholder="e.g. In this free 2-hour class you'll learn how to identify high-probability setups, manage risk, and build a repeatable process."></textarea>
-        </div>
-        <div>
-          <label class="field-label">CTA text</label>
-          <input type="text" id="lp-cta" placeholder="e.g. Register for Free Now" />
-        </div>
+    <div class="mode-toggle-row">
+      <div class="mode-label">Mode</div>
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="btn-paid" onclick="setMode('paid')">Paid ad</button>
+        <button class="mode-btn" id="btn-organic" onclick="setMode('organic')">Organic content</button>
       </div>
     </div>
 
-    <!-- Script -->
-    <div class="script-wrap">
-      <label class="field-label">Video script</label>
-      <textarea id="script-input" placeholder="Paste your video script here..." oninput="updateWordCount()"></textarea>
-    </div>
-    <div class="word-count" id="word-count">Start typing to see word count and estimated video length.</div>
-
-    <!-- Weights panel -->
-    <div class="weights-panel" id="weights-panel">
+    <div class="weights-section">
       <div class="weights-header" onclick="toggleWeights()">
-        <div class="weights-title">⚙ Scoring weights <span class="weights-badge" id="weights-badge">Custom</span></div>
-        <span class="weights-chev" id="weights-chev">▼</span>
+        <span>Scoring weights <span id="weights-preset-label" style="color:#888;font-size:12px;"></span></span>
+        <span class="weights-chev" id="weights-chev">▶</span>
       </div>
       <div class="weights-body" id="weights-body">
-        <p style="font-size:13px;color:#888;margin:10px 0 12px;line-height:1.5;">Boost criteria that matter most. Selecting a platform auto-applies recommended weights — you can still adjust. Total /60 is always normalised.</p>
-        <div id="wt-rows"></div>
-        <div class="weights-footer">
-          <span class="weights-note">0.5× (low) → 1.0× (default) → 2.5× (high)</span>
-          <button class="btn-link" onclick="resetWeights()">Reset to defaults</button>
-        </div>
+        <div class="weights-grid" id="weights-grid"></div>
       </div>
     </div>
 
-    <div class="btn-row">
-      <button id="eval-btn" onclick="runEval()">Evaluate script</button>
+    <div class="field-label" style="margin-bottom:8px;margin-top:20px;">Script</div>
+    <textarea id="script-input" placeholder="Paste your full script here...&#10;&#10;The evaluator will score it across 12 criteria, check compliance, generate rewrites, and map the emotional arc."></textarea>
+    <div class="eval-row">
+      <button class="eval-btn" id="eval-btn" onclick="runEval()">Evaluate script →</button>
+      <div class="char-count" id="char-count"></div>
     </div>
-    <div id="loading" style="display:none;padding:18px 0;">
-      <div class="spinner-wrap"><div class="spinner"></div><span id="loading-msg">Analysing your script...</span></div>
-      <div class="progress-bar"><div class="progress-fill" id="prog" style="width:5%"></div></div>
-      <div class="stage-label" id="stage-label"></div>
-    </div>
-    <div id="error-box" class="error-box"></div>
   </div>
 
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progress-wrap" style="display:none;">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill"></div>
+    </div>
+    <div class="progress-label" id="progress-label">Starting evaluation...</div>
+  </div>
+
+  <!-- ERROR -->
+  <div class="error-box" id="error-box" style="display:none;"></div>
+
   <!-- RESULTS -->
-  <div class="results" id="results">
-    <div class="score-hero">
-      <div class="hero-top">
-        <div class="hero-left">
-          <div id="verdict-pill" class="verdict-pill"></div>
-          <div id="verdict-text" class="verdict-text"></div>
-          <div class="rec-use-row">
-            <span class="rec-use-label">Recommended use:</span>
-            <span id="rec-use-pill" class="rec-use-pill"></span>
-            <span id="platform-hero-pill" class="platform-hero-pill" style="display:none;"></span>
-          </div>
+  <div id="results" style="display:none;">
+
+    <div class="result-header">
+      <div class="result-header-left">
+        <div class="result-script-label" id="result-script-label">Video Script Evaluation</div>
+        <div class="result-script-name" id="result-script-name"></div>
+        <div id="verdict-pill-wrap"></div>
+        <div class="verdict-text" id="verdict-text"></div>
+      </div>
+      <div class="result-header-right">
+        <div class="score-num-wrap">
+          <span class="score-num" id="score-num">—</span>
+          <span class="score-denom">/60</span>
         </div>
-        <div class="hero-scores" id="hero-scores"></div>
+        <div class="score-label">overall score</div>
+        <button class="download-btn" onclick="downloadReport()">↓ Download report</button>
       </div>
     </div>
+
+    <div id="framework-card" class="framework-card"></div>
 
     <div class="tab-row">
       <div class="tab active" onclick="switchTab(this,'overview')">Overview</div>
@@ -470,711 +380,929 @@ button:disabled{opacity:.4;cursor:not-allowed}
       <div class="tab" onclick="switchTab(this,'performance')">Performance</div>
     </div>
 
-    <div id="tab-overview" class="tab-panel active">
-      <div class="sec-label">Framework analysis</div>
-      <div id="framework-card"></div>
-      <div class="sec-label">Perfect video diagnostic</div>
-      <div class="diag-grid" id="diag-grid"></div>
-    </div>
+    <div id="tab-overview" class="tab-panel active"><div id="overview-content"></div></div>
 
     <div id="tab-scores" class="tab-panel">
-      <div id="paid-scores-section"></div>
-      <div id="org-scores-section"></div>
+      <div class="score-grid" id="score-grid"></div>
     </div>
 
     <div id="tab-breakdown" class="tab-panel">
-      <div id="breakdown-mode-note" style="font-size:13px;color:#888;margin-bottom:14px;"></div>
-      <div id="detail-blocks"></div>
+      <div id="breakdown-blocks"></div>
     </div>
 
     <div id="tab-issues" class="tab-panel">
-      <div class="sec-label">Top 3 biggest issues</div>
-      <div id="issues-list"></div>
-      <div class="sec-label">Top 3 highest-impact improvements</div>
-      <div id="improvements-list"></div>
+      <div id="issues-content"></div>
     </div>
 
     <div id="tab-compliance" class="tab-panel">
-      <div class="sec-label">Financial compliance & risk</div>
-      <div id="compliance-verdict-block"></div>
-      <div id="compliance-flags-list"></div>
-      <div class="sec-label">Ad platform approval risk</div>
-      <div id="ad-risk-block"></div>
-      <div id="ad-risk-list"></div>
-      <div class="sec-label">AI-sounding / robotic phrases to remove</div>
-      <div id="ai-phrases-list"></div>
-      <div class="sec-label">Visual & production notes</div>
-      <div id="visual-notes-list"></div>
+      <div id="compliance-content"></div>
     </div>
 
     <div id="tab-rewrites" class="tab-panel">
-      <div class="sec-label">5 stronger hook options</div>
-      <div id="hooks-list"></div>
-      <div class="sec-label">Stronger bridge</div>
-      <div id="bridge-block"></div>
-      <div class="sec-label">Stronger CTA</div>
-      <div id="cta-block"></div>
-      <div class="sec-label">Quick fix version</div>
-      <div id="quick-fix-block"></div>
-      <div id="paid-rewrite-section"></div>
-      <div id="org-rewrite-section"></div>
-      <div class="sec-label">Landing page message match</div>
-      <div id="lp-match-block"></div>
-      <div class="sec-label">Final recommendation</div>
-      <div id="final-rec-block"></div>
+      <div id="rewrites-content"></div>
     </div>
 
     <div id="tab-performance" class="tab-panel">
       <div class="sec-label">Emotional arc</div>
       <div id="arc-summary"></div>
       <div id="arc-timeline"></div>
-      <div class="sec-label">Drop-off risk map</div>
+      <div class="sec-label" style="margin-top:28px;">Drop-off risk map</div>
       <div id="drop-map"></div>
-      <div class="sec-label">Cold audience test</div>
+      <div class="sec-label" style="margin-top:28px;">Cold audience test</div>
       <div id="cold-score"></div>
       <div id="cold-criteria"></div>
     </div>
 
-    <div class="reset-row">
-      <a id="download-link" style="display:none;"></a>
-      <button onclick="downloadReport()">Download report</button>
-      <button class="btn-ghost" onclick="resetEval()">Evaluate a different script</button>
-    </div>
   </div>
+
 </div>
-
 <script>
-// ═══════════════════════════════════════════════════════════════════════════
+// ======================================================================
 // CONSTANTS
-// ═══════════════════════════════════════════════════════════════════════════
-const PAID_KEYS=["paidHook","paidAudience","paidPain","paidReframe","paidCuriosity","paidBridge","paidOffer","paidLeadQuality","paidCred","paidRetention","paidHuman","paidCTA"];
-const PAID_NAMES={paidHook:"Hook strength",paidAudience:"Audience relevance",paidPain:"Problem & pain clarity",paidReframe:"Reframe / belief shift",paidCuriosity:"Curiosity gap",paidBridge:"Free class bridge",paidOffer:"Offer clarity",paidLeadQuality:"Lead quality fit",paidCred:"Credibility & believability",paidRetention:"Retention flow",paidHuman:"Human / non-AI sounding",paidCTA:"CTA / click motivation"};
-const PAID_SHORT={paidHook:"hook",paidAudience:"audience",paidPain:"pain",paidReframe:"reframe",paidCuriosity:"curiosity",paidBridge:"bridge",paidOffer:"offer",paidLeadQuality:"leadQuality",paidCred:"cred",paidRetention:"retention",paidHuman:"human",paidCTA:"cta"};
-const ORG_KEYS=["orgHook","orgRelatability","orgEducation","orgPOV","orgRetention","orgShare","orgComment","orgHuman","orgTrust","orgSoftCTA","orgVisual","orgSeries"];
-const ORG_NAMES={orgHook:"Hook strength",orgRelatability:"Relatability",orgEducation:"Educational value",orgPOV:"Point of view",orgRetention:"Retention flow",orgShare:"Share / save potential",orgComment:"Comment potential",orgHuman:"Human / non-AI sounding",orgTrust:"Brand trust",orgSoftCTA:"Soft CTA fit",orgVisual:"Visual / production potential",orgSeries:"Content series potential"};
-const ORG_SHORT={orgHook:"hook",orgRelatability:"relatability",orgEducation:"education",orgPOV:"pov",orgRetention:"retention",orgShare:"share",orgComment:"comment",orgHuman:"human",orgTrust:"trust",orgSoftCTA:"softCTA",orgVisual:"visual",orgSeries:"series"};
+// ======================================================================
 
-const PAID_RUBRICS={paidHook:["No hook — opens with generic context, title, or self-intro","Weak hook that doesn't stop the right viewer from scrolling","Decent hook that creates mild interest but isn't scroll-stopping","Strong and specific, relevant to the target viewer","Stops the right viewer immediately — emotional pull or bold claim"],paidAudience:["No audience signal — could be for anyone","Vague reference to a broad group","Identifies the audience but doesn't mirror their exact situation","Speaks directly to a defined audience with their real pain","Laser-targeted — the right viewer instantly thinks 'this is for me'"],paidPain:["No problem stated — jumps to solution or pitch","Problem mentioned but vague or generic","Clear problem with some emotional weight","Specific, emotional, and urgent pain that creates tension","Deeply resonant — names the exact frustration most people feel but won't say"],paidReframe:["No reframe — just promotion or features","Surface-level insight that doesn't shift perspective","Decent reframe that challenges one assumption","Strong belief shift that changes how they see their problem","'Aha moment' — counterintuitive, memorable, genuinely new angle"],paidCuriosity:["Gives everything away — no reason to click or continue","Some curiosity but gap isn't compelling","Creates mild curiosity — viewer might continue","Clear open loop — viewer wants to see the full method","Irresistible gap — they cannot not click to find out more"],paidBridge:["No bridge — hard sell with no logical connection to class","Bridge feels forced or abrupt","Logical bridge that gives a reason to sign up","Smooth bridge — the class feels like the natural next step","Seamless — registering feels obvious, easy, and exciting"],paidOffer:["No clear offer stated","Offer mentioned vaguely — unclear what it is","Class mentioned but topic or benefit is unclear","Class is clear — topic, format, and main benefit explained","Crystal clear — viewer fully understands what they get and why it matters"],paidLeadQuality:["Very likely to attract low-quality leads and curiosity clicks","May attract some low-quality or unserious leads","Mixed — some quality leads but angle may attract tyre-kickers","Likely to attract motivated, serious learners","Strongly pre-qualifies serious learners ready to take action"],paidCred:["No trust signals of any kind","Vague claims with no support","Some credibility signals — could be stronger or more specific","Clear trust signals — specific, believable, and naturally delivered","Highly credible — specific experience or methodology without overclaiming"],paidRetention:["Multiple drop-off points — viewers likely to leave early","Choppy flow with notable dead spots","Mostly flows — holds attention through the main body","Well-structured with open loops carrying viewer to CTA","Exceptional — every line earns the next, no slow moments"],paidHuman:["Robotic throughout — clearly generated or templated","Some human moments but mostly corporate or polished","Acceptable — a few weak phrases but passable overall","Sounds natural and conversational throughout","Distinctly human — you can hear a real person saying exactly this"],paidCTA:["No CTA or completely unclear what to do","Weak or vague CTA — no compelling reason to click","Functional CTA — tells them what to do but lacks urgency","Strong CTA with clear benefit, action, and natural urgency","Compelling CTA — specific benefit, low friction, natural urgency, clear next step"]};
-const ORG_RUBRICS={orgHook:["No hook — opens with generic context or intro","Weak hook that doesn't create curiosity or stop the scroll","Decent hook that creates mild interest","Strong hook with curiosity, tension, or strong relatability","Exceptional — stops the right viewer with a specific, compelling angle"],orgRelatability:["Feels generic — no one strongly identifies with this","Vague relatability that most viewers would ignore","Some viewers would relate to this","Most of the target audience would relate strongly","Feels like the viewer wrote it themselves — 'this is exactly me'"],orgEducation:["Nothing useful learned — just promotion or filler","Vague or surface-level lesson most viewers already know","One clear useful idea delivered adequately","Clear, memorable lesson the viewer can apply right away","Exceptional — unique insight the viewer won't easily find elsewhere"],orgPOV:["No clear opinion — sounds generic and safe","Weak POV that could be anyone's opinion","Decent angle but not particularly distinctive","Clear, distinctive point of view","Strong contrarian or fresh perspective that makes people think differently"],orgRetention:["Clear reasons to drop off at every section","Choppy flow with notable dead spots","Mostly flows — holds attention through the main body","Well-structured with curiosity and pacing that holds viewers","Exceptional — every sentence earns the next"],orgShare:["No reason to save or share","Mild interest — someone might share out of weak curiosity","Some share/save potential — useful but not compelling","Strong save potential — people bookmark content like this","Highly shareable — solves a real problem memorably or is genuinely surprising"],orgComment:["No comment-worthy moments","Mild discussion potential","Some viewers might comment","Good discussion potential — creates agreement, questions, or reflection","High comment potential — sparks debate, emotion, or strong personal reaction"],orgHuman:["Robotic throughout — clearly AI-generated or heavily templated","Some human moments but mostly corporate or polished","Acceptable — a few weak phrases but passable overall","Sounds natural and conversational throughout","Distinctly human voice — you can hear a real person speaking"],orgTrust:["No trust signals — could be anyone saying anything","Weak authority — not convincing","Acceptable trust level — some credibility shown","Good trust — clear teaching, specific examples, no overclaiming","Strong trust — calm authority, genuine insight, viewer would want to follow"],orgSoftCTA:["No CTA (acceptable for pure education)","CTA feels forced or too salesy for organic content","CTA present but slightly hard for an organic context","Natural soft CTA that doesn't disrupt the content flow","Perfect organic CTA — feels like a helpful suggestion, not a pitch"],orgVisual:["No clear visual moments — pure talking head","Limited visual potential","Some good visual moments","Good visual potential — charts, text overlays, or B-roll moments","Rich visual potential — multiple strong moments for the editor"],orgSeries:["One-off idea with no series potential","Could potentially fit a series with effort","Decent series fit","Good pillar content — clearly fits a repeatable series","Excellent series anchor — defines a content pillar or show format"]};
+const API_URL = 'https://api.anthropic.com/v1/messages';
+const MODEL = 'claude-haiku-4-5-20251001';
+const HISTORY_KEY = 'vse_history_v2';
+const MAX_HISTORY = 10;
 
-const DIAG_QUESTIONS=["Would the first 3 seconds stop the right viewer from scrolling?","Would the viewer know this video is for them?","Is the problem specific enough to create emotional tension?","Does the script teach one useful idea without giving away the full class?","Does the script create a reason to continue watching?","Does the script make the free 2-hour class feel like the next logical step?","Is the class offer clear enough?","Would this attract quality leads or just curiosity clicks?","Does the script sound like a real person speaking?","Are there any claims that could create compliance or ad approval risks?","Does the script have strong visual moments for the editor?","Would someone click, save, share, comment, or register after watching?"];
+const PLATFORM_LABELS = {
+  any: 'Any platform',
+  tiktok: 'TikTok / Reels',
+  facebook: 'Facebook / Instagram',
+  youtube: 'YouTube'
+};
 
-const FRAMEWORK_LABELS={"auto":"Auto-recommend","PAS":"PAS","AIDA":"AIDA","PASTOR":"PASTOR","BAB":"Before–After–Bridge","PMMPC":"Problem–Myth–Method–Proof–CTA","HVT":"Hook–Value–Takeaway","MTL":"Myth–Truth–Lesson","MCF":"Mistake–Consequence–Fix","SLA":"Story–Lesson–Application","POV":"POV / Hot Take","TWA":"Teach With Analogy"};
+const PLATFORM_NOTES = {
+  any: '',
+  tiktok: 'Hook in first 1–2 seconds is critical. Fast pacing, pattern interrupts, strong sound-on delivery.',
+  facebook: 'Strict ad review. Avoid personal attribute language and before/after claims. Captions matter for sound-off viewing.',
+  youtube: 'Longer retention patterns acceptable. Credibility and depth matter more here.'
+};
 
-const PLATFORM_LABELS={any:'Any platform',tiktok:'TikTok / Reels',facebook:'Facebook / Instagram',youtube:'YouTube'};
-const PLATFORM_NOTES={any:'',tiktok:'Hook in first 1–2 seconds is critical. Fast pacing, pattern interrupts, strong sound-on delivery.',facebook:'Strict ad review. Avoid personal attribute language and before/after claims. Captions matter for sound-off viewing.',youtube:'Longer retention patterns acceptable. Credibility and depth matter more here.'};
-const PLATFORM_PROMPT={any:'Any platform (no specific optimization)',tiktok:'TikTok / Reels — short-form vertical, hook in first 1-2 seconds is make-or-break, fast pacing, strong sound-on delivery, pattern interrupts critical, younger audience expects raw authenticity',facebook:'Facebook / Instagram — mixed sound-off viewing (captions important), feed and stories, ad review system is strict on personal attribute language, before/after financial transformation claims, and income-related framing',youtube:'YouTube — longer-form tolerated, pre-roll or in-feed ads, pattern breaks needed every 30-60s, credibility and depth are more valued, stronger retention expectations'};
+const PLATFORM_PROMPT = {
+  any: 'Any platform (no specific optimisation)',
+  tiktok: 'TikTok / Reels — short-form vertical, hook in first 1-2 seconds is make-or-break, fast pacing, strong sound-on delivery, pattern interrupts critical, younger audience expects raw authenticity',
+  facebook: 'Facebook / Instagram — mixed sound-off viewing (captions important), feed and stories, ad review system is strict on personal attribute language, before/after financial transformation claims, and income-related framing',
+  youtube: 'YouTube — longer-form tolerated, pre-roll or in-feed ads, pattern breaks needed every 30-60s, credibility and depth are more valued, stronger retention expectations'
+};
 
-// Platform weight presets (slider values 1-5 where 2=default 1.0×)
-const PLATFORM_PRESETS={
-  any:{paid:{},organic:{}},
-  tiktok:{
-    paid:{paidHook:5,paidCuriosity:4,paidRetention:4,paidHuman:4},
-    organic:{orgHook:5,orgRetention:4,orgShare:4,orgComment:4,orgHuman:4}
+const PLATFORM_PRESETS = {
+  any: { paid: {}, organic: {} },
+  tiktok: {
+    paid: { paidHook: 5, paidCuriosity: 4, paidRetention: 4, paidHuman: 4 },
+    organic: { orgHook: 5, orgRetention: 4, orgShare: 4, orgComment: 4, orgHuman: 4 }
   },
-  facebook:{
-    paid:{paidAudience:4,paidLeadQuality:5,paidCred:4,paidBridge:4},
-    organic:{orgHook:4,orgRelatability:4,orgTrust:4,orgVisual:3}
+  facebook: {
+    paid: { paidAudience: 4, paidLeadQuality: 5, paidCred: 4, paidBridge: 4 },
+    organic: { orgHook: 4, orgRelatability: 4, orgTrust: 4 }
   },
-  youtube:{
-    paid:{paidRetention:5,paidCred:4,paidOffer:4,paidCTA:4},
-    organic:{orgRetention:5,orgEducation:4,orgTrust:4,orgSeries:4}
+  youtube: {
+    paid: { paidRetention: 5, paidCred: 4, paidOffer: 4, paidCTA: 4 },
+    organic: { orgRetention: 5, orgEducation: 4, orgTrust: 4, orgSeries: 4 }
   }
 };
 
-// ═══════════════════════════════════════════════════════════════════════════
+const PAID_CRITERIA = {
+  keys: ['paidHook','paidAudience','paidLeadQuality','paidPain','paidReframe','paidCuriosity','paidOffer','paidCred','paidCTA','paidRetention','paidHuman','paidBridge'],
+  names: {
+    paidHook: 'Hook strength',
+    paidAudience: 'Audience targeting',
+    paidLeadQuality: 'Lead quality signal',
+    paidPain: 'Pain & problem clarity',
+    paidReframe: 'Reframe / insight',
+    paidCuriosity: 'Curiosity gap',
+    paidOffer: 'Offer clarity & bridge',
+    paidCred: 'Credibility & believability',
+    paidCTA: 'CTA strength',
+    paidRetention: 'Retention flow',
+    paidHuman: 'Human / non-AI tone',
+    paidBridge: 'Landing page bridge'
+  }
+};
+
+const ORGANIC_CRITERIA = {
+  keys: ['orgHook','orgRelatability','orgPain','orgReframe','orgEducation','orgCuriosity','orgTrust','orgRetention','orgHuman','orgShare','orgComment','orgSeries'],
+  names: {
+    orgHook: 'Hook strength',
+    orgRelatability: 'Audience relatability',
+    orgPain: 'Pain & problem clarity',
+    orgReframe: 'Reframe / insight',
+    orgEducation: 'Education & value delivery',
+    orgCuriosity: 'Curiosity gap',
+    orgTrust: 'Trust & credibility',
+    orgRetention: 'Retention flow',
+    orgHuman: 'Human / non-AI tone',
+    orgShare: 'Share / save motivation',
+    orgComment: 'Comment hook',
+    orgSeries: 'Follow / series motivation'
+  }
+};
+
+const EMOTION_COLORS = {
+  pain: '#e05a20',
+  tension: '#c0392b',
+  curiosity: '#8e44ad',
+  reframe: '#2980b9',
+  hope: '#27ae60',
+  urgency: '#e67e22',
+  excitement: '#d4ac0d',
+  neutral: '#7f8c8d'
+};
+
+// ======================================================================
 // STATE
-// ═══════════════════════════════════════════════════════════════════════════
-let _evalData=null;
+// ======================================================================
 
-// ═══════════════════════════════════════════════════════════════════════════
-// HISTORY
-// ═══════════════════════════════════════════════════════════════════════════
-const HISTORY_KEY='vse_history_v2';
-const MAX_HISTORY=10;
+let _mode = 'paid';
+let _weights = {};
+let _evalData = null;
+let _historyOpen = false;
+let _weightsOpen = false;
 
-function saveToHistory(data){
-  const history=loadHistory();
-  const paidTotal=PAID_KEYS.reduce((a,k)=>a+(data.s[k]||0),0);
-  const orgTotal=ORG_KEYS.reduce((a,k)=>a+(data.s[k]||0),0);
-  const entry={
-    id:Date.now().toString(),
-    date:new Date().toLocaleString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}),
-    scriptPreview:(data.script||'').substring(0,90).replace(/\n/g,' ').trim()+(data.script.length>90?'…':''),
-    verdict:data.s.verdict||'REVISE',
-    mode:data.mode,
-    paidTotal,orgTotal,
-    contentType:data.ctLabel,
-    framework:data.s.selectedFramework||data.fwLabel,
-    platform:data.platform||'any',
-    data:data
-  };
-  history.unshift(entry);
-  if(history.length>MAX_HISTORY)history.pop();
-  try{localStorage.setItem(HISTORY_KEY,JSON.stringify(history));}catch(e){console.warn('History save failed',e)}
-  renderHistoryPanel();
-}
-
-function loadHistory(){
-  try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');}
-  catch(e){return []}
-}
-
-function restoreHistory(id){
-  const entry=loadHistory().find(h=>h.id===id);
-  if(!entry||!entry.data)return;
-  _evalData=entry.data;
-  render(_evalData);
-  document.getElementById('results').style.display='block';
-  document.getElementById('input-section').style.display='none';
-  window.scrollTo(0,0);
-}
-
-function deleteHistory(id){
-  const history=loadHistory().filter(h=>h.id!==id);
-  try{localStorage.setItem(HISTORY_KEY,JSON.stringify(history));}catch(e){}
-  renderHistoryPanel();
-}
-
-function clearHistory(){
-  if(!confirm('Clear all script history?'))return;
-  localStorage.removeItem(HISTORY_KEY);
-  renderHistoryPanel();
-}
-
-function toggleHistory(){
-  const body=document.getElementById('history-body'),chev=document.getElementById('history-chev');
-  const open=body.classList.toggle('open');chev.classList.toggle('open',open);
-}
-
-function renderHistoryPanel(){
-  const history=loadHistory();
-  const panel=document.getElementById('history-panel');
-  if(!panel)return;
-  if(history.length===0){panel.style.display='none';return;}
-  panel.style.display='block';
-  const countEl=document.getElementById('history-count');
-  if(countEl)countEl.textContent=history.length;
-  const list=document.getElementById('history-list');
-  if(!list)return;
-  list.innerHTML=history.map(h=>{
-    const pc=h.verdict==='PASS'?'verdict-strong':h.verdict==='REJECT'?'verdict-weak':'verdict-good';
-    const scoreText=h.mode==='organic'?`${h.orgTotal}/60 organic`:h.mode==='paid'?`${h.paidTotal}/60 paid`:`${h.paidTotal}/60 paid · ${h.orgTotal}/60 organic`;
-    const platTag=h.platform&&h.platform!=='any'?` · ${PLATFORM_LABELS[h.platform]||h.platform}`:'';
-    return `<div class="history-item" onclick="restoreHistory('${h.id}')">
-      <div class="history-item-content">
-        <div class="history-item-meta">${h.date}${platTag} · ${esc(h.framework)}</div>
-        <div class="history-item-preview">${esc(h.scriptPreview)}</div>
-        <div class="history-item-score">${scoreText}</div>
-      </div>
-      <div class="history-item-right">
-        <span class="verdict-pill ${pc}" style="margin:0;font-size:11px;">${h.verdict}</span>
-        <button class="history-delete" onclick="event.stopPropagation();deleteHistory('${h.id}')" title="Remove">×</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// PLATFORM
-// ═══════════════════════════════════════════════════════════════════════════
-function onPlatformChange(){
-  const p=document.getElementById('platform').value;
-  document.getElementById('platform-note').textContent=PLATFORM_NOTES[p]||'';
-  applyPlatformPreset(p);
-}
-
-function applyPlatformPreset(platform){
-  const ct=document.getElementById('content-type').value;
-  const preset=PLATFORM_PRESETS[platform]||{};
-  const keys=ct==='organic'?ORG_KEYS:PAID_KEYS;
-  // Reset all to 2 (1.0×)
-  keys.forEach(k=>{const el=document.getElementById('wt-'+k);if(el)el.value=2;});
-  // Apply preset values
-  const presetMap=ct==='organic'?(preset.organic||{}):(preset.paid||{});
-  Object.entries(presetMap).forEach(([k,v])=>{const el=document.getElementById('wt-'+k);if(el)el.value=v;});
-  onWeightChange();
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// WEIGHTS
-// ═══════════════════════════════════════════════════════════════════════════
-function refreshWeightsPanel(){
-  const ct=document.getElementById('content-type').value;
-  const keys=ct==='organic'?ORG_KEYS:PAID_KEYS;
-  const names=ct==='organic'?ORG_NAMES:PAID_NAMES;
-  document.getElementById('wt-rows').innerHTML=keys.map(k=>`<div class="wt-row">
-    <span class="wt-name">${names[k]}</span>
-    <input type="range" class="wt-slider" id="wt-${k}" min="1" max="5" value="2" oninput="onWeightChange()">
-    <span class="wt-val" id="wtv-${k}">1.0×</span>
-  </div>`).join('');
-}
-function sliderToWeight(v){return v*0.5}
-function getWeight(k){const el=document.getElementById('wt-'+k);return el?sliderToWeight(parseInt(el.value)):1.0}
-function isDefaultWeights(){const ct=document.getElementById('content-type').value;return(ct==='organic'?ORG_KEYS:PAID_KEYS).every(k=>getWeight(k)===1.0)}
-function onWeightChange(){
-  const ct=document.getElementById('content-type').value;
-  const keys=ct==='organic'?ORG_KEYS:PAID_KEYS;
-  keys.forEach(k=>{const el=document.getElementById('wtv-'+k);if(el)el.textContent=getWeight(k).toFixed(1)+'×'});
-  document.getElementById('weights-badge').classList.toggle('visible',!isDefaultWeights());
-  if(_evalData)updateWeightedScores(_evalData.s);
-}
-function calcWeightedTotal(scores,keys){let num=0,den=0;keys.forEach(k=>{const w=getWeight(k);num+=(scores[k]||0)*w;den+=5*w});return Math.round(num/den*60)}
-function updateWeightedScores(s){
-  const mode=s.scoreMode||'paid';
-  if(mode!=='organic'){const el=document.getElementById('paid-score-num');if(el)el.textContent=calcWeightedTotal(s,PAID_KEYS);}
-  if(mode!=='paid'){const el=document.getElementById('org-score-num');if(el)el.textContent=calcWeightedTotal(s,ORG_KEYS);}
-  const wn=document.getElementById('paid-score-wn');if(wn)wn.style.display=isDefaultWeights()?'none':'block';
-}
-function resetWeights(){const ct=document.getElementById('content-type').value;(ct==='organic'?ORG_KEYS:PAID_KEYS).forEach(k=>{const el=document.getElementById('wt-'+k);if(el)el.value=2});onWeightChange()}
-function toggleWeights(){const body=document.getElementById('weights-body'),chev=document.getElementById('weights-chev');const open=body.classList.toggle('open');chev.classList.toggle('open',open)}
-function onContentTypeChange(){
-  const v=document.getElementById('content-type').value;
-  document.getElementById('lp-section').classList.toggle('visible',v==='paid');
-  refreshWeightsPanel();
-  const p=document.getElementById('platform').value;
-  applyPlatformPreset(p);
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// WORD COUNT
-// ═══════════════════════════════════════════════════════════════════════════
-function updateWordCount(){
-  const txt=document.getElementById('script-input').value.trim();
-  const words=txt?txt.split(/\s+/).filter(w=>w.length>0).length:0;
-  if(!words){document.getElementById('word-count').textContent='Start typing to see word count and estimated video length.';return}
-  const s=Math.round(words/(130/60)),m=Math.floor(s/60),r=s%60;
-  document.getElementById('word-count').textContent=`${words} words · ${m>0?`~${m}m ${r}s`:`~${r}s`} video at speaking pace (130 wpm)`;
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// API KEY
-// ═══════════════════════════════════════════════════════════════════════════
-function saveKey(){const k=document.getElementById('api-key-input').value.trim();if(!k){alert('Please enter your API key.');return}localStorage.setItem('anthropic_key',k);document.getElementById('key-saved').style.display='block';document.getElementById('api-key-input').value='sk-ant-••••••••••••••••';setTimeout(()=>document.getElementById('key-saved').style.display='none',2500)}
-function getKey(){return localStorage.getItem('anthropic_key')||''}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// CLAUDE API
-// ═══════════════════════════════════════════════════════════════════════════
-async function callClaude(prompt,maxTokens=4096){
-  let apiKey=localStorage.getItem('anthropic_key');
-  if(!apiKey||apiKey.includes('••')){const fresh=window.prompt('Enter your Anthropic API key:');if(!fresh)throw new Error('API key required.');localStorage.setItem('anthropic_key',fresh);apiKey=fresh}
-  const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]})});
-  const data=await res.json();
-  if(data.error)throw new Error(data.error.message);
-  return data.content[0].text;
-}
-function parseJSON(raw){const s=String(raw||'').replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();const a=s.indexOf('{'),b=s.lastIndexOf('}');if(a===-1||b<=a)throw new Error('No JSON found in response');return JSON.parse(s.slice(a,b+1))}
-function setProgress(pct,stage){document.getElementById('prog').style.width=pct+'%';document.getElementById('stage-label').textContent=stage||''}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// EVALUATE
-// ═══════════════════════════════════════════════════════════════════════════
-async function runEval(){
-  const script=document.getElementById('script-input').value.trim();
-  if(!script||script.length<30){showError('Please paste a script before evaluating.');return}
-  if(!getKey()||getKey().includes('••')){showError('Please enter and save your Anthropic API key first.');return}
-  document.getElementById('eval-btn').disabled=true;
-  document.getElementById('loading').style.display='block';
-  document.getElementById('error-box').style.display='none';
-
-  const ct=document.getElementById('content-type').value;
-  const goal=document.getElementById('content-goal').value;
-  const fw=document.getElementById('framework').value;
-  const platform=document.getElementById('platform').value;
-  const lpH=document.getElementById('lp-headline').value.trim();
-  const lpP=document.getElementById('lp-promise').value.trim();
-  const lpC=document.getElementById('lp-cta').value.trim();
-  const hasLP=!!(lpH||lpP||lpC);
-  const ctLabel=ct==='paid'?'Paid Ad':ct==='organic'?'Organic Content':'Not Sure — evaluate both';
-  const goalLabel={class:'Free 2-hour class sign-up',click:'Landing page click',watchtime:'Watch time / retention',engagement:'Engagement / comments',education:'Education / trust-building',growth:'Follower growth',notsure:'Not sure'}[goal];
-  const fwLabel=FRAMEWORK_LABELS[fw]||fw;
-  const platformLabel=PLATFORM_PROMPT[platform]||PLATFORM_LABELS[platform];
-  const lpSection=hasLP?`Landing Page Headline: ${lpH||'(not provided)'}\nFree Class Promise: ${lpP||'(not provided)'}\nClass CTA: ${lpC||'(not provided)'}`:null;
-
-  let s,d,c,r,p;
-
-  // ── CALL 1: Framework + Scores + Diagnostics ─────────────────────────────
-  setProgress(5,'Step 1 of 5 — scoring and framework analysis...');
-  try{
-    s=parseJSON(await callClaude(`You are an expert video script evaluator for financial education. Return ONLY raw JSON, no markdown.
-Content Type: ${ctLabel} | Goal: ${goalLabel} | Framework: ${fwLabel} | Platform: ${platformLabel}
-${lpSection||'(No landing page info provided)'}
-
-{"contentTypeDetected":"<Paid Ad|Organic Content|Both>","selectedFramework":"<actual framework name e.g. PAS, AIDA, HVT — NEVER write 'Auto-recommend'; always name the specific framework the script uses or best fits>","frameworkFitScore":<1-5>,"frameworkDiagnosis":"<2-3 sentences: right framework for objective? does script follow it? what part missing or weak? would another work better?>",
-"scoreMode":"<paid|organic|both>",
-"paidHook":<0-5>,"paidAudience":<0-5>,"paidPain":<0-5>,"paidReframe":<0-5>,"paidCuriosity":<0-5>,"paidBridge":<0-5>,"paidOffer":<0-5>,"paidLeadQuality":<0-5>,"paidCred":<0-5>,"paidRetention":<0-5>,"paidHuman":<0-5>,"paidCTA":<0-5>,"paidTotal":<sum>,
-"paidGrade":"<54-60=Strong paid ad. Ready to test.|45-53=Good foundation, revise before testing.|36-44=Average ad, likely weak performance.|below 36=Weak ad, rewrite needed.>",
-"paidHookComment":"<10 words>","paidAudienceComment":"<10 words>","paidPainComment":"<10 words>","paidReframeComment":"<10 words>","paidCuriosityComment":"<10 words>","paidBridgeComment":"<10 words>","paidOfferComment":"<10 words>","paidLeadQualityComment":"<10 words>","paidCredComment":"<10 words>","paidRetentionComment":"<10 words>","paidHumanComment":"<10 words>","paidCTAComment":"<10 words>",
-"orgHook":<0-5>,"orgRelatability":<0-5>,"orgEducation":<0-5>,"orgPOV":<0-5>,"orgRetention":<0-5>,"orgShare":<0-5>,"orgComment":<0-5>,"orgHuman":<0-5>,"orgTrust":<0-5>,"orgSoftCTA":<0-5>,"orgVisual":<0-5>,"orgSeries":<0-5>,"orgTotal":<sum>,
-"orgGrade":"<same grade scale>",
-"orgHookComment":"<10 words>","orgRelatabilityComment":"<10 words>","orgEducationComment":"<10 words>","orgPOVComment":"<10 words>","orgRetentionComment":"<10 words>","orgShareComment":"<10 words>","orgCommentComment":"<10 words>","orgHumanComment":"<10 words>","orgTrustComment":"<10 words>","orgSoftCTAComment":"<10 words>","orgVisualComment":"<10 words>","orgSeriesComment":"<10 words>",
-"verdict":"<PASS|REVISE|REJECT>","verdictReason":"<2-4 sentences>","recommendedUse":"<Paid Ad|Organic Content|Both|Neither>",
-"diag1":"<Yes — reason|No — reason|Partially — reason>","diag2":"<...>","diag3":"<...>","diag4":"<...>","diag5":"<...>","diag6":"<...>","diag7":"<...>","diag8":"<...>","diag9":"<...>","diag10":"<...>","diag11":"<...>","diag12":"<...>",
-"issue1":"<str>","issue2":"<str>","issue3":"<str>","improve1":"<str>","improve2":"<str>","improve3":"<str>",
-"complianceLevel":"<no_major|moderate|high>","complianceNote":"<No major compliance red flags, but claims should still be reviewed before publishing.|Moderate compliance risk. Revise before publishing.|High compliance risk. Do not use until revised.>",
-"lpMatchScore":<1-5 or 0>,"lpMatchComment":"<str>","lpMismatchRisk":"<str>","lpImprove":"<str>"}
-
-PAID AD scoring (0 if not evaluating): 1=hookStrength 2=audienceRelevance 3=problemPainClarity 4=reframeBeliefShift 5=curiosityGap 6=freeClassBridge 7=offerClarity 8=leadQualityFit 9=credibilityBelievability 10=retentionFlow 11=humanNonAI 12=ctaClickMotivation — all 1-5. Set to 0 if not evaluating.
-ORGANIC scoring (0 if not evaluating): 1=hookStrength 2=relatability 3=educationalValue 4=pointOfView 5=retentionFlow 6=shareSavePotential 7=commentPotential 8=humanNonAI 9=brandTrust 10=softCTAFit 11=visualProductionPotential 12=contentSeriesPotential — all 1-5.
-Grading: 54-60=Strong, 45-53=Good/revise, 36-44=Average, <36=Weak/rewrite.
-Perfect diagnostic answers: "Yes — [1 sentence]", "No — [1 sentence]", or "Partially — [1 sentence]".
-${hasLP?'LP MATCH: Evaluate alignment with provided headline/promise/CTA. Score 1-5.':'LP MATCH: Set lpMatchScore to 0. lpMatchComment="Landing page message match cannot be fully evaluated because no landing page details were provided." Evaluate in lpImprove whether video has clear logical transition into free 2-hour class.'}
-Script:\n${script}`));
-  }catch(e){finish();showError('Step 1 failed: '+e.message);return}
-
-  // ── CALL 2: Detailed criterion evaluation ─────────────────────────────────
-  setProgress(22,'Step 2 of 5 — detailed criterion evaluation...');
-  const mode=s.scoreMode||'paid';
-  const evalKeys=mode==='organic'?ORG_KEYS:PAID_KEYS;
-  const evalNames=mode==='organic'?ORG_NAMES:PAID_NAMES;
-  const evalShort=mode==='organic'?ORG_SHORT:PAID_SHORT;
-  try{
-    d=parseJSON(await callClaude(`Detailed evaluation of each criterion for this ${mode==='organic'?'organic':'paid ad'} script. Return ONLY raw JSON.
-Criteria: ${evalKeys.map((k,i)=>`${i+1}. ${evalNames[k]} (key: "${evalShort[k]}")`).join(' | ')}
-JSON: {${evalKeys.map(k=>`"${evalShort[k]}Works":"<what works>","${evalShort[k]}Weak":"<what is weak or missing>","${evalShort[k]}Improve":"<how to improve>"`).join(',')}}
-Platform context: ${platformLabel}
-Be direct. Point out what will hurt performance. Do not be overly positive.
-Script:\n${script}`));
-  }catch(e){finish();showError('Step 2 failed: '+e.message);return}
-
-  // ── CALL 3: Compliance + AI phrases + Visual notes + Ad approval risk ─────
-  setProgress(42,'Step 3 of 5 — compliance, ad risk, and production audit...');
-  try{
-    c=parseJSON(await callClaude(`Identify financial compliance risks, AI-sounding phrases, visual notes, AND ad platform approval risks. Return ONLY raw JSON.
-Platform: ${platformLabel}
-
-{"f1line":"<exact flagged line or empty>","f1why":"<why risky>","f1fix":"<safer rewrite>","f2line":"<or empty>","f2why":"<str>","f2fix":"<str>","f3line":"<or empty>","f3why":"<str>","f3fix":"<str>","f4line":"<or empty>","f4why":"<str>","f4fix":"<str>",
-"ai1phrase":"<AI-sounding phrase or empty>","ai1why":"<why weak>","ai1rewrite":"<natural version>","ai2phrase":"<or empty>","ai2why":"<str>","ai2rewrite":"<str>","ai3phrase":"<or empty>","ai3why":"<str>","ai3rewrite":"<str>","ai4phrase":"<or empty>","ai4why":"<str>","ai4rewrite":"<str>",
-"vis1":"<visual note>","vis2":"<str>","vis3":"<str>","vis4":"<str>","vis5":"<str>","vis6":"<str>",
-"adRiskLevel":"<low|medium|high>",
-"adRiskSummary":"<1-2 sentences on overall ad approval risk for the chosen platform>",
-"adRisk1platform":"<Facebook/Meta|TikTok|Google Ads|All platforms>","adRisk1pattern":"<pattern type>","adRisk1line":"<exact line or empty>","adRisk1why":"<why this may cause rejection>","adRisk1fix":"<safer version>",
-"adRisk2platform":"<or none>","adRisk2pattern":"<str>","adRisk2line":"<or empty>","adRisk2why":"<str>","adRisk2fix":"<str>",
-"adRisk3platform":"<or none>","adRisk3pattern":"<str>","adRisk3line":"<or empty>","adRisk3why":"<str>","adRisk3fix":"<str>",
-"adRisk4platform":"<or none>","adRisk4pattern":"<str>","adRisk4line":"<or empty>","adRisk4why":"<str>","adRisk4fix":"<str>"}
-
-FINANCIAL COMPLIANCE flags: guaranteed profits, risk-free investing, easy money, replace income fast, secret strategy that always works, anyone can do this easily, implied certain results, unverified stats/testimonials, fake scarcity/urgency, specific return promises. Do NOT invent proof.
-AI PHRASES to flag: "in today's fast-paced world", "unlock your potential", "transform your financial future", "game-changing", "don't miss this golden opportunity", "master the art of", "say goodbye to confusion", "are you ready to", "take your journey to the next level", "whether you are a beginner or experienced". Also flag overly polished or corporate sentences.
-AD APPROVAL RISK patterns to check for ${platformLabel}:
-Facebook/Meta: personal attribute targeting language ("Are you X type of person?", "If you struggle with"), before/after transformation with financial implication, implied personal financial success/income, emotional manipulation language, "secret" framing, unsubstantiated outcome claims.
-TikTok: financial product promotion without educational disclaimer, get-rich or fast-money framing, specific financial outcome claims.
-Google Ads: superlatives without proof ("best", "#1", "guaranteed"), misleading financial promises, clickbait that misrepresents content.
-All platforms: "risk-free", phrasing that implies guaranteed outcomes, manufactured urgency or scarcity.
-If adRisk[N]platform is "none" or no risk found, leave that entry with all empty strings.
-
-Script:\n${script}`));
-  }catch(e){finish();showError('Step 3 failed: '+e.message);return}
-
-  // ── CALL 4: Rewrites ──────────────────────────────────────────────────────
-  setProgress(62,'Step 4 of 5 — generating rewrites...');
-  try{
-    r=parseJSON(await callClaude(`Expert video script writer for financial education. Write improved versions. Return ONLY raw JSON.
-Content type: ${ctLabel} | Platform: ${platformLabel}
-${lpSection||''}
-{"hook1":"<str>","hook2":"<str>","hook3":"<str>","hook4":"<str>","hook5":"<str>",
-"bridgeRewrite":"<3-5 sentences, natural, non-salesy>",
-"ctaRewrite":"<specific benefit, clear action, natural>",
-"quickFix":"<improved version of original script — same angle, biggest issues fixed. Full script.>",
-"rwPaidHook":"<improved hook>","rwPaidBody":"<improved body/middle>","rwPaidBridge":"<improved class bridge>","rwPaidCTA":"<improved CTA>","rwPaidNote":"<2 sentences: what changed and why>",
-"rwOrgHook":"<organic hook>","rwOrgBody":"<organic body/middle>","rwOrgCTA":"<organic soft CTA>","rwOrgNote":"<2 sentences: what changed and why>",
-"finalRec":"<paragraph: best use case, recommended content type, recommended framework, ready to test/post, what must be fixed before publishing>"}
-Platform rules for ${platformLabel}: ${platform==='tiktok'?'Hook must land in first 2 seconds. Short punchy sentences. Sounds like a real person recording casually.':platform==='facebook'?'Avoid personal attribute language. Captions-friendly delivery. No implied income promises.':platform==='youtube'?'Can afford a slightly longer build. Credibility matters more. Pattern break every 30-60 seconds.':'Natural, human delivery. No generic phrases.'}
-No AI phrases. No invented proof. Sound like a real person.
-Script:\n${script}`,4096));
-  }catch(e){finish();showError('Step 4 failed: '+e.message);return}
-
-  // ── CALL 5: Performance — emotional arc, drop-off map, cold audience ──────
-  setProgress(82,'Step 5 of 5 — emotional arc, drop-off map, cold audience test...');
-  try{
-    p=parseJSON(await callClaude(`Analyze this script for emotional arc, drop-off risk, and cold audience clarity. Return ONLY raw JSON.
-Content type: ${ctLabel} | Platform: ${platformLabel}
-
-{"arcSeg1excerpt":"<first ~20 chars of segment>","arcSeg1emotion":"<pain|tension|curiosity|reframe|hope|urgency|excitement|neutral>","arcSeg1note":"<10-12 word description>",
-"arcSeg2excerpt":"<str>","arcSeg2emotion":"<str>","arcSeg2note":"<str>",
-"arcSeg3excerpt":"<str>","arcSeg3emotion":"<str>","arcSeg3note":"<str>",
-"arcSeg4excerpt":"<str>","arcSeg4emotion":"<str>","arcSeg4note":"<str>",
-"arcSeg5excerpt":"<str>","arcSeg5emotion":"<str>","arcSeg5note":"<str>",
-"arcSeg6excerpt":"<or empty>","arcSeg6emotion":"<or empty>","arcSeg6note":"<or empty>",
-"arcSeg7excerpt":"<or empty>","arcSeg7emotion":"<or empty>","arcSeg7note":"<or empty>",
-"arcSeg8excerpt":"<or empty>","arcSeg8emotion":"<or empty>","arcSeg8note":"<or empty>",
-"arcSegCount":<5-8>,
-"arcPattern":"<e.g. pain → tension → curiosity → reframe → hope → action>",
-"arcMissing":"<what emotional stage is absent, weak, or comes too late>",
-"arcScore":<1-5>,
-"arcDiagnosis":"<2-3 sentences: does the arc build conversion-appropriate emotional momentum? what is flat or missing?>",
-"drop1excerpt":"<first 35 chars of segment>","drop1risk":"<high|medium|low>","drop1reason":"<why viewers would leave here>","drop1fix":"<how to fix>",
-"drop2excerpt":"<str>","drop2risk":"<str>","drop2reason":"<str>","drop2fix":"<str>",
-"drop3excerpt":"<str>","drop3risk":"<str>","drop3reason":"<str>","drop3fix":"<str>",
-"drop4excerpt":"<str>","drop4risk":"<str>","drop4reason":"<str>","drop4fix":"<str>",
-"drop5excerpt":"<str>","drop5risk":"<str>","drop5reason":"<str>","drop5fix":"<str>",
-"drop6excerpt":"<or empty>","drop6risk":"<or empty>","drop6reason":"<str>","drop6fix":"<str>",
-"drop7excerpt":"<or empty>","drop7risk":"<or empty>","drop7reason":"<str>","drop7fix":"<str>",
-"drop8excerpt":"<or empty>","drop8risk":"<or empty>","drop8reason":"<str>","drop8fix":"<str>",
-"dropCount":<5-8>,
-"coldScore":<1-5>,
-"coldBrand":"<yes|partial|no>","coldBrandNote":"<would a stranger know who is speaking and why to trust them?>",
-"coldOffer":"<yes|partial|no>","coldOfferNote":"<would a stranger understand the offer without prior context?>",
-"coldJargon":"<yes|partial|no>","coldJargonNote":"<are there terms that assume prior knowledge?>","coldJargonTerms":"<comma-separated list or empty>",
-"coldPain":"<yes|partial|no>","coldPainNote":"<would a stranger feel the problem applies to them?>",
-"coldTrust":"<yes|partial|no>","coldTrustNote":"<is there enough credibility for someone who has never seen this brand?>",
-"coldDiagnosis":"<2-3 sentences: would a cold audience be compelled? what would confuse or lose them?>"}
-
-EMOTIONAL ARC: A converting script follows — pain/problem → tension/agitation → reframe/insight → hope/possibility → urgency/action. Identify which stage each segment delivers. Note if the script goes flat, repeats without building, or skips emotional stages entirely.
-DROP-OFF RISK: Flag every section where viewers are likely to exit. Causes: slow lines with no new info, no tension or payoff in sight, pivot without bridge, unclear who this is for, jargon without explanation, vague generic lines.
-COLD AUDIENCE: Imagine someone who has never heard of this brand, never attended a class, and doesn't know the teacher. Evaluate whether the script works on first contact.
-Segment the script naturally into 5-8 logical chunks. For drop-off, cover the full script — mark low risk where retention is safe.
-Script:\n${script}`));
-  }catch(e){finish();showError('Step 5 failed: '+e.message);return}
-
-  setProgress(100,'Done');
-  _evalData={s,d,c,r,p,script,mode,evalKeys,evalNames,evalShort,hasLP,lpSection,ctLabel,fwLabel,platform,platformLabel};
-  saveToHistory(_evalData);
-  setTimeout(()=>{finish();render(_evalData);document.getElementById('results').style.display='block';document.getElementById('input-section').style.display='none';},300);
-}
-function finish(){document.getElementById('loading').style.display='none';document.getElementById('eval-btn').disabled=false}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// RENDER
-// ═══════════════════════════════════════════════════════════════════════════
-function render(data){
-  const{s,d,c,r,mode,evalKeys,evalNames,evalShort,platform}=data;
-
-  // Score hero
-  const verd=s.verdict||'REVISE';
-  const vPill=document.getElementById('verdict-pill');
-  vPill.className='verdict-pill '+(verd==='PASS'?'verdict-strong':verd==='REVISE'?'verdict-good':'verdict-weak');
-  vPill.textContent=verd;
-  document.getElementById('verdict-text').textContent=s.verdictReason||'';
-  document.getElementById('rec-use-pill').textContent=s.recommendedUse||'';
-  const php=document.getElementById('platform-hero-pill');
-  if(platform&&platform!=='any'){php.style.display='inline-block';php.textContent=PLATFORM_LABELS[platform];}
-  else php.style.display='none';
-  const heroScores=document.getElementById('hero-scores');heroScores.innerHTML='';
-  if(mode!=='organic'){const wt=calcWeightedTotal(s,PAID_KEYS);heroScores.innerHTML+=`<div class="score-block"><div><span class="score-big" id="paid-score-num">${wt}</span><span class="score-denom">/60</span></div><div class="score-lbl">Paid Ad</div><div class="score-weighted-note" id="paid-score-wn" style="display:${isDefaultWeights()?'none':'block'}">custom weights</div></div>`}
-  if(mode!=='paid'){const wt=calcWeightedTotal(s,ORG_KEYS);heroScores.innerHTML+=`<div class="score-block"><div><span class="score-big" id="org-score-num">${wt}</span><span class="score-denom">/60</span></div><div class="score-lbl">Organic</div></div>`}
-
-  // Overview tab
-  const stars='★'.repeat(s.frameworkFitScore||0)+'☆'.repeat(5-(s.frameworkFitScore||0));
-  const fwDisplayName=s.selectedFramework&&s.selectedFramework!=='Auto-recommend'?s.selectedFramework:(data.fwLabel!=='Auto-recommend'?data.fwLabel:'Unknown framework');
-  const fwAutoTag=data.fwLabel==='Auto-recommend'?` <span style="font-size:11px;font-weight:500;padding:2px 7px;border-radius:8px;background:#f0eeeb;color:#888;margin-left:6px;">auto-recommended</span>`:'';
-  document.getElementById('framework-card').innerHTML=`<div class="framework-card"><div class="fw-header"><span class="fw-name">${esc(fwDisplayName)}${fwAutoTag}</span><span class="fw-fit"><span class="fw-stars">${stars}</span>${s.frameworkFitScore||'?'}/5 fit</span></div><div class="fw-diagnosis">${esc(s.frameworkDiagnosis||'—')}</div></div>`;
-  const diagGrid=document.getElementById('diag-grid');diagGrid.innerHTML='';
-  for(let i=1;i<=12;i++){const txt=s['diag'+i]||'—';const isYes=txt.toLowerCase().startsWith('yes');const isNo=txt.toLowerCase().startsWith('no');const cls=isYes?'diag-yes':isNo?'diag-no':'diag-part';const badge=isYes?'Yes':isNo?'No':'Partially';const detail=txt.replace(/^(yes|no|partially)\s*[—\-]\s*/i,'');const el=document.createElement('div');el.className='diag-card';el.innerHTML=`<span class="diag-num">${i}.</span><span class="diag-badge ${cls}">${badge}</span><div><div style="font-size:12px;font-weight:500;color:#888;margin-bottom:2px;">${esc(DIAG_QUESTIONS[i-1])}</div><div class="diag-text">${esc(detail)}</div></div>`;diagGrid.appendChild(el)}
-
-  // Scores tab
-  function buildScoreTable(keys,names,shortKeys,scores,title,grade){
-    if(!scores||!keys.some(k=>(scores[k]||0)>0))return '';
-    const rows=keys.map(k=>{const sc=scores[k]||0,cc=sc>=5?'s5':sc>=4?'s4':sc>=3?'s3':sc>=2?'s2':'s1';const dots=Array.from({length:5},(_,i)=>`<div class="dot ${i<sc?cc:''}"></div>`).join('');const sh=shortKeys[k];const comment=scores[sh+'Comment']||scores[k+'Comment']||'';return `<tr><td><div class="sc-name">${names[k]}</div><div class="sc-dots">${dots}<span class="sc-val">${sc}/5</span></div></td><td class="sc-comment">${esc(comment)}</td></tr>`}).join('');
-    const total=keys.reduce((a,k)=>a+(scores[k]||0),0);
-    return `<div class="score-table-mode-label">${title}</div><div class="score-table-wrap"><table class="score-table"><thead><tr><th>Criterion</th><th>Quick comment</th></tr></thead><tbody>${rows}</tbody></table></div><div style="font-size:13px;color:#555;margin-bottom:16px;padding:8px 12px;background:#faf9f7;border-radius:6px;">Total: <strong>${total}/60</strong> — ${esc(grade||'')}</div>`;
-  }
-  document.getElementById('paid-scores-section').innerHTML=mode!=='organic'?`<div class="sec-label">Paid ad score</div>${buildScoreTable(PAID_KEYS,PAID_NAMES,PAID_SHORT,s,'Paid Ad criteria',s.paidGrade)}`:'';
-  document.getElementById('org-scores-section').innerHTML=mode!=='paid'?`<div class="sec-label">Organic content score</div>${buildScoreTable(ORG_KEYS,ORG_NAMES,ORG_SHORT,s,'Organic criteria',s.orgGrade)}`:'';
-
-  // Breakdown tab
-  document.getElementById('breakdown-mode-note').textContent=mode==='both'?`Detailed breakdown shown for Paid Ad criteria (primary evaluation). Both score tables are in the Scores tab.`:'';
-  const rubrics=mode==='organic'?ORG_RUBRICS:PAID_RUBRICS;
-  const det=document.getElementById('detail-blocks');det.innerHTML='';
-  evalKeys.forEach((k,i)=>{const sc=s[k]||0,sh=evalShort[k],bc=sc>=5?'b5':sc>=4?'b4':sc>=3?'b3':'b2';const works=d[sh+'Works']||'—',weak=d[sh+'Weak']||'—',improve=d[sh+'Improve']||'—';const rubRows=(rubrics[k]||[]).map((txt,idx)=>{const score=idx+1,cur=score===sc;return `<tr class="${cur?'current-score':''}"><td class="rubric-score-badge">${score}/5${cur?' ←':''}</td><td style="color:${cur?'#1a52a8':'#555'}">${esc(txt)}</td></tr>`}).join('');const el=document.createElement('div');el.className='detail-block';el.innerHTML=`<div class="detail-head" onclick="tog(${i})"><span class="detail-crit">${evalNames[k]}</span><span style="display:flex;align-items:center"><span class="dbadge ${bc}">${sc}/5</span><span class="chev" id="ch${i}">▼</span></span></div><div class="detail-body" id="bd${i}"><div class="sub-label">What works</div><div class="sub-text">${esc(works)}</div><div class="sub-label">What is weak or missing</div><div class="sub-text">${esc(weak)}</div><div class="sub-label">How to improve</div><div class="sub-text">${esc(improve)}</div><div class="rubric-toggle" onclick="event.stopPropagation();togRubric(${i})"><span>Scoring rubric</span><span class="rubric-toggle-chev" id="rch${i}">▼</span></div><div id="rub${i}" style="display:none"><table class="rubric-table">${rubRows}</table></div></div>`;det.appendChild(el)});
-
-  // Issues tab
-  document.getElementById('issues-list').innerHTML=[s.issue1,s.issue2,s.issue3].filter(Boolean).map((x,i)=>`<div class="issue-card"><strong>${i+1}.</strong> ${esc(x)}</div>`).join('')||'<div class="ok-banner">No major issues identified.</div>';
-  document.getElementById('improvements-list').innerHTML=[s.improve1,s.improve2,s.improve3].filter(Boolean).map((x,i)=>`<div class="improve-card"><strong>${i+1}.</strong> ${esc(x)}</div>`).join('')||'<div class="ok-banner">No specific improvements listed.</div>';
-
-  // Compliance tab
-  const cvClass=s.complianceLevel==='high'?'cv-high':s.complianceLevel==='moderate'?'cv-moderate':'cv-safe';
-  document.getElementById('compliance-verdict-block').innerHTML=`<div class="compliance-verdict ${cvClass}">${esc(s.complianceNote||'Claims should be reviewed before publishing.')}</div>`;
-  const flags=[1,2,3,4].map(n=>{const l=c['f'+n+'line'],w=c['f'+n+'why'],f=c['f'+n+'fix'];if(!l||!l.trim())return '';return `<div class="flag-card"><div class="flag-line">"${esc(l)}"</div><div class="flag-why">${esc(w)}</div><div class="flag-arrow">↓ safer rewrite</div><div class="flag-fix">${esc(f)}</div></div>`}).join('');
-  document.getElementById('compliance-flags-list').innerHTML=flags||'<div class="ok-banner">No specific compliance-risky lines flagged.</div>';
-
-  // Ad approval risk
-  const arLevel=c.adRiskLevel||'low';
-  const arClass=arLevel==='high'?'ar-high':arLevel==='medium'?'ar-medium':'ar-low';
-  const arIcon=arLevel==='high'?'🔴':arLevel==='medium'?'🟡':'🟢';
-  document.getElementById('ad-risk-block').innerHTML=`<div class="ad-risk-level ${arClass}">${arIcon} ${arLevel.charAt(0).toUpperCase()+arLevel.slice(1)} ad approval risk — ${esc(c.adRiskSummary||'No major platform-specific risks detected.')}</div>`;
-  const adRisks=[1,2,3,4].map(n=>{const plat=c['adRisk'+n+'platform'],pat=c['adRisk'+n+'pattern'],line=c['adRisk'+n+'line'],why=c['adRisk'+n+'why'],fix=c['adRisk'+n+'fix'];if(!plat||plat==='none'||(!line&&!why))return '';const platCls=plat.toLowerCase().includes('meta')||plat.toLowerCase().includes('facebook')?'platform-badge-meta':plat.toLowerCase().includes('tiktok')?'platform-badge-tiktok':plat.toLowerCase().includes('google')?'platform-badge-google':'platform-badge-all';return `<div class="flag-card"><div class="flag-type-row"><span class="platform-badge ${platCls}">${esc(plat)}</span><span class="pattern-tag">${esc(pat)}</span></div>${line?`<div class="flag-line">"${esc(line)}"</div>`:''}${why?`<div class="flag-why">${esc(why)}</div>`:''}${fix?`<div class="flag-arrow">↓ safer version</div><div class="flag-fix">${esc(fix)}</div>`:''}</div>`}).join('');
-  document.getElementById('ad-risk-list').innerHTML=adRisks||'<div class="ok-banner">No platform-specific approval risk patterns detected in this script.</div>';
-
-  const aiPhrases=[1,2,3,4].map(n=>{const p=c['ai'+n+'phrase'],w=c['ai'+n+'why'],rw=c['ai'+n+'rewrite'];if(!p||!p.trim())return '';return `<div class="flag-card"><div class="flag-line">"${esc(p)}"</div><div class="flag-why">${esc(w)}</div><div class="flag-arrow">↓ natural rewrite</div><div class="flag-fix">${esc(rw)}</div></div>`}).join('');
-  document.getElementById('ai-phrases-list').innerHTML=aiPhrases||'<div class="ok-banner">No AI-sounding or robotic phrases flagged.</div>';
-  const visIcons=['🎬','📊','📱','✍️','🔄','💡'];
-  document.getElementById('visual-notes-list').innerHTML=[1,2,3,4,5,6].map((n,i)=>{const v=c['vis'+n];if(!v||!v.trim())return '';return `<div class="vis-card"><span class="vis-icon">${visIcons[i]||'📌'}</span><span>${esc(v)}</span></div>`}).join('')||'<div style="font-size:14px;color:#888;">No specific visual production notes generated.</div>';
-
-  // Rewrites tab
-  document.getElementById('hooks-list').innerHTML=[1,2,3,4,5].map(n=>{const h=r['hook'+n];if(!h)return '';return `<div class="hook-card"><div class="hook-num">Option ${n}</div><div class="hook-text">${esc(h)}</div></div>`}).join('');
-  document.getElementById('bridge-block').innerHTML=`<div class="rbox"><div class="rbox-label">Rewritten bridge</div><div class="rtext" style="color:#1a6e3c;">${esc(r.bridgeRewrite||'—')}</div></div>`;
-  document.getElementById('cta-block').innerHTML=`<div class="rbox"><div class="rbox-label">Rewritten CTA</div><div class="rtext" style="color:#1a6e3c;">${esc(r.ctaRewrite||'—')}</div></div>`;
-  document.getElementById('quick-fix-block').innerHTML=`<div class="rbox"><div class="rbox-label">Quick fix version <span style="text-transform:none;font-weight:400;font-size:12px;color:#aaa;">(same angle, key issues fixed)</span></div><div class="rtext">${esc(r.quickFix||'—')}</div></div>`;
-  const paidRw=mode!=='organic'&&(r.rwPaidHook||r.rwPaidBody)?`<div class="sec-label">Full paid ad rewrite</div><div class="rbox">${[{l:'HOOK',t:r.rwPaidHook},{l:'BODY / MIDDLE',t:r.rwPaidBody},{l:'CLASS BRIDGE',t:r.rwPaidBridge},{l:'CTA',t:r.rwPaidCTA}].filter(x=>x.t).map(x=>`<div class="rsub">${esc(x.l)}</div><div class="rtext">${esc(x.t)}</div>`).join('')}${r.rwPaidNote?`<div class="rnote"><strong>What changed:</strong> ${esc(r.rwPaidNote)}</div>`:''}</div>`:''
-  const orgRw=mode!=='paid'&&(r.rwOrgHook||r.rwOrgBody)?`<div class="sec-label">Full organic content rewrite</div><div class="rbox">${[{l:'HOOK',t:r.rwOrgHook},{l:'BODY / MIDDLE',t:r.rwOrgBody},{l:'SOFT CTA',t:r.rwOrgCTA}].filter(x=>x.t).map(x=>`<div class="rsub">${esc(x.l)}</div><div class="rtext">${esc(x.t)}</div>`).join('')}${r.rwOrgNote?`<div class="rnote"><strong>What changed:</strong> ${esc(r.rwOrgNote)}</div>`:''}</div>`:''
-  document.getElementById('paid-rewrite-section').innerHTML=paidRw;
-  document.getElementById('org-rewrite-section').innerHTML=orgRw;
-  document.getElementById('lp-match-block').innerHTML=s.lpMatchScore>0?`<div class="lp-match-card"><div class="lp-score-row"><span class="lp-score-num" style="color:${s.lpMatchScore>=4?'#1a6e3c':s.lpMatchScore>=3?'#a05c00':'#a02020'};">${s.lpMatchScore}</span><span class="lp-score-max">/5</span><span style="font-size:13px;color:#888;margin-left:6px;">message match score</span></div><div class="lp-match-detail">${esc(s.lpMatchComment||'—')}</div>${s.lpMismatchRisk?`<div class="lp-mismatch">Mismatch risk: ${esc(s.lpMismatchRisk)}</div>`:''} ${s.lpImprove?`<div class="lp-improve">How to improve: ${esc(s.lpImprove)}</div>`:''}</div>`:`<div class="lp-na">${esc(s.lpMatchComment||'No landing page details provided.')}${s.lpImprove?'<br><br>'+esc(s.lpImprove):''}</div>`;
-  document.getElementById('final-rec-block').innerHTML=`<div class="final-rec-card"><div class="final-rec-text">${esc(r.finalRec||'—')}</div></div>`;
-
-  // Performance tab
-  if(data.p)renderPerformance(data);
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// RENDER PERFORMANCE TAB
-// ═══════════════════════════════════════════════════════════════════════════
-function renderPerformance(data){
-  const p=data.p;
-  if(!p)return;
-
-  // ── Emotional arc summary ──────────────────────────────────────────────
-  const arcCol=p.arcScore>=4?'#1a6e3c':p.arcScore>=3?'#a05c00':'#a02020';
-  document.getElementById('arc-summary').innerHTML=`<div class="arc-summary">
-    <div class="arc-score-row"><span class="arc-score-num" style="color:${arcCol}">${p.arcScore||'?'}</span><span class="arc-score-max">/5</span><span style="font-size:13px;color:#888;margin-left:6px;">arc quality</span></div>
-    <div class="arc-diagnosis">${esc(p.arcDiagnosis||'—')}</div>
-    ${p.arcMissing?`<div class="arc-missing">Missing or weak: ${esc(p.arcMissing)}</div>`:''}
-    <div style="font-size:12px;color:#888;margin-top:10px;">Pattern detected: <span style="font-weight:500;color:#333;">${esc(p.arcPattern||'—')}</span></div>
-  </div>`;
-
-  // ── Arc timeline ───────────────────────────────────────────────────────
-  const validEmotions=['pain','tension','curiosity','reframe','hope','urgency','excitement','neutral'];
-  const segCount=Math.max(1,Math.min(parseInt(p.arcSegCount)||5,8));
-  let timelineHtml='';
-  for(let i=1;i<=segCount;i++){
-    const ex=p['arcSeg'+i+'excerpt']||'';
-    const emRaw=(p['arcSeg'+i+'emotion']||'neutral').toLowerCase().trim();
-    const note=p['arcSeg'+i+'note']||'';
-    if(!ex&&!note)continue;
-    const em=validEmotions.includes(emRaw)?emRaw:'neutral';
-    if(i>1)timelineHtml+=`<div class="arc-arrow">→</div>`;
-    timelineHtml+=`<div class="arc-seg arc-seg-${em}"><div class="arc-emotion">${em}</div><div class="arc-excerpt">"${esc(ex)}…"</div><div class="arc-note">${esc(note)}</div></div>`;
-  }
-  document.getElementById('arc-timeline').innerHTML=`<div class="arc-timeline">${timelineHtml}</div>`;
-
-  // ── Drop-off risk map ──────────────────────────────────────────────────
-  const dropCount=Math.max(1,Math.min(parseInt(p.dropCount)||5,8));
-  let dropHtml='';
-  for(let i=1;i<=dropCount;i++){
-    const ex=p['drop'+i+'excerpt']||'';
-    const riskRaw=(p['drop'+i+'risk']||'low').toLowerCase().trim();
-    const reason=p['drop'+i+'reason']||'';
-    const fix=p['drop'+i+'fix']||'';
-    if(!ex&&!reason)continue;
-    const risk=['high','medium','low'].includes(riskRaw)?riskRaw:'low';
-    dropHtml+=`<div class="drop-seg drop-${risk}">
-      <div><span class="drop-risk-badge drop-risk-${risk}">${risk} risk</span></div>
-      <div class="drop-excerpt">"${esc(ex)}…"</div>
-      ${reason?`<div class="drop-reason">${esc(reason)}</div>`:''}
-      ${risk!=='low'&&fix?`<div class="drop-fix">Fix: ${esc(fix)}</div>`:''}
-    </div>`;
-  }
-  document.getElementById('drop-map').innerHTML=dropHtml||'<div class="ok-banner">No significant drop-off risks identified.</div>';
-
-  // ── Cold audience score ────────────────────────────────────────────────
-  const coldCol=p.coldScore>=4?'#1a6e3c':p.coldScore>=3?'#a05c00':'#a02020';
-  document.getElementById('cold-score').innerHTML=`<div class="cold-score-card">
-    <div class="cold-score-row"><span class="cold-score-num" style="color:${coldCol}">${p.coldScore||'?'}</span><span class="cold-score-max">/5</span><span style="font-size:13px;color:#888;margin-left:6px;">cold audience clarity</span></div>
-    <div class="cold-diagnosis">${esc(p.coldDiagnosis||'—')}</div>
-  </div>`;
-
-  // ── Cold criteria ──────────────────────────────────────────────────────
-  const coldCriteria=[
-    {key:'coldBrand',label:'Brand / speaker clarity',note:p.coldBrandNote,invert:false},
-    {key:'coldOffer',label:'Offer clarity',note:p.coldOfferNote,invert:false},
-    {key:'coldJargon',label:'Jargon-free language',note:p.coldJargonNote,invert:true},
-    {key:'coldPain',label:'Pain relatability',note:p.coldPainNote,invert:false},
-    {key:'coldTrust',label:'Trust signals',note:p.coldTrustNote,invert:false}
-  ];
-  let coldHtml=coldCriteria.map(c=>{
-    const raw=p[c.key]||'partial';
-    const display=c.invert?(raw==='yes'?'no':raw==='no'?'yes':raw):raw;
-    const cls=display==='yes'?'cold-yes':display==='partial'?'cold-partial':'cold-no';
-    const label=display==='yes'?'Pass':display==='partial'?'Partial':'Fail';
-    return `<div class="cold-card"><span class="cold-verdict ${cls}">${label}</span><div><div class="cold-label">${c.label}</div><div class="cold-note">${esc(c.note||'—')}</div></div></div>`;
-  }).join('');
-  if(p.coldJargonTerms&&p.coldJargonTerms.trim()){
-    const terms=p.coldJargonTerms.split(',').map(t=>t.trim()).filter(Boolean);
-    if(terms.length)coldHtml+=`<div style="margin-top:4px;margin-bottom:12px;"><div style="font-size:12px;font-weight:500;color:#888;margin-bottom:6px;">Terms that may confuse a cold audience:</div><div class="cold-jargon-list">${terms.map(t=>`<span class="cold-jargon-tag">${esc(t)}</span>`).join('')}</div></div>`;
-  }
-  document.getElementById('cold-criteria').innerHTML=coldHtml;
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// DOWNLOAD REPORT
-// ═══════════════════════════════════════════════════════════════════════════
-function downloadReport(){
-  if(!_evalData)return;
-  const{s,d,c,r,p,script,mode,evalKeys,evalNames,evalShort,ctLabel,fwLabel,platform}=_evalData;
-  const date=new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
-  const words=script.trim().split(/\s+/).filter(w=>w.length>0).length;
-  const ts=Math.round(words/(130/60)),m=Math.floor(ts/60),sec=ts%60;
-  const timeStr=m>0?`~${m}m ${sec}s`:`~${sec}s`;
-  const verd=s.verdict||'REVISE';
-  const verdCol=verd==='PASS'?'#1a6e3c':verd==='REVISE'?'#1a52a8':'#a02020';
-  const paidTotal=PAID_KEYS.reduce((a,k)=>a+(s[k]||0),0);
-  const orgTotal=ORG_KEYS.reduce((a,k)=>a+(s[k]||0),0);
-
-  function sec2(title,content){return `<div style="margin-bottom:32px;"><div style="font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#888;border-bottom:1px solid #e5e3de;padding-bottom:8px;margin-bottom:14px;">${title}</div>${content}</div>`}
-  function row(label,score,comment){const pct=(score/5)*100,col=pct>=80?'#2d8c56':pct>=60?'#4a9eca':pct>=40?'#e09a20':'#e05a20';return `<tr><td style="padding:7px 0;font-size:14px;color:#333;width:200px;">${label}</td><td style="padding:7px 0;width:120px;"><div style="height:5px;background:#f0eeeb;border-radius:3px;"><div style="height:5px;width:${pct}%;background:${col};border-radius:3px;"></div></div></td><td style="padding:7px 0;font-size:12px;font-weight:500;width:40px;">${score}/5</td><td style="padding:7px 0;font-size:13px;color:#777;">${esc(comment||'')}</td></tr>`}
-
-  const diagHtml=Array.from({length:12},(_,i)=>{const txt=s['diag'+(i+1)]||'—';const isYes=txt.toLowerCase().startsWith('yes');const isNo=txt.toLowerCase().startsWith('no');const col=isYes?'#1a6e3c':isNo?'#a02020':'#a05c00';const badge=isYes?'Yes':isNo?'No':'Partially';const detail=txt.replace(/^(yes|no|partially)\s*[—\-]\s*/i,'');return `<div style="display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid #f5f4f2;"><span style="font-size:11px;font-weight:600;color:#aaa;min-width:18px;">${i+1}.</span><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:${isYes?'#e6f5ec':isNo?'#fdecea':'#fff4e0'};color:${col};white-space:nowrap;">${badge}</span><div><div style="font-size:12px;font-weight:500;color:#888;margin-bottom:2px;">${DIAG_QUESTIONS[i]}</div><div style="font-size:13px;color:#444;">${esc(detail)}</div></div></div>`}).join('');
-  const paidRows=mode!=='organic'?PAID_KEYS.map(k=>row(PAID_NAMES[k],s[k]||0,s[PAID_SHORT[k]+'Comment']||'')).join(''):''
-  const orgRows=mode!=='paid'?ORG_KEYS.map(k=>row(ORG_NAMES[k],s[k]||0,s[ORG_SHORT[k]+'Comment']||'')).join(''):''
-  const flagsHtml=[1,2,3,4].map(n=>{const l=c['f'+n+'line'],w=c['f'+n+'why'],f=c['f'+n+'fix'];if(!l||!l.trim())return '';return `<div style="border:1px solid #e5e3de;border-radius:8px;padding:14px;margin-bottom:10px;"><div style="font-size:14px;color:#a02020;font-style:italic;padding:8px 12px;background:#fdecea;border-radius:6px;margin-bottom:8px;">"${esc(l)}"</div><div style="font-size:13px;color:#777;margin-bottom:6px;">${esc(w)}</div><div style="font-size:11px;color:#aaa;margin-bottom:4px;">↓ safer rewrite</div><div style="font-size:14px;color:#1a6e3c;padding:8px 12px;background:#e6f5ec;border-radius:6px;">${esc(f)}</div></div>`}).join('');
-  const adRisksHtml=[1,2,3,4].map(n=>{const plat=c['adRisk'+n+'platform'],pat=c['adRisk'+n+'pattern'],line=c['adRisk'+n+'line'],why=c['adRisk'+n+'why'],fix=c['adRisk'+n+'fix'];if(!plat||plat==='none'||(!line&&!why))return '';return `<div style="border:1px solid #e5e3de;border-radius:8px;padding:14px;margin-bottom:10px;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;"><span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:10px;background:#1a1a1a;color:#fff;">${esc(plat)}</span><span style="font-size:11px;padding:2px 8px;border-radius:10px;background:#fff4e0;color:#a05c00;">${esc(pat)}</span></div>${line?`<div style="font-size:14px;color:#a02020;font-style:italic;padding:8px 12px;background:#fdecea;border-radius:6px;margin-bottom:8px;">"${esc(line)}"</div>`:''}${why?`<div style="font-size:13px;color:#777;margin-bottom:6px;">${esc(why)}</div>`:''}${fix?`<div style="font-size:14px;color:#1a6e3c;padding:8px 12px;background:#e6f5ec;border-radius:6px;">${esc(fix)}</div>`:''}</div>`}).join('');
-  const aiHtml=[1,2,3,4].map(n=>{const p=c['ai'+n+'phrase'],w=c['ai'+n+'why'],rw=c['ai'+n+'rewrite'];if(!p||!p.trim())return '';return `<div style="border:1px solid #e5e3de;border-radius:8px;padding:14px;margin-bottom:10px;"><div style="font-size:14px;color:#a02020;font-style:italic;padding:8px 12px;background:#fdecea;border-radius:6px;margin-bottom:8px;">"${esc(p)}"</div><div style="font-size:13px;color:#777;margin-bottom:6px;">${esc(w)}</div><div style="font-size:11px;color:#aaa;margin-bottom:4px;">↓ natural rewrite</div><div style="font-size:14px;color:#1a6e3c;padding:8px 12px;background:#e6f5ec;border-radius:6px;">${esc(rw)}</div></div>`}).join('');
-  const hooksHtml=[1,2,3,4,5].map(n=>{const h=r['hook'+n];if(!h)return '';return `<div style="border:1px solid #e5e3de;border-radius:8px;padding:12px 15px;margin-bottom:9px;"><div style="font-size:11px;font-weight:600;color:#888;margin-bottom:5px;">Option ${n}</div><div style="font-size:14px;font-style:italic;line-height:1.85;white-space:pre-wrap;">${esc(h)}</div></div>`}).join('');
-  const detailHtml=evalKeys.map(k=>{const sh=evalShort[k];return `<div style="border:1px solid #e5e3de;border-radius:8px;padding:14px;margin-bottom:10px;"><div style="font-size:14px;font-weight:500;margin-bottom:10px;">${evalNames[k]} — ${s[k]||0}/5</div><div style="font-size:11px;font-weight:600;text-transform:uppercase;color:#888;margin-bottom:3px;">What works</div><div style="font-size:14px;color:#333;margin-bottom:10px;">${esc(d[sh+'Works']||'—')}</div><div style="font-size:11px;font-weight:600;text-transform:uppercase;color:#888;margin-bottom:3px;">Weak or missing</div><div style="font-size:14px;color:#333;margin-bottom:10px;">${esc(d[sh+'Weak']||'—')}</div><div style="font-size:11px;font-weight:600;text-transform:uppercase;color:#888;margin-bottom:3px;">How to improve</div><div style="font-size:14px;color:#333;">${esc(d[sh+'Improve']||'—')}</div></div>`}).join('');
-
-  const html=`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Script Evaluation — ${date}</title>
-<style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f9f8f6;color:#1a1a1a;font-size:15px;line-height:1.6;}.wrap{max-width:800px;margin:0 auto;padding:40px 28px 80px;}h1{font-size:22px;font-weight:500;margin-bottom:4px;}.meta{font-size:13px;color:#888;margin-bottom:28px;}table{width:100%;border-collapse:collapse;}@media print{body{background:#fff;}.wrap{padding:20px;}}</style>
-</head><body><div class="wrap">
-<h1>Video Script Evaluation Report</h1>
-<div class="meta">Generated ${date} · ${words} words · ${timeStr} · ${esc(ctLabel)}${platform&&platform!=='any'?' · '+PLATFORM_LABELS[platform]:''} · ${esc(fwLabel)}</div>
-${script?sec2('Original script',`<div style="background:#faf9f7;border:1px solid #e5e3de;border-radius:8px;padding:16px;font-size:13px;color:#444;line-height:1.75;white-space:pre-wrap;">${esc(script)}</div>`):''}
-<div style="background:#fff;border:1px solid #e5e3de;border-radius:12px;padding:20px 24px;margin-bottom:28px;"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;"><div><div style="font-size:15px;font-weight:600;color:${verdCol};margin-bottom:8px;">VERDICT: ${verd}</div><div style="font-size:14px;color:#444;max-width:480px;">${esc(s.verdictReason||'')}</div><div style="font-size:13px;color:#888;margin-top:8px;">Recommended use: ${esc(s.recommendedUse||'—')}</div></div><div style="display:flex;gap:20px;flex-wrap:wrap;">${mode!=='organic'?`<div style="text-align:right;"><div style="font-size:42px;font-weight:500;line-height:1;">${paidTotal}</div><div style="font-size:16px;color:#888;">/60 Paid</div></div>`:''}${mode!=='paid'?`<div style="text-align:right;"><div style="font-size:42px;font-weight:500;line-height:1;">${orgTotal}</div><div style="font-size:16px;color:#888;">/60 Organic</div></div>`:''}</div></div></div>
-${sec2('Framework analysis',`<div style="background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:16px 18px;"><div style="font-size:15px;font-weight:500;margin-bottom:8px;">${esc(s.selectedFramework||fwLabel)} — ${s.frameworkFitScore||'?'}/5 fit</div><div style="font-size:14px;color:#333;line-height:1.7;">${esc(s.frameworkDiagnosis||'—')}</div></div>`)}
-${mode!=='organic'&&paidRows?sec2('Paid ad score breakdown',`<table><thead><tr><th style="text-align:left;font-size:11px;color:#888;padding:6px 0;border-bottom:1px solid #e5e3de;">Criterion</th><th></th><th></th><th style="text-align:left;font-size:11px;color:#888;padding:6px 0;border-bottom:1px solid #e5e3de;">Comment</th></tr></thead><tbody>${paidRows}</tbody></table><div style="font-size:13px;margin-top:10px;padding:6px 12px;background:#faf9f7;border-radius:6px;">Total: <strong>${paidTotal}/60</strong> — ${esc(s.paidGrade||'')}</div>`):''}
-${mode!=='paid'&&orgRows?sec2('Organic content score breakdown',`<table><thead><tr><th style="text-align:left;font-size:11px;color:#888;padding:6px 0;border-bottom:1px solid #e5e3de;">Criterion</th><th></th><th></th><th style="text-align:left;font-size:11px;color:#888;padding:6px 0;border-bottom:1px solid #e5e3de;">Comment</th></tr></thead><tbody>${orgRows}</tbody></table><div style="font-size:13px;margin-top:10px;padding:6px 12px;background:#faf9f7;border-radius:6px;">Total: <strong>${orgTotal}/60</strong> — ${esc(s.orgGrade||'')}</div>`):''}
-${sec2('Perfect video diagnostic',diagHtml)}
-${sec2('Detailed criterion evaluation',detailHtml)}
-${sec2('Top 3 issues',[s.issue1,s.issue2,s.issue3].filter(Boolean).map((x,i)=>`<div style="border-left:3px solid #e05a20;background:#fff8f5;border-radius:0 8px 8px 0;padding:11px 15px;margin-bottom:9px;font-size:14px;"><strong>${i+1}.</strong> ${esc(x)}</div>`).join(''))}
-${sec2('Top 3 improvements',[s.improve1,s.improve2,s.improve3].filter(Boolean).map((x,i)=>`<div style="border-left:3px solid #4a9eca;background:#f5f9ff;border-radius:0 8px 8px 0;padding:11px 15px;margin-bottom:9px;font-size:14px;"><strong>${i+1}.</strong> ${esc(x)}</div>`).join(''))}
-${sec2('Financial compliance & risk',`<div style="padding:12px 15px;border-radius:8px;font-size:14px;font-weight:500;margin-bottom:14px;background:${s.complianceLevel==='high'?'#fdecea':s.complianceLevel==='moderate'?'#fff4e0':'#e6f5ec'};color:${s.complianceLevel==='high'?'#a02020':s.complianceLevel==='moderate'?'#a05c00':'#1a6e3c'};">${esc(s.complianceNote||'')}</div>${flagsHtml||'<div style="font-size:14px;color:#1a6e3c;">No specific compliance-risky lines flagged.</div>'}`)}
-${sec2('Ad platform approval risk',`<div style="padding:12px 15px;border-radius:8px;font-size:14px;font-weight:500;margin-bottom:14px;background:${c.adRiskLevel==='high'?'#fdecea':c.adRiskLevel==='medium'?'#fff4e0':'#e6f5ec'};color:${c.adRiskLevel==='high'?'#a02020':c.adRiskLevel==='medium'?'#a05c00':'#1a6e3c'};">${esc(c.adRiskSummary||'')}</div>${adRisksHtml||'<div style="font-size:14px;color:#1a6e3c;">No platform-specific approval risks detected.</div>'}`)}
-${sec2('AI-sounding phrases to remove',aiHtml||'<div style="font-size:14px;color:#1a6e3c;">No AI-sounding phrases flagged.</div>')}
-${sec2('5 stronger hook options',hooksHtml)}
-${sec2('Stronger bridge',`<div style="background:#e6f5ec;border-radius:8px;padding:14px;font-size:14px;color:#1a6e3c;line-height:1.8;white-space:pre-wrap;">${esc(r.bridgeRewrite||'—')}</div>`)}
-${sec2('Stronger CTA',`<div style="background:#e6f5ec;border-radius:8px;padding:14px;font-size:14px;color:#1a6e3c;line-height:1.8;white-space:pre-wrap;">${esc(r.ctaRewrite||'—')}</div>`)}
-${sec2('Quick fix version',`<div style="background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:18px 20px;font-size:14px;line-height:1.85;white-space:pre-wrap;">${esc(r.quickFix||'—')}</div>`)}
-${mode!=='organic'&&(r.rwPaidHook||r.rwPaidBody)?sec2('Full paid ad rewrite',`<div style="background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:18px 20px;">${[{l:'HOOK',t:r.rwPaidHook},{l:'BODY / MIDDLE',t:r.rwPaidBody},{l:'CLASS BRIDGE',t:r.rwPaidBridge},{l:'CTA',t:r.rwPaidCTA}].filter(x=>x.t).map(x=>`<div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4a9eca;margin:14px 0 5px;">${x.l}</div><div style="font-size:14px;line-height:1.85;white-space:pre-wrap;">${esc(x.t)}</div>`).join('')}${r.rwPaidNote?`<div style="margin-top:14px;font-size:13px;color:#555;background:#faf9f7;padding:10px 14px;border-radius:6px;">${esc(r.rwPaidNote)}</div>`:''}</div>`):''}
-${mode!=='paid'&&(r.rwOrgHook||r.rwOrgBody)?sec2('Full organic content rewrite',`<div style="background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:18px 20px;">${[{l:'HOOK',t:r.rwOrgHook},{l:'BODY / MIDDLE',t:r.rwOrgBody},{l:'SOFT CTA',t:r.rwOrgCTA}].filter(x=>x.t).map(x=>`<div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#4a9eca;margin:14px 0 5px;">${x.l}</div><div style="font-size:14px;line-height:1.85;white-space:pre-wrap;">${esc(x.t)}</div>`).join('')}${r.rwOrgNote?`<div style="margin-top:14px;font-size:13px;color:#555;background:#faf9f7;padding:10px 14px;border-radius:6px;">${esc(r.rwOrgNote)}</div>`:''}</div>`):''}
-${sec2('Final recommendation',`<div style="background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:18px 20px;font-size:14px;color:#333;line-height:1.75;white-space:pre-wrap;">${esc(r.finalRec||'—')}</div>`)}
-${p?sec2('Emotional arc',`<div style="background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:16px 18px;margin-bottom:12px;"><div style="font-size:28px;font-weight:500;color:${p.arcScore>=4?'#1a6e3c':p.arcScore>=3?'#a05c00':'#a02020'}">${p.arcScore||'?'}<span style="font-size:14px;color:#888;"> /5 arc quality</span></div><div style="font-size:14px;color:#333;margin-top:6px;line-height:1.7;">${esc(p.arcDiagnosis||'—')}</div>${p.arcMissing?`<div style="font-size:13px;color:#a05c00;background:#fff4e0;padding:8px 12px;border-radius:6px;margin-top:8px;">Missing or weak: ${esc(p.arcMissing)}</div>`:''}<div style="font-size:12px;color:#888;margin-top:8px;">Pattern: <strong>${esc(p.arcPattern||'—')}</strong></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;">${(()=>{const em=['pain','tension','curiosity','reframe','hope','urgency','excitement','neutral'];const segCt=Math.min(parseInt(p.arcSegCount)||5,8);let h='';for(let i=1;i<=segCt;i++){const ex=p['arcSeg'+i+'excerpt']||'';const emRaw=(p['arcSeg'+i+'emotion']||'neutral').toLowerCase().trim();const note=p['arcSeg'+i+'note']||'';if(!ex&&!note)continue;const e=em.includes(emRaw)?emRaw:'neutral';const bg={pain:'#fdecea',tension:'#fff0e5',curiosity:'#f3eeff',reframe:'#e5f0ff',hope:'#e6f5ec',urgency:'#fff4e0',excitement:'#e5faf5',neutral:'#f5f4f2'}[e];const col={pain:'#a02020',tension:'#c04a00',curiosity:'#6a2db0',reframe:'#1a52a8',hope:'#1a6e3c',urgency:'#a05c00',excitement:'#0d7a5f',neutral:'#666'}[e];h+=`<div style="background:${bg};border-radius:8px;padding:8px 12px;min-width:100px;flex:1;"><div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:${col};">${e}</div><div style="font-size:12px;font-style:italic;margin-top:3px;color:${col};opacity:.85;">"${esc(ex)}…"</div><div style="font-size:12px;color:${col};margin-top:3px;opacity:.9;">${esc(note)}</div></div>`;}return h;})()}</div>`):''}
-${p?sec2('Drop-off risk map',`${(()=>{const dc=Math.min(parseInt(p.dropCount)||5,8);let h='';for(let i=1;i<=dc;i++){const ex=p['drop'+i+'excerpt']||'';const rr=(p['drop'+i+'risk']||'low').toLowerCase();const reason=p['drop'+i+'reason']||'';const fix=p['drop'+i+'fix']||'';if(!ex&&!reason)continue;const risk=['high','medium','low'].includes(rr)?rr:'low';const bc=risk==='high'?'#c0392b':risk==='medium'?'#e09a20':'#2d8c56';const bg=risk==='high'?'#fff8f7':risk==='medium'?'#fffbf3':'#f5faf7';h+=`<div style="border-left:3px solid ${bc};background:${bg};border-radius:0 8px 8px 0;padding:11px 15px;margin-bottom:8px;"><div style="font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:${bg};color:${bc};display:inline-block;margin-bottom:6px;">${risk} risk</div><div style="font-size:14px;font-style:italic;line-height:1.6;margin-bottom:4px;">"${esc(ex)}…"</div>${reason?`<div style="font-size:13px;color:#777;line-height:1.5;margin-bottom:4px;">${esc(reason)}</div>`:''}${risk!=='low'&&fix?`<div style="font-size:13px;color:#1a6e3c;font-weight:500;">Fix: ${esc(fix)}</div>`:''}</div>`;}return h||'<div style="color:#1a6e3c;font-size:14px;">No significant drop-off risks identified.</div>';})()}`):''}
-${p?sec2('Cold audience test',`<div style="background:#fff;border:1px solid #e5e3de;border-radius:10px;padding:16px 18px;margin-bottom:12px;"><div style="font-size:28px;font-weight:500;color:${p.coldScore>=4?'#1a6e3c':p.coldScore>=3?'#a05c00':'#a02020'}">${p.coldScore||'?'}<span style="font-size:14px;color:#888;"> /5 cold audience clarity</span></div><div style="font-size:14px;color:#333;margin-top:6px;line-height:1.7;">${esc(p.coldDiagnosis||'—')}</div></div>${[{k:'coldBrand',l:'Brand / speaker clarity',inv:false},{k:'coldOffer',l:'Offer clarity',inv:false},{k:'coldJargon',l:'Jargon-free language',inv:true},{k:'coldPain',l:'Pain relatability',inv:false},{k:'coldTrust',l:'Trust signals',inv:false}].map(c=>{const raw=p[c.k]||'partial';const d=c.inv?(raw==='yes'?'no':raw==='no'?'yes':raw):raw;const bg=d==='yes'?'#e6f5ec':d==='partial'?'#fff4e0':'#fdecea';const col=d==='yes'?'#1a6e3c':d==='partial'?'#a05c00':'#a02020';const vl=d==='yes'?'Pass':d==='partial'?'Partial':'Fail';const note=p[c.k+'Note']||'—';return `<div style="border:1px solid #e5e3de;border-radius:8px;padding:11px 14px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;"><span style="font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;background:${bg};color:${col};white-space:nowrap;">${vl}</span><div><div style="font-size:13px;font-weight:500;margin-bottom:2px;">${c.l}</div><div style="font-size:13px;color:#555;">${esc(note)}</div></div></div>`;}).join('')}`):''}
-</div></body></html>`;
-
-  const b64=btoa(unescape(encodeURIComponent(html)));
-  const a=document.getElementById('download-link');a.href='data:text/html;base64,'+b64;a.download='script-evaluation-'+date.replace(/ /g,'-')+'.html';a.click();
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// UI HELPERS
-// ═══════════════════════════════════════════════════════════════════════════
-function tog(i){const bd=document.getElementById('bd'+i),ch=document.getElementById('ch'+i);ch.classList.toggle('open',bd.classList.toggle('open'))}
-function togRubric(i){const rub=document.getElementById('rub'+i),ch=document.getElementById('rch'+i);const open=rub.style.display==='none';rub.style.display=open?'block':'none';ch.classList.toggle('open',open)}
-function switchTab(el,name){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));el.classList.add('active');document.getElementById('tab-'+name).classList.add('active')}
-function resetEval(){document.getElementById('results').style.display='none';document.getElementById('input-section').style.display='block';document.getElementById('script-input').value='';document.getElementById('eval-btn').disabled=false;document.getElementById('error-box').style.display='none';updateWordCount();document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===0));document.querySelectorAll('.tab-panel').forEach((p,i)=>p.classList.toggle('active',i===0))}
-function showError(msg){const el=document.getElementById('error-box');el.textContent=msg;el.style.display='block'}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}
-
-// ═══════════════════════════════════════════════════════════════════════════
+// ======================================================================
 // INIT
-// ═══════════════════════════════════════════════════════════════════════════
-window.addEventListener('load',()=>{
-  refreshWeightsPanel();
-  renderHistoryPanel();
-  const k=getKey();
-  if(k){document.getElementById('api-key-input').value='sk-ant-••••••••••••••••';document.getElementById('key-saved').style.display='block'}
+// ======================================================================
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedKey = localStorage.getItem('anthropic_key');
+  if (savedKey) {
+    document.getElementById('api-key-input').value = savedKey;
+    document.getElementById('key-hint').textContent = '✓ Key loaded from browser storage.';
+  }
+  setMode('paid', false);
+  renderHistory();
+  document.getElementById('script-input').addEventListener('input', updateCharCount);
 });
+
+function updateCharCount() {
+  const len = document.getElementById('script-input').value.length;
+  document.getElementById('char-count').textContent = len > 0 ? len.toLocaleString() + ' chars' : '';
+}
+
+// ======================================================================
+// API KEY
+// ======================================================================
+
+function saveKey() {
+  const val = document.getElementById('api-key-input').value.trim();
+  if (!val) { document.getElementById('key-hint').textContent = '⚠ Please enter an API key.'; return; }
+  localStorage.setItem('anthropic_key', val);
+  document.getElementById('key-hint').textContent = '✓ Saved to browser storage.';
+}
+
+function getKey() {
+  return document.getElementById('api-key-input').value.trim() || localStorage.getItem('anthropic_key') || '';
+}
+
+// ======================================================================
+// MODE & WEIGHTS
+// ======================================================================
+
+function setMode(m, applyPreset) {
+  _mode = m;
+  document.getElementById('btn-paid').classList.toggle('active', m === 'paid');
+  document.getElementById('btn-organic').classList.toggle('active', m === 'organic');
+  const crit = m === 'paid' ? PAID_CRITERIA : ORGANIC_CRITERIA;
+  _weights = {};
+  crit.keys.forEach(k => _weights[k] = 3);
+  if (applyPreset !== false) {
+    const platform = document.getElementById('platform').value;
+    applyPlatformPreset(platform, m);
+  }
+  renderWeightsGrid();
+}
+
+function onPlatformChange() {
+  const platform = document.getElementById('platform').value;
+  document.getElementById('platform-note').textContent = PLATFORM_NOTES[platform] || '';
+  applyPlatformPreset(platform, _mode);
+  renderWeightsGrid();
+}
+
+function applyPlatformPreset(platform, mode) {
+  const preset = (PLATFORM_PRESETS[platform] || {})[mode] || {};
+  Object.entries(preset).forEach(([k, v]) => { if (k in _weights) _weights[k] = v; });
+  const hasPreset = Object.keys(preset).length > 0;
+  document.getElementById('weights-preset-label').textContent = hasPreset
+    ? '(' + (PLATFORM_LABELS[platform] || '') + ' preset applied)' : '';
+}
+
+function renderWeightsGrid() {
+  const crit = _mode === 'paid' ? PAID_CRITERIA : ORGANIC_CRITERIA;
+  const grid = document.getElementById('weights-grid');
+  grid.innerHTML = '';
+  crit.keys.forEach(k => {
+    const w = _weights[k] || 3;
+    const row = document.createElement('div');
+    row.className = 'weight-row';
+    row.innerHTML = '<div class="weight-name">' + esc(crit.names[k]) + '</div>' +
+      '<div class="weight-controls">' +
+      '<input type="range" min="1" max="5" value="' + w + '" oninput="updateWeight(\'' + k + '\',this.value)" />' +
+      '<span class="weight-val" id="wv-' + k + '">' + w + '</span>' +
+      '</div>';
+    grid.appendChild(row);
+  });
+}
+
+function updateWeight(k, v) {
+  _weights[k] = parseInt(v);
+  const el = document.getElementById('wv-' + k);
+  if (el) el.textContent = v;
+}
+
+function toggleWeights() {
+  _weightsOpen = !_weightsOpen;
+  document.getElementById('weights-body').style.display = _weightsOpen ? 'block' : 'none';
+  document.getElementById('weights-chev').textContent = _weightsOpen ? '▼' : '▶';
+}
+
+// ======================================================================
+// HISTORY
+// ======================================================================
+
+function loadHistory() {
+  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+
+function saveToHistory(data) {
+  let hist = loadHistory();
+  const entry = { id: Date.now(), ts: new Date().toISOString() };
+  // Store compact version of data
+  Object.assign(entry, data);
+  hist.unshift(entry);
+  if (hist.length > MAX_HISTORY) hist = hist.slice(0, MAX_HISTORY);
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(hist)); } catch(e) {}
+  renderHistory();
+}
+
+function renderHistory() {
+  const hist = loadHistory();
+  const countEl = document.getElementById('history-count');
+  if (countEl) countEl.textContent = hist.length > 0 ? '(' + hist.length + ')' : '';
+  const list = document.getElementById('history-list');
+  if (!list) return;
+  if (hist.length === 0) {
+    list.innerHTML = '<div class="history-empty">No evaluations yet. Run your first evaluation above.</div>';
+    return;
+  }
+  list.innerHTML = '';
+  hist.forEach((entry, idx) => {
+    const item = document.createElement('div');
+    item.className = 'history-item';
+    const dt = new Date(entry.ts);
+    const dateStr = dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const totalScore = (entry.s && entry.s.totalScore) ? entry.s.totalScore : '—';
+    const snippet = (entry.scriptName || (entry.script || '').slice(0, 55) + ((entry.script || '').length > 55 ? '…' : '')) || 'Untitled';
+    const modeLabel = entry.mode === 'organic' ? 'Organic' : 'Paid';
+    const platLabel = PLATFORM_LABELS[entry.platform] || 'Any';
+    item.innerHTML =
+      '<div class="history-item-top"><div class="history-item-name">' + esc(snippet) + '</div><div class="history-item-score">' + totalScore + '/60</div></div>' +
+      '<div class="history-item-meta">' + dateStr + ' · ' + modeLabel + ' · ' + platLabel + '</div>';
+    item.onclick = function() { restoreFromHistory(entry); };
+    list.appendChild(item);
+  });
+}
+
+function toggleHistory() {
+  _historyOpen = !_historyOpen;
+  document.getElementById('history-body').style.display = _historyOpen ? 'block' : 'none';
+  document.getElementById('history-chev').textContent = _historyOpen ? '▲' : '▼';
+}
+
+function clearHistory() {
+  if (!confirm('Clear all evaluation history?')) return;
+  localStorage.removeItem(HISTORY_KEY);
+  renderHistory();
+}
+
+function restoreFromHistory(entry) {
+  if (!entry) return;
+  _evalData = entry;
+  if (entry.script) document.getElementById('script-input').value = entry.script;
+  if (entry.mode) setMode(entry.mode, false);
+  renderResults(entry);
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ======================================================================
+// API
+// ======================================================================
+
+async function callClaude(prompt) {
+  const key = getKey();
+  if (!key) throw new Error('No API key set. Please enter your Anthropic API key above and click Save key.');
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': key,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      max_tokens: 2400,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  if (!res.ok) {
+    let errText = '';
+    try { errText = await res.text(); } catch(e) {}
+    throw new Error('API error ' + res.status + ': ' + errText);
+  }
+  const data = await res.json();
+  return (data.content && data.content[0] && data.content[0].text) || '';
+}
+
+function parseJSON(text) {
+  let clean = text.replace(/```json\s*/gi, '').replace(/```\s*/gi, '').trim();
+  const start = clean.indexOf('{');
+  const end = clean.lastIndexOf('}');
+  if (start === -1 || end === -1) throw new Error('No JSON object found in API response. Raw: ' + clean.slice(0, 200));
+  clean = clean.slice(start, end + 1);
+  return JSON.parse(clean);
+}
+
+// ======================================================================
+// PROGRESS
+// ======================================================================
+
+function setProgress(pct, label) {
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = label;
+}
+
+function showProgress() {
+  document.getElementById('progress-wrap').style.display = 'block';
+  document.getElementById('error-box').style.display = 'none';
+  document.getElementById('results').style.display = 'none';
+  setProgress(0, 'Starting evaluation...');
+}
+
+function hideProgress() {
+  document.getElementById('progress-wrap').style.display = 'none';
+}
+
+function showError(msg) {
+  const box = document.getElementById('error-box');
+  box.textContent = '⚠ ' + msg;
+  box.style.display = 'block';
+  hideProgress();
+}
+
+// ======================================================================
+// MAIN EVALUATION — 5 API CALLS
+// ======================================================================
+
+async function runEval() {
+  const script = document.getElementById('script-input').value.trim();
+  if (!script) { alert('Please paste a script first.'); return; }
+  if (!getKey()) { alert('Please enter your Anthropic API key and click Save key.'); return; }
+
+  const mode = _mode;
+  const crit = mode === 'paid' ? PAID_CRITERIA : ORGANIC_CRITERIA;
+  const evalKeys = crit.keys;
+  const evalNames = crit.names;
+
+  const platform = document.getElementById('platform').value;
+  const platformLabel = PLATFORM_PROMPT[platform];
+  const platformDisplayLabel = PLATFORM_LABELS[platform];
+
+  const ctEl = document.getElementById('content-type');
+  const ctLabel = ctEl.options[ctEl.selectedIndex].text;
+  const hasLP = document.getElementById('has-lp').value === 'yes';
+  const lpSection = hasLP ? 'Yes — this script bridges to a landing page.' : 'No — standalone script.';
+  const scriptName = document.getElementById('script-name').value.trim();
+
+  document.getElementById('eval-btn').disabled = true;
+  showProgress();
+
+  let s, d, c, r, p;
+
+  try {
+    // ---- CALL 1: Scores + Framework ----
+    setProgress(5, 'Step 1 of 5 — scoring and framework analysis...');
+
+    const scoresLines = evalKeys.map((k, i) => (i+1) + '. ' + evalNames[k] + ': score 1-5 as "' + k + '"').join('\n');
+
+    s = parseJSON(await callClaude(
+      'You are evaluating a financial education video script for use as a ' +
+      (mode === 'organic' ? 'organic social media post' : 'paid advertisement') + '.\n' +
+      'Platform: ' + platformLabel + '\n' +
+      'Content type: ' + ctLabel + '\n' +
+      'Landing page: ' + lpSection + '\n\n' +
+      'Score each criterion 1-5. Return ONLY raw JSON, no markdown fences.\n\n' +
+      'Criteria:\n' + scoresLines + '\n\n' +
+      'Also return:\n' +
+      '"totalScore": integer sum of all criterion scores\n' +
+      '"verdict": one of "weak"|"average"|"good"|"strong"\n' +
+      '"verdictText": honest 2-3 sentence summary of overall script quality and what must change\n' +
+      '"selectedFramework": the specific copywriting framework this script uses or best fits — e.g. PAS, AIDA, HVT, PASTOR, Hook-Value-CTA, Problem-Agitate-Solve, etc. NEVER write "Auto-recommend" — always name the actual framework\n' +
+      '"fwRationale": one sentence explaining why this framework was identified\n\n' +
+      'Script:\n' + script
+    ));
+
+    // ---- CALL 2: Detailed breakdown (numbered keys — avoids Haiku camelCase drift) ----
+    setProgress(22, 'Step 2 of 5 — detailed criterion evaluation...');
+
+    const critListForCall2 = evalKeys.map((k, i) => (i+1) + '. ' + evalNames[k]).join('\n');
+
+    d = parseJSON(await callClaude(
+      'Detailed evaluation of each criterion for this ' + (mode === 'organic' ? 'organic' : 'paid ad') + ' script.\n' +
+      'Platform: ' + platformLabel + '\n' +
+      'Return ONLY raw JSON. No markdown fences.\n\n' +
+      'Criteria (12 total):\n' + critListForCall2 + '\n\n' +
+      'Return EXACTLY this structure — c1 through c12 matching the criteria order above:\n' +
+      '{"c1works":"<what works in the script for criterion 1>","c1weak":"<what is weak or missing>","c1fix":"<specific how-to-improve action>",' +
+      '"c2works":"<str>","c2weak":"<str>","c2fix":"<str>",' +
+      '"c3works":"<str>","c3weak":"<str>","c3fix":"<str>",' +
+      '"c4works":"<str>","c4weak":"<str>","c4fix":"<str>",' +
+      '"c5works":"<str>","c5weak":"<str>","c5fix":"<str>",' +
+      '"c6works":"<str>","c6weak":"<str>","c6fix":"<str>",' +
+      '"c7works":"<str>","c7weak":"<str>","c7fix":"<str>",' +
+      '"c8works":"<str>","c8weak":"<str>","c8fix":"<str>",' +
+      '"c9works":"<str>","c9weak":"<str>","c9fix":"<str>",' +
+      '"c10works":"<str>","c10weak":"<str>","c10fix":"<str>",' +
+      '"c11works":"<str>","c11weak":"<str>","c11fix":"<str>",' +
+      '"c12works":"<str>","c12weak":"<str>","c12fix":"<str>"}\n\n' +
+      'Be direct and specific. Point out what will hurt performance. Do not be overly positive.\n\n' +
+      'Script:\n' + script
+    ));
+
+    // ---- CALL 3: Compliance + Ad risk + Visual ----
+    setProgress(42, 'Step 3 of 5 — compliance, ad risk, and production audit...');
+
+    c = parseJSON(await callClaude(
+      'Evaluate this financial education script for compliance and ad approval risk.\n' +
+      'Platform: ' + platformLabel + '\n' +
+      'Mode: ' + (mode === 'paid' ? 'Paid advertisement' : 'Organic content') + '\n' +
+      'Return ONLY raw JSON. No markdown fences.\n\n' +
+      '{"complianceRisk":"low|medium|high",' +
+      '"complianceFlags":["<list compliance issues: guaranteed returns, specific income claims, misleading statements, etc — empty array if none>"],' +
+      '"complianceSummary":"<2 sentences on overall compliance health>",' +
+      '"adRisk":"low|medium|high",' +
+      '"adRiskFlags":["<specific phrases or claims likely to trigger ad rejection: personal attributes language, before/after transformation, income guarantees, misleading financial claims — empty array if none>"],' +
+      '"adRiskSummary":"<2 sentences on ad approval risk>",' +
+      '"visualSuggestions":["<3-5 specific B-roll, on-screen text, or visual overlay recommendations>"],' +
+      '"productionNotes":"<2-3 sentences on pacing, delivery, and production recommendations>"}\n\n' +
+      'Script:\n' + script
+    ));
+
+    // ---- CALL 4: Rewrites ----
+    setProgress(62, 'Step 4 of 5 — generating rewrites...');
+
+    r = parseJSON(await callClaude(
+      'Generate improved versions of this ' + (mode === 'organic' ? 'organic' : 'paid ad') + ' script.\n' +
+      'Platform: ' + platformLabel + '\n' +
+      'Content type: ' + ctLabel + '\n' +
+      'Return ONLY raw JSON. No markdown fences.\n\n' +
+      '{"hookOptions":[' +
+      '{"label":"<style e.g. Loss specificity>","text":"<rewritten hook — first 3-6 lines only>"},' +
+      '{"label":"<style>","text":"<hook>"},' +
+      '{"label":"<style>","text":"<hook>"}],' +
+      '"fullRewrite":"<complete improved script — use \\n for line breaks>",' +
+      '"rewriteNotes":"<2-3 sentences explaining the key changes made and why>",' +
+      '"ctaOptions":[' +
+      '{"label":"<style>","text":"<rewritten CTA — last 3-5 lines>"},' +
+      '{"label":"<style>","text":"<CTA>"}]}\n\n' +
+      'Script:\n' + script
+    ));
+
+    // ---- CALL 5: Emotional arc + Drop-off + Cold audience ----
+    setProgress(82, 'Step 5 of 5 — emotional arc, drop-off map, cold audience test...');
+
+    p = parseJSON(await callClaude(
+      'Analyse this script for emotional arc, drop-off risk, and cold audience clarity.\n' +
+      'Content type: ' + ctLabel + ' | Platform: ' + platformLabel + '\n' +
+      'Return ONLY raw JSON. No markdown fences.\n\n' +
+      '{"arcSeg1excerpt":"<first ~20 chars of segment 1>","arcSeg1emotion":"<pain|tension|curiosity|reframe|hope|urgency|excitement|neutral>","arcSeg1note":"<10-12 word description of emotional beat>",' +
+      '"arcSeg2excerpt":"<str>","arcSeg2emotion":"<str>","arcSeg2note":"<str>",' +
+      '"arcSeg3excerpt":"<str>","arcSeg3emotion":"<str>","arcSeg3note":"<str>",' +
+      '"arcSeg4excerpt":"<str>","arcSeg4emotion":"<str>","arcSeg4note":"<str>",' +
+      '"arcSeg5excerpt":"<str>","arcSeg5emotion":"<str>","arcSeg5note":"<str>",' +
+      '"arcSeg6excerpt":"<str>","arcSeg6emotion":"<str>","arcSeg6note":"<str>",' +
+      '"arcSeg7excerpt":"<str>","arcSeg7emotion":"<str>","arcSeg7note":"<str>",' +
+      '"arcSeg8excerpt":"<str>","arcSeg8emotion":"<str>","arcSeg8note":"<str>",' +
+      '"arcSegCount":6,' +
+      '"arcPattern":"<e.g. pain → tension → curiosity → reframe → hope → action>",' +
+      '"arcMissing":"<what emotional stage is absent, weak, or comes too late>",' +
+      '"arcScore":3,' +
+      '"arcDiagnosis":"<2-3 sentences on arc quality>",' +
+      '"drop1excerpt":"<first 35 chars>","drop1risk":"<high|medium|low>","drop1reason":"<why viewers leave>","drop1fix":"<how to fix>",' +
+      '"drop2excerpt":"<str>","drop2risk":"<str>","drop2reason":"<str>","drop2fix":"<str>",' +
+      '"drop3excerpt":"<str>","drop3risk":"<str>","drop3reason":"<str>","drop3fix":"<str>",' +
+      '"drop4excerpt":"<str>","drop4risk":"<str>","drop4reason":"<str>","drop4fix":"<str>",' +
+      '"drop5excerpt":"<str>","drop5risk":"<str>","drop5reason":"<str>","drop5fix":"<str>",' +
+      '"drop6excerpt":"<str>","drop6risk":"<str>","drop6reason":"<str>","drop6fix":"<str>",' +
+      '"dropCount":5,' +
+      '"coldScore":3,' +
+      '"coldBrand":"<yes|partial|no>","coldBrandNote":"<str>",' +
+      '"coldOffer":"<yes|partial|no>","coldOfferNote":"<str>",' +
+      '"coldJargon":"<yes|partial|no>","coldJargonNote":"<str>","coldJargonTerms":"<comma-separated jargon terms or empty string>",' +
+      '"coldPain":"<yes|partial|no>","coldPainNote":"<str>",' +
+      '"coldTrust":"<yes|partial|no>","coldTrustNote":"<str>",' +
+      '"coldDiagnosis":"<2-3 sentences on cold audience readiness>"}\n\n' +
+      'Script:\n' + script
+    ));
+
+    setProgress(100, 'Done ✓');
+
+    const fwLabel = (s.selectedFramework && s.selectedFramework !== 'Auto-recommend')
+      ? s.selectedFramework : 'Framework identified';
+
+    _evalData = {
+      s, d, c, r, p, script, scriptName, mode,
+      evalKeys, evalNames,
+      hasLP, lpSection, ctLabel, fwLabel,
+      platform, platformLabel: platformDisplayLabel
+    };
+
+    saveToHistory(_evalData);
+    renderResults(_evalData);
+
+    setTimeout(hideProgress, 600);
+
+  } catch (err) {
+    showError(err.message || String(err));
+  } finally {
+    document.getElementById('eval-btn').disabled = false;
+  }
+}
+
+// ======================================================================
+// RENDER RESULTS
+// ======================================================================
+
+function renderResults(data) {
+  const { s, d, c, r, p, evalKeys, evalNames } = data;
+
+  document.getElementById('results').style.display = 'block';
+
+  // Header
+  const name = data.scriptName || (data.script || '').slice(0, 60) + ((data.script || '').length > 60 ? '…' : '');
+  document.getElementById('result-script-name').textContent = name || 'Script evaluation';
+  document.getElementById('result-script-label').textContent =
+    'Video Script Evaluation · ' + (data.mode === 'paid' ? 'Paid Ad' : 'Organic') +
+    (data.platformLabel ? ' · ' + data.platformLabel : '');
+
+  const totalScore = (s && s.totalScore) ? s.totalScore :
+    evalKeys.reduce((sum, k) => sum + (s ? (s[k] || 0) : 0), 0);
+  document.getElementById('score-num').textContent = totalScore;
+
+  const verdictMap = {
+    weak:    { cls: 'verdict-weak',    label: 'Needs significant work' },
+    average: { cls: 'verdict-avg',     label: 'Average — weak retention or conversion likely' },
+    good:    { cls: 'verdict-good',    label: 'Good script — strong in most areas' },
+    strong:  { cls: 'verdict-strong',  label: 'Strong script — ready to film' }
+  };
+  const vd = verdictMap[(s && s.verdict)] || verdictMap.average;
+  document.getElementById('verdict-pill-wrap').innerHTML =
+    '<div class="verdict-pill ' + vd.cls + '">' + vd.label + '</div>';
+  document.getElementById('verdict-text').textContent = (s && s.verdictText) || '';
+
+  // Framework card
+  const fwName = (s && s.selectedFramework && s.selectedFramework !== 'Auto-recommend')
+    ? s.selectedFramework : (data.fwLabel || 'Framework identified');
+  document.getElementById('framework-card').innerHTML =
+    '<div class="fw-label">Framework identified</div>' +
+    '<div class="fw-name">' + esc(fwName) + '</div>' +
+    '<div class="fw-rationale">' + esc((s && s.fwRationale) || '') + '</div>';
+
+  // Tabs
+  renderOverview(data);
+  renderScores(data);
+  renderBreakdown(data);
+  renderIssues(data);
+  renderCompliance(data);
+  renderRewrites(data);
+  renderPerformance(data);
+
+  // Reset to overview
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('.tab[onclick*="overview"]').classList.add('active');
+  document.getElementById('tab-overview').classList.add('active');
+
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ---- Overview ----
+function renderOverview(data) {
+  const { s, evalKeys, evalNames } = data;
+  if (!s) { document.getElementById('overview-content').innerHTML = '<div>No data.</div>'; return; }
+
+  const scored = evalKeys.map(k => ({ k, name: evalNames[k], score: s[k] || 0 }))
+    .sort((a, b) => a.score - b.score);
+  const weakest = scored.slice(0, 3);
+  const strongest = scored.slice(-3).reverse();
+
+  let html =
+    '<div class="overview-grid">' +
+    '<div class="overview-card"><div class="ov-label">3 biggest weaknesses</div>' +
+    weakest.map(x => '<div class="ov-item ov-weak"><span class="ov-score">' + x.score + '/5</span> ' + esc(x.name) + '</div>').join('') +
+    '</div>' +
+    '<div class="overview-card"><div class="ov-label">3 strongest areas</div>' +
+    strongest.map(x => '<div class="ov-item ov-strong"><span class="ov-score">' + x.score + '/5</span> ' + esc(x.name) + '</div>').join('') +
+    '</div></div>' +
+    '<div class="ov-verdict-text">' + esc(s.verdictText || '') + '</div>';
+
+  document.getElementById('overview-content').innerHTML = html;
+}
+
+// ---- Scores ----
+function renderScores(data) {
+  const { s, evalKeys, evalNames } = data;
+  const grid = document.getElementById('score-grid');
+  grid.innerHTML = '';
+  if (!s) return;
+  evalKeys.forEach(k => {
+    const score = s[k] || 0;
+    const cc = score >= 5 ? 'filled-5' : score >= 4 ? 'filled-4' : score >= 3 ? 'filled-3' : score >= 2 ? 'filled-2' : 'filled-1';
+    const dots = Array.from({ length: 5 }, (_, i) => '<div class="dot ' + (i < score ? cc : '') + '"></div>').join('');
+    const card = document.createElement('div');
+    card.className = 'score-card';
+    card.innerHTML = '<div class="score-card-name">' + esc(evalNames[k]) + '</div><div class="dots">' + dots + '<span class="score-val">' + score + '/5</span></div>';
+    grid.appendChild(card);
+  });
+}
+
+// ---- Breakdown (FIXED: uses c1works/c1weak/c1fix numbered keys) ----
+function renderBreakdown(data) {
+  const { s, d, evalKeys, evalNames } = data;
+  const container = document.getElementById('breakdown-blocks');
+  container.innerHTML = '';
+  if (!s || !d) { container.innerHTML = '<div style="color:#888;font-size:14px;">Breakdown data not available.</div>'; return; }
+
+  evalKeys.forEach((k, i) => {
+    const score = s[k] || 0;
+    const badgeClass = score >= 5 ? 'badge-5' : score >= 4 ? 'badge-4' : score >= 3 ? 'badge-3' : 'badge-2';
+    const num = i + 1;
+    // FIXED: use numbered keys c1works, c1weak, c1fix (not camelCase short names)
+    const works   = d['c' + num + 'works'] || '—';
+    const weak    = d['c' + num + 'weak']  || '—';
+    const improve = d['c' + num + 'fix']   || '—';
+
+    const block = document.createElement('div');
+    block.className = 'detail-block';
+    block.innerHTML =
+      '<div class="detail-header" onclick="toggleDetail(\'bd-' + i + '\')">' +
+      '<span class="detail-crit-name">' + esc(evalNames[k]) + '</span>' +
+      '<span style="display:flex;align-items:center;gap:10px;">' +
+      '<span class="detail-score-badge ' + badgeClass + '">' + score + '/5</span>' +
+      '<span class="chevron" id="chev-bd-' + i + '">▼</span>' +
+      '</span></div>' +
+      '<div class="detail-body" id="body-bd-' + i + '">' +
+      '<div class="detail-subsection"><div class="detail-sublabel">What works</div><div class="detail-text">' + esc(works) + '</div></div>' +
+      '<div class="detail-subsection"><div class="detail-sublabel">What is weak or missing</div><div class="detail-text">' + esc(weak) + '</div></div>' +
+      '<div class="detail-subsection"><div class="detail-sublabel">How to improve</div><div class="detail-text">' + esc(improve) + '</div></div>' +
+      '</div>';
+    container.appendChild(block);
+  });
+}
+
+// ---- Issues ----
+function renderIssues(data) {
+  const { s, d, evalKeys, evalNames } = data;
+  if (!s || !d) { document.getElementById('issues-content').innerHTML = '<div style="color:#888;font-size:14px;">Issues data not available.</div>'; return; }
+
+  const scored = evalKeys.map((k, i) => ({ k, name: evalNames[k], score: s[k] || 0, idx: i }))
+    .sort((a, b) => a.score - b.score);
+  const top3 = scored.slice(0, 3);
+
+  let html = '<div class="sec-label">Top issues to fix</div>';
+  top3.forEach((x, n) => {
+    const weak = d['c' + (x.idx + 1) + 'weak'] || '—';
+    html += '<div class="issue-card"><strong>' + (n+1) + '. ' + esc(x.name) + ' (' + x.score + '/5)</strong> — ' + esc(weak) + '</div>';
+  });
+
+  html += '<div class="sec-label" style="margin-top:28px;">Highest-impact improvements</div>';
+  top3.forEach((x, n) => {
+    const improve = d['c' + (x.idx + 1) + 'fix'] || '—';
+    html += '<div class="improve-card"><strong>' + (n+1) + '. ' + esc(x.name) + '</strong> — ' + esc(improve) + '</div>';
+  });
+
+  document.getElementById('issues-content').innerHTML = html;
+}
+
+// ---- Compliance ----
+function renderCompliance(data) {
+  const { c } = data;
+  if (!c) { document.getElementById('compliance-content').innerHTML = '<div class="flag-ok">Compliance data not available.</div>'; return; }
+
+  const riskClass = { low: 'flag-ok', medium: 'flag-warn flag-medium', high: 'flag-warn' };
+
+  let html =
+    '<div class="sec-label">Compliance risk</div>' +
+    '<div class="' + (riskClass[c.complianceRisk] || 'flag-ok') + '">Risk level: <strong>' +
+    (c.complianceRisk || 'unknown').toUpperCase() + '</strong><br>' + esc(c.complianceSummary || '') + '</div>';
+
+  if (c.complianceFlags && c.complianceFlags.length) {
+    c.complianceFlags.forEach(f => { if (f) html += '<div class="flag-warn">⚠ ' + esc(f) + '</div>'; });
+  }
+
+  html +=
+    '<div class="sec-label" style="margin-top:28px;">Ad approval risk</div>' +
+    '<div class="' + (riskClass[c.adRisk] || 'flag-ok') + '">Ad risk: <strong>' +
+    (c.adRisk || 'unknown').toUpperCase() + '</strong><br>' + esc(c.adRiskSummary || '') + '</div>';
+
+  if (c.adRiskFlags && c.adRiskFlags.length) {
+    c.adRiskFlags.forEach(f => { if (f) html += '<div class="flag-warn">⚠ ' + esc(f) + '</div>'; });
+  }
+
+  html += '<div class="sec-label" style="margin-top:28px;">Visual & production notes</div>';
+
+  if (c.productionNotes) {
+    html += '<div class="rewrite-block" style="margin-bottom:12px;"><div class="detail-text">' + esc(c.productionNotes) + '</div></div>';
+  }
+
+  if (c.visualSuggestions && c.visualSuggestions.length) {
+    c.visualSuggestions.forEach((s, i) => {
+      if (s) html += '<div class="visual-item">' + (i+1) + '. ' + esc(s) + '</div>';
+    });
+  }
+
+  document.getElementById('compliance-content').innerHTML = html;
+}
+
+// ---- Rewrites ----
+function renderRewrites(data) {
+  const { r } = data;
+  if (!r) { document.getElementById('rewrites-content').innerHTML = '<div style="color:#888;font-size:14px;">Rewrites not available.</div>'; return; }
+
+  let html = '<div class="sec-label">Hook options to A/B test</div>';
+
+  if (r.hookOptions && r.hookOptions.length) {
+    r.hookOptions.forEach(h => {
+      html += '<div class="hook-card"><div class="hook-num">' + esc(h.label || '') + '</div>' +
+        '<div class="hook-text">' + esc(h.text || '') + '</div></div>';
+    });
+  }
+
+  if (r.ctaOptions && r.ctaOptions.length) {
+    html += '<div class="sec-label" style="margin-top:28px;">CTA options</div>';
+    r.ctaOptions.forEach(ct => {
+      html += '<div class="hook-card"><div class="hook-num">' + esc(ct.label || '') + '</div>' +
+        '<div class="hook-text">' + esc(ct.text || '') + '</div></div>';
+    });
+  }
+
+  html += '<div class="sec-label" style="margin-top:28px;">Full improved script</div>' +
+    '<div class="rewrite-block"><div class="rewrite-text">' + esc(r.fullRewrite || '') + '</div>' +
+    (r.rewriteNotes ? '<div class="rewrite-note"><strong>What changed:</strong> ' + esc(r.rewriteNotes) + '</div>' : '') +
+    '</div>';
+
+  document.getElementById('rewrites-content').innerHTML = html;
+}
+
+// ---- Performance ----
+function renderPerformance(data) {
+  const { p } = data;
+  if (!p) {
+    document.getElementById('arc-summary').innerHTML = '<div style="color:#888;font-size:14px;">Performance data not available.</div>';
+    return;
+  }
+
+  // Arc summary
+  const arcCol = p.arcScore >= 4 ? '#1a6e3c' : p.arcScore >= 3 ? '#a05c00' : '#a02020';
+  document.getElementById('arc-summary').innerHTML =
+    '<div class="arc-summary">' +
+    '<div class="arc-score-row">' +
+    '<span class="arc-score-label">Arc score</span>' +
+    '<span class="arc-score-val" style="color:' + arcCol + '">' + (p.arcScore || '—') + '/5</span>' +
+    '<span class="arc-pattern">' + esc(p.arcPattern || '') + '</span>' +
+    '</div>' +
+    (p.arcMissing ? '<div class="arc-missing">⚠ Missing: ' + esc(p.arcMissing) + '</div>' : '') +
+    '<div class="arc-diagnosis">' + esc(p.arcDiagnosis || '') + '</div>' +
+    '</div>';
+
+  // Arc timeline
+  const segCount = Math.min(p.arcSegCount || 6, 8);
+  let timelineHtml = '<div class="arc-timeline">';
+  for (let i = 1; i <= segCount; i++) {
+    const emotion = (p['arcSeg' + i + 'emotion'] || 'neutral').toLowerCase();
+    const excerpt = p['arcSeg' + i + 'excerpt'] || '';
+    const note    = p['arcSeg' + i + 'note']    || '';
+    if (!excerpt && !note) continue;
+    const color = EMOTION_COLORS[emotion] || '#7f8c8d';
+    if (i > 1) timelineHtml += '<div class="arc-arrow">→</div>';
+    timelineHtml +=
+      '<div class="arc-seg" style="background:' + color + '18;border-left:3px solid ' + color + '">' +
+      '<div class="arc-emotion" style="color:' + color + '">' + esc(emotion) + '</div>' +
+      '<div class="arc-excerpt">' + esc(excerpt) + '</div>' +
+      '<div class="arc-note">' + esc(note) + '</div>' +
+      '</div>';
+  }
+  timelineHtml += '</div>';
+  document.getElementById('arc-timeline').innerHTML = timelineHtml;
+
+  // Drop-off map
+  const dropCount = Math.min(p.dropCount || 5, 8);
+  let dropHtml = '';
+  for (let i = 1; i <= dropCount; i++) {
+    const risk    = (p['drop' + i + 'risk']   || 'low').toLowerCase();
+    const excerpt = p['drop' + i + 'excerpt'] || '';
+    const reason  = p['drop' + i + 'reason']  || '';
+    const fix     = p['drop' + i + 'fix']     || '';
+    if (!excerpt && !reason) continue;
+    dropHtml +=
+      '<div class="drop-seg drop-' + risk + '">' +
+      '<div class="drop-risk-badge drop-risk-' + risk + '">' + risk.toUpperCase() + ' RISK</div>' +
+      '<div class="drop-excerpt">"' + esc(excerpt) + '"</div>' +
+      '<div class="drop-reason">Why viewers leave: ' + esc(reason) + '</div>' +
+      '<div class="drop-fix">Fix: ' + esc(fix) + '</div>' +
+      '</div>';
+  }
+  document.getElementById('drop-map').innerHTML = dropHtml || '<div style="color:#888;font-size:14px;">No drop-off data.</div>';
+
+  // Cold audience score
+  const coldCol = p.coldScore >= 4 ? '#1a6e3c' : p.coldScore >= 3 ? '#a05c00' : '#a02020';
+  document.getElementById('cold-score').innerHTML =
+    '<div class="cold-score-card">' +
+    '<div class="cold-score-row">' +
+    '<span class="cold-score-label">Cold audience score</span>' +
+    '<span class="cold-score-val" style="color:' + coldCol + '">' + (p.coldScore || '—') + '/5</span>' +
+    '</div>' +
+    '<div class="cold-diagnosis">' + esc(p.coldDiagnosis || '') + '</div>' +
+    '</div>';
+
+  // Cold criteria
+  const coldItems = [
+    { key: 'coldBrand',  label: 'Brand clarity',             noteKey: 'coldBrandNote' },
+    { key: 'coldOffer',  label: 'Offer clarity',             noteKey: 'coldOfferNote' },
+    { key: 'coldJargon', label: 'No unexplained jargon',     noteKey: 'coldJargonNote', termsKey: 'coldJargonTerms' },
+    { key: 'coldPain',   label: 'Universal pain hook',       noteKey: 'coldPainNote' },
+    { key: 'coldTrust',  label: 'Trust signals present',     noteKey: 'coldTrustNote' }
+  ];
+
+  let coldHtml = '';
+  coldItems.forEach(cr => {
+    const verdict = (p[cr.key] || 'partial').toLowerCase();
+    const note    = p[cr.noteKey] || '';
+    const vc      = verdict === 'yes' ? 'cold-yes' : verdict === 'no' ? 'cold-no' : 'cold-partial';
+    const vl      = verdict === 'yes' ? '✓ Pass' : verdict === 'no' ? '✗ Fail' : '~ Partial';
+    const terms   = cr.termsKey ? (p[cr.termsKey] || '') : '';
+    coldHtml +=
+      '<div class="cold-card">' +
+      '<div class="cold-label">' + esc(cr.label) + '</div>' +
+      '<div class="cold-verdict ' + vc + '">' + vl + '</div>' +
+      '<div class="cold-note">' + esc(note) + '</div>' +
+      (terms ? '<div class="cold-jargon-list">' + terms.split(',').map(t => t.trim()).filter(Boolean).map(t => '<span class="cold-jargon-tag">' + esc(t) + '</span>').join('') + '</div>' : '') +
+      '</div>';
+  });
+  document.getElementById('cold-criteria').innerHTML = coldHtml;
+}
+
+// ======================================================================
+// UI HELPERS
+// ======================================================================
+
+function toggleDetail(id) {
+  const body = document.getElementById('body-' + id);
+  const chev = document.getElementById('chev-' + id);
+  if (!body) return;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (chev) chev.classList.toggle('open', !isOpen);
+}
+
+function switchTab(el, name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const panel = document.getElementById('tab-' + name);
+  if (panel) panel.classList.add('active');
+}
+
+function esc(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/\n/g, '<br>');
+}
+
+// ======================================================================
+// DOWNLOAD REPORT
+// ======================================================================
+
+function downloadReport() {
+  if (!_evalData) { alert('Run an evaluation first.'); return; }
+  const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const safeName = (_evalData.scriptName || 'script').replace(/[^a-z0-9]/gi, '-').toLowerCase();
+  a.download = 'evaluation-' + safeName + '-' + Date.now() + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 </script>
 </body>
 </html>
