@@ -8,17 +8,14 @@
 :root { color-scheme: light; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f9f8f6; color: #1a1a1a; font-size: 15px; line-height: 1.6; }
-
 .page { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
 
-/* App header */
 .app-header { margin-bottom: 28px; }
 .app-title { font-size: 20px; font-weight: 600; color: #1a1a1a; }
 .app-sub { font-size: 13px; color: #888; margin-top: 2px; }
 
-/* API key */
-.key-section { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
-.key-label { font-size: 12px; font-weight: 500; color: #888; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+.key-section { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 20px; margin-bottom: 14px; }
+.key-label { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
 .key-row { display: flex; gap: 8px; }
 .key-row input { flex: 1; border: 1px solid #d5d3ce; border-radius: 7px; padding: 8px 12px; font-size: 14px; font-family: monospace; outline: none; }
 .key-row input:focus { border-color: #888; }
@@ -26,222 +23,213 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .key-row button:hover { background: #333; }
 .key-hint { font-size: 12px; color: #888; margin-top: 6px; }
 
-/* History panel */
-.history-panel { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
-.history-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; cursor: pointer; user-select: none; }
+.history-panel { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; margin-bottom: 14px; overflow: hidden; }
+.history-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 20px; cursor: pointer; user-select: none; }
 .history-header:hover { background: #faf9f7; }
 .history-title { font-size: 14px; font-weight: 500; color: #1a1a1a; }
 .history-count { font-size: 12px; color: #888; font-weight: 400; }
 .history-chev { font-size: 12px; color: #888; }
 .history-body { display: none; border-top: 1px solid #e5e3de; }
-.history-list { max-height: 280px; overflow-y: auto; }
-.history-empty { padding: 20px; font-size: 13px; color: #aaa; text-align: center; }
-.history-item { padding: 12px 20px; cursor: pointer; border-bottom: 1px solid #f0eee9; }
+.history-list { max-height: 260px; overflow-y: auto; }
+.history-empty { padding: 18px 20px; font-size: 13px; color: #aaa; }
+.history-item { padding: 11px 20px; cursor: pointer; border-bottom: 1px solid #f0eee9; }
 .history-item:hover { background: #faf9f7; }
 .history-item:last-child { border-bottom: none; }
 .history-item-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
 .history-item-name { font-size: 13px; color: #1a1a1a; font-weight: 500; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .history-item-score { font-size: 13px; font-weight: 600; color: #1a1a1a; white-space: nowrap; }
 .history-item-meta { font-size: 11px; color: #aaa; margin-top: 2px; }
-.history-footer { padding: 10px 20px; border-top: 1px solid #f0eee9; }
+.history-footer { padding: 9px 20px; border-top: 1px solid #f0eee9; }
 .btn-link { background: none; border: none; font-size: 12px; color: #888; cursor: pointer; padding: 0; text-decoration: underline; }
 .btn-link:hover { color: #c0392b; }
 
-/* Input section */
-.input-section { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 24px; margin-bottom: 16px; }
-
-.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-@media(max-width:600px) { .meta-grid { grid-template-columns: 1fr; } }
+.input-section { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 22px; margin-bottom: 14px; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+@media(max-width:580px){.meta-grid{grid-template-columns:1fr;}}
 .meta-field { display: flex; flex-direction: column; gap: 5px; }
 .field-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; }
 .meta-field input, .meta-field select { border: 1px solid #d5d3ce; border-radius: 7px; padding: 8px 12px; font-size: 14px; font-family: inherit; outline: none; background: #fff; color: #1a1a1a; }
 .meta-field input:focus, .meta-field select:focus { border-color: #888; }
-.platform-note { font-size: 11px; color: #888; line-height: 1.5; margin-top: 2px; }
+.platform-note { font-size: 11px; color: #888; line-height: 1.5; margin-top: 3px; min-height: 16px; }
 
-.mode-toggle-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+.mode-toggle-row { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
 .mode-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; }
 .mode-toggle { display: flex; background: #f3f1ee; border-radius: 8px; padding: 3px; gap: 2px; }
-.mode-btn { background: none; border: none; border-radius: 6px; padding: 6px 16px; font-size: 13px; font-weight: 500; cursor: pointer; color: #666; transition: all 0.15s; }
+.mode-btn { background: none; border: none; border-radius: 6px; padding: 6px 18px; font-size: 13px; font-weight: 500; cursor: pointer; color: #666; transition: all 0.15s; }
 .mode-btn.active { background: #fff; color: #1a1a1a; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
-.weights-section { border: 1px solid #e5e3de; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+.weights-section { border: 1px solid #e5e3de; border-radius: 8px; margin-bottom: 18px; overflow: hidden; }
 .weights-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; cursor: pointer; background: #faf9f7; font-size: 13px; color: #555; user-select: none; }
 .weights-header:hover { background: #f3f1ee; }
 .weights-chev { font-size: 11px; }
 .weights-body { padding: 16px; display: none; }
 .weights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@media(max-width:600px) { .weights-grid { grid-template-columns: 1fr; } }
+@media(max-width:580px){.weights-grid{grid-template-columns:1fr;}}
 .weight-row { display: flex; flex-direction: column; gap: 4px; }
 .weight-name { font-size: 12px; color: #555; }
 .weight-controls { display: flex; align-items: center; gap: 8px; }
-.weight-controls input[type=range] { flex: 1; }
+.weight-controls input[type=range] { flex: 1; accent-color: #1a1a1a; }
 .weight-val { font-size: 12px; font-weight: 600; color: #1a1a1a; width: 16px; text-align: right; }
 
-textarea#script-input { width: 100%; min-height: 200px; border: 1px solid #d5d3ce; border-radius: 8px; padding: 12px 14px; font-size: 14px; font-family: inherit; line-height: 1.7; resize: vertical; outline: none; }
+textarea#script-input { width: 100%; min-height: 190px; border: 1px solid #d5d3ce; border-radius: 8px; padding: 12px 14px; font-size: 14px; font-family: inherit; line-height: 1.7; resize: vertical; outline: none; }
 textarea#script-input:focus { border-color: #888; }
-
-.eval-row { display: flex; align-items: center; gap: 16px; margin-top: 14px; }
-.eval-btn { background: #1a1a1a; color: #fff; border: none; border-radius: 8px; padding: 11px 28px; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+.eval-row { display: flex; align-items: center; gap: 16px; margin-top: 13px; }
+.eval-btn { background: #1a1a1a; color: #fff; border: none; border-radius: 8px; padding: 11px 28px; font-size: 14px; font-weight: 500; cursor: pointer; }
 .eval-btn:hover { background: #333; }
-.eval-btn:disabled { background: #ccc; cursor: not-allowed; }
+.eval-btn:disabled { background: #bbb; cursor: not-allowed; }
 .char-count { font-size: 12px; color: #aaa; }
 
-/* Progress */
-.progress-wrap { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+.progress-wrap { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 20px 24px; margin-bottom: 14px; }
 .progress-bar-bg { background: #f0eee9; border-radius: 100px; height: 6px; overflow: hidden; margin-bottom: 10px; }
 .progress-bar-fill { background: #1a1a1a; height: 100%; border-radius: 100px; transition: width 0.4s ease; width: 0%; }
 .progress-label { font-size: 13px; color: #666; }
 
-/* Error */
-.error-box { background: #fdecea; border: 1px solid #f5c6c6; border-radius: 10px; padding: 16px 20px; font-size: 14px; color: #a02020; margin-bottom: 16px; white-space: pre-wrap; word-break: break-word; }
+.error-box { background: #fdecea; border: 1px solid #f5c6c6; border-radius: 10px; padding: 16px 20px; font-size: 14px; color: #a02020; margin-bottom: 14px; white-space: pre-wrap; word-break: break-word; }
 
-/* Results */
-.result-header { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 24px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
+.result-header { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 22px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap; }
 .result-header-left { flex: 1; }
 .result-script-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
-.result-script-name { font-size: 18px; font-weight: 500; color: #1a1a1a; margin-bottom: 12px; }
+.result-script-name { font-size: 18px; font-weight: 500; color: #1a1a1a; margin-bottom: 10px; }
 .result-header-right { text-align: right; flex-shrink: 0; }
-.score-num-wrap { line-height: 1; }
-.score-num { font-size: 52px; font-weight: 500; color: #1a1a1a; }
+.score-num { font-size: 52px; font-weight: 500; color: #1a1a1a; line-height: 1; }
 .score-denom { font-size: 22px; color: #888; font-weight: 400; }
-.score-label { font-size: 12px; color: #888; margin-top: 2px; margin-bottom: 12px; }
-.download-btn { background: #fff; border: 1px solid #d5d3ce; border-radius: 7px; padding: 7px 14px; font-size: 12px; color: #555; cursor: pointer; }
+.score-label { font-size: 12px; color: #888; margin-top: 4px; margin-bottom: 12px; }
+.download-btn { background: #fff; border: 1px solid #d5d3ce; border-radius: 7px; padding: 7px 14px; font-size: 12px; color: #555; cursor: pointer; display: block; }
 .download-btn:hover { background: #f3f1ee; }
 
 .verdict-pill { display: inline-block; font-size: 12px; font-weight: 500; padding: 5px 14px; border-radius: 20px; margin-bottom: 10px; }
-.verdict-avg { background: #fff4e0; color: #a05c00; }
-.verdict-good { background: #e5f0ff; color: #1a52a8; }
+.verdict-avg    { background: #fff4e0; color: #a05c00; }
+.verdict-good   { background: #e5f0ff; color: #1a52a8; }
 .verdict-strong { background: #e6f5ec; color: #1a6e3c; }
-.verdict-weak { background: #fdecea; color: #a02020; }
+.verdict-weak   { background: #fdecea; color: #a02020; }
 .verdict-text { font-size: 14px; color: #555; line-height: 1.65; }
 
-/* Framework card */
-.framework-card { background: #fff; border: 1px solid #e5e3de; border-left: 3px solid #1a1a1a; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 16px; }
+.framework-card { background: #fff; border: 1px solid #e5e3de; border-left: 3px solid #1a1a1a; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-bottom: 12px; }
 .fw-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
 .fw-name { font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
 .fw-rationale { font-size: 13px; color: #666; }
 
-/* Tabs */
-.tab-row { display: flex; gap: 0; border-bottom: 1px solid #e5e3de; margin-bottom: 0; flex-wrap: wrap; background: #fff; border-radius: 10px 10px 0 0; border: 1px solid #e5e3de; border-bottom: none; overflow: hidden; }
-.tab { font-size: 13px; padding: 11px 18px; cursor: pointer; color: #888; border-bottom: 2px solid transparent; transition: color 0.15s; white-space: nowrap; background: #faf9f7; }
+.tab-row { display: flex; gap: 0; flex-wrap: wrap; background: #fff; border-radius: 10px 10px 0 0; border: 1px solid #e5e3de; border-bottom: none; overflow: hidden; }
+.tab { font-size: 13px; padding: 11px 16px; cursor: pointer; color: #888; border-bottom: 2px solid transparent; white-space: nowrap; background: #faf9f7; transition: color 0.15s; }
 .tab:hover { color: #333; background: #f3f1ee; }
 .tab.active { color: #1a1a1a; border-bottom-color: #1a1a1a; font-weight: 500; background: #fff; }
-.tab-panel { display: none; background: #fff; border: 1px solid #e5e3de; border-top: none; border-radius: 0 0 10px 10px; padding: 24px; }
+.tab-panel { display: none; background: #fff; border: 1px solid #e5e3de; border-top: none; border-radius: 0 0 10px 10px; padding: 22px; }
 .tab-panel.active { display: block; }
 
-/* Score grid */
-.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
-.score-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 14px 16px; }
+.score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 10px; }
+.score-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 13px 15px; }
 .score-card-name { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 8px; }
 .dots { display: flex; gap: 5px; align-items: center; }
 .dot { width: 9px; height: 9px; border-radius: 50%; background: #e5e3de; flex-shrink: 0; }
-.dot.filled-5 { background: #2d8c56; }
-.dot.filled-4 { background: #4a9eca; }
-.dot.filled-3 { background: #e09a20; }
-.dot.filled-2 { background: #e05a20; }
-.dot.filled-1 { background: #c0392b; }
+.dot.f5 { background: #2d8c56; }
+.dot.f4 { background: #4a9eca; }
+.dot.f3 { background: #e09a20; }
+.dot.f2 { background: #e05a20; }
+.dot.f1 { background: #c0392b; }
 .score-val { font-size: 12px; color: #888; margin-left: 6px; }
 
-/* Detail blocks (breakdown) */
-.detail-block { margin-bottom: 10px; border: 1px solid #e5e3de; border-radius: 10px; overflow: hidden; background: #fff; }
-.detail-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #faf9f7; border-bottom: 1px solid #e5e3de; cursor: pointer; user-select: none; }
+.detail-block { margin-bottom: 8px; border: 1px solid #e5e3de; border-radius: 10px; overflow: hidden; background: #fff; }
+.detail-header { display: flex; align-items: center; justify-content: space-between; padding: 13px 17px; background: #faf9f7; border-bottom: 1px solid #e5e3de; cursor: pointer; user-select: none; }
 .detail-header:hover { background: #f3f1ee; }
 .detail-crit-name { font-size: 14px; font-weight: 500; color: #1a1a1a; }
 .detail-score-badge { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
-.badge-5 { background: #e6f5ec; color: #1a6e3c; }
-.badge-4 { background: #e5f0ff; color: #1a52a8; }
-.badge-3 { background: #fff4e0; color: #a05c00; }
-.badge-2 { background: #fdecea; color: #a02020; }
-.badge-1 { background: #fdecea; color: #a02020; }
-.detail-body { padding: 18px; display: none; }
+.b5 { background: #e6f5ec; color: #1a6e3c; }
+.b4 { background: #e5f0ff; color: #1a52a8; }
+.b3 { background: #fff4e0; color: #a05c00; }
+.b2, .b1 { background: #fdecea; color: #a02020; }
+.detail-body { padding: 17px; display: none; }
 .detail-body.open { display: block; }
-.detail-subsection { margin-bottom: 14px; }
+.detail-subsection { margin-bottom: 13px; }
 .detail-subsection:last-child { margin-bottom: 0; }
 .detail-sublabel { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; margin-bottom: 5px; }
 .detail-text { font-size: 14px; color: #333; line-height: 1.65; }
-.chevron { font-size: 12px; color: #888; transition: transform 0.2s; }
+.chevron { font-size: 11px; color: #888; transition: transform 0.2s; }
 .chevron.open { transform: rotate(180deg); }
 
-/* Issues */
-.issue-card { border-left: 3px solid #e05a20; background: #fff8f5; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 10px; font-size: 14px; color: #333; line-height: 1.65; }
-.improve-card { border-left: 3px solid #4a9eca; background: #f5f9ff; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 10px; font-size: 14px; color: #333; line-height: 1.65; }
+.issue-card   { border-left: 3px solid #e05a20; background: #fff8f5; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 9px; font-size: 14px; color: #333; line-height: 1.65; }
+.improve-card { border-left: 3px solid #4a9eca; background: #f5f9ff; border-radius: 0 8px 8px 0; padding: 12px 16px; margin-bottom: 9px; font-size: 14px; color: #333; line-height: 1.65; }
 .improve-card strong, .issue-card strong { color: #1a1a1a; }
 
-/* Compliance */
-.flag-ok { background: #e6f5ec; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #1a6e3c; margin-bottom: 8px; line-height: 1.65; }
+.flag-ok   { background: #e6f5ec; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #1a6e3c; margin-bottom: 8px; line-height: 1.65; }
 .flag-warn { background: #fdecea; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: #a02020; margin-bottom: 8px; line-height: 1.65; }
-.flag-medium { background: #fff4e0; color: #a05c00; }
-.compliance-flags { margin-top: 12px; }
-.visual-suggestions { margin-top: 12px; }
-.visual-item { font-size: 14px; color: #333; padding: 8px 12px; background: #faf9f7; border-radius: 6px; margin-bottom: 6px; line-height: 1.6; }
+.flag-med  { background: #fff4e0; color: #a05c00; border-radius: 8px; padding: 12px 16px; font-size: 14px; margin-bottom: 8px; line-height: 1.65; }
+.visual-item { font-size: 14px; color: #333; padding: 8px 12px; background: #faf9f7; border-radius: 6px; margin-bottom: 6px; }
 
-/* Rewrites */
-.hook-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 18px; margin-bottom: 10px; }
-.hook-num { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.05em; margin-bottom: 8px; text-transform: uppercase; }
+.hook-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 15px 17px; margin-bottom: 10px; }
+.hook-num  { font-size: 11px; font-weight: 500; color: #888; letter-spacing: 0.05em; margin-bottom: 7px; text-transform: uppercase; }
 .hook-text { font-size: 14px; color: #1a1a1a; line-height: 1.85; white-space: pre-line; font-style: italic; }
-.rewrite-block { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 18px 20px; }
-.rewrite-text { font-size: 14px; color: #1a1a1a; line-height: 1.85; white-space: pre-line; }
-.rewrite-note { font-size: 13px; color: #666; line-height: 1.65; background: #fff; border-radius: 8px; padding: 12px 16px; margin-top: 16px; border: 1px solid #e5e3de; }
+.rewrite-block { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 17px 19px; }
+.rewrite-text  { font-size: 14px; color: #1a1a1a; line-height: 1.85; white-space: pre-line; }
+.rewrite-note  { font-size: 13px; color: #666; line-height: 1.65; background: #fff; border-radius: 8px; padding: 12px 15px; margin-top: 14px; border: 1px solid #e5e3de; }
 
-/* Sec label */
 .sec-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: #888; margin-bottom: 14px; border-bottom: 1px solid #e5e3de; padding-bottom: 8px; }
 
-/* Overview */
-.overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-@media(max-width:600px) { .overview-grid { grid-template-columns: 1fr; } }
-.overview-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px; }
-.ov-label { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; margin-bottom: 12px; }
-.ov-item { font-size: 13px; color: #1a1a1a; padding: 6px 0; border-bottom: 1px solid #f0eee9; display: flex; align-items: center; gap: 8px; }
+.overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+@media(max-width:580px){.overview-grid{grid-template-columns:1fr;}}
+.overview-card  { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 15px; }
+.ov-label       { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: #888; margin-bottom: 11px; }
+.ov-item        { font-size: 13px; color: #1a1a1a; padding: 6px 0; border-bottom: 1px solid #f0eee9; display: flex; align-items: center; gap: 8px; }
 .ov-item:last-child { border-bottom: none; }
-.ov-score { font-size: 12px; font-weight: 600; background: #e5e3de; border-radius: 4px; padding: 2px 7px; }
-.ov-weak .ov-score { background: #fdecea; color: #a02020; }
+.ov-score       { font-size: 11px; font-weight: 600; background: #e5e3de; border-radius: 4px; padding: 2px 7px; }
+.ov-weak   .ov-score { background: #fdecea; color: #a02020; }
 .ov-strong .ov-score { background: #e6f5ec; color: #1a6e3c; }
 .ov-verdict-text { font-size: 14px; color: #555; line-height: 1.7; background: #faf9f7; border-radius: 8px; padding: 14px 16px; border: 1px solid #e5e3de; }
 
-/* Performance — Emotional Arc */
-.arc-summary { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; }
-.arc-score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
-.arc-score-label { font-size: 12px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
-.arc-score-val { font-size: 22px; font-weight: 600; }
-.arc-pattern { font-size: 13px; color: #555; font-style: italic; }
-.arc-missing { font-size: 13px; color: #a05c00; background: #fff4e0; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; }
-.arc-diagnosis { font-size: 14px; color: #444; line-height: 1.65; }
+/* Emotional arc */
+.arc-summary    { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 15px 17px; margin-bottom: 18px; }
+.arc-score-row  { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+.arc-score-label { font-size: 11px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+.arc-score-val  { font-size: 22px; font-weight: 600; }
+.arc-pattern    { font-size: 13px; color: #555; font-style: italic; }
+.arc-missing    { font-size: 13px; color: #a05c00; background: #fff4e0; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; }
+.arc-diagnosis  { font-size: 14px; color: #444; line-height: 1.65; }
+.arc-timeline   { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; }
+.arc-seg        { flex: 1; min-width: 90px; padding: 11px 13px; border-radius: 8px; margin: 3px; }
+.arc-arrow      { display: flex; align-items: center; color: #ccc; font-size: 14px; padding: 0 2px; }
+.arc-emotion    { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+.arc-excerpt    { font-size: 11px; color: #444; font-style: italic; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.arc-note       { font-size: 11px; color: #666; line-height: 1.5; }
 
-.arc-timeline { display: flex; align-items: stretch; flex-wrap: wrap; gap: 0; margin-bottom: 8px; }
-.arc-seg { flex: 1; min-width: 100px; padding: 12px 14px; border-radius: 8px; margin: 3px; }
-.arc-arrow { display: flex; align-items: center; color: #ccc; font-size: 16px; flex-shrink: 0; padding: 0 4px; }
-.arc-emotion { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
-.arc-excerpt { font-size: 12px; color: #444; font-style: italic; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.arc-note { font-size: 11px; color: #666; line-height: 1.5; }
+/* Drop-off */
+.drop-seg        { border-radius: 8px; padding: 13px 15px; margin-bottom: 9px; border: 1px solid transparent; }
+.drop-high       { background: #fdecea; border-color: #f5c6c6; }
+.drop-medium     { background: #fff4e0; border-color: #fde8b0; }
+.drop-low        { background: #e6f5ec; border-color: #b8e0c6; }
+.drop-risk-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 4px; margin-bottom: 7px; }
+.drb-high        { background: #c0392b; color: #fff; }
+.drb-medium      { background: #e09a20; color: #fff; }
+.drb-low         { background: #2d8c56; color: #fff; }
+.drop-excerpt    { font-size: 13px; font-style: italic; color: #333; margin-bottom: 5px; }
+.drop-reason     { font-size: 13px; color: #555; margin-bottom: 4px; }
+.drop-fix        { font-size: 13px; color: #1a6e3c; font-weight: 500; }
 
-/* Performance — Drop-off */
-.drop-seg { border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; border: 1px solid transparent; }
-.drop-high { background: #fdecea; border-color: #f5c6c6; }
-.drop-medium { background: #fff4e0; border-color: #fde8b0; }
-.drop-low { background: #e6f5ec; border-color: #b8e0c6; }
-.drop-risk-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 9px; border-radius: 4px; margin-bottom: 8px; }
-.drop-risk-high { background: #c0392b; color: #fff; }
-.drop-risk-medium { background: #e09a20; color: #fff; }
-.drop-risk-low { background: #2d8c56; color: #fff; }
-.drop-excerpt { font-size: 13px; font-style: italic; color: #333; margin-bottom: 6px; }
-.drop-reason { font-size: 13px; color: #555; margin-bottom: 4px; }
-.drop-fix { font-size: 13px; color: #1a6e3c; font-weight: 500; }
-
-/* Performance — Cold audience */
-.cold-score-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; }
-.cold-score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-.cold-score-label { font-size: 12px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
-.cold-score-val { font-size: 22px; font-weight: 600; }
-.cold-diagnosis { font-size: 14px; color: #444; line-height: 1.65; }
-.cold-card { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
-.cold-label { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 6px; }
+/* Cold audience */
+.cold-score-card { background: #faf9f7; border: 1px solid #e5e3de; border-radius: 10px; padding: 15px 17px; margin-bottom: 14px; }
+.cold-score-row  { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.cold-score-label { font-size: 11px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+.cold-score-val  { font-size: 22px; font-weight: 600; }
+.cold-diagnosis  { font-size: 14px; color: #444; line-height: 1.65; }
+.cold-card   { background: #fff; border: 1px solid #e5e3de; border-radius: 10px; padding: 13px 15px; margin-bottom: 9px; }
+.cold-label  { font-size: 13px; font-weight: 500; color: #1a1a1a; margin-bottom: 6px; }
 .cold-verdict { display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 4px; margin-bottom: 6px; }
-.cold-yes { background: #e6f5ec; color: #1a6e3c; }
-.cold-partial { background: #fff4e0; color: #a05c00; }
-.cold-no { background: #fdecea; color: #a02020; }
-.cold-note { font-size: 13px; color: #555; line-height: 1.6; }
+.cv-yes     { background: #e6f5ec; color: #1a6e3c; }
+.cv-partial { background: #fff4e0; color: #a05c00; }
+.cv-no      { background: #fdecea; color: #a02020; }
+.cold-note  { font-size: 13px; color: #555; line-height: 1.6; }
 .cold-jargon-list { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
-.cold-jargon-tag { background: #fdecea; color: #a02020; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 4px; }
+.cold-jargon-tag  { background: #fdecea; color: #a02020; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 4px; }
+
+/* Print styles — PDF export */
+@media print {
+  .app-header, .key-section, .history-panel, .input-section,
+  .progress-wrap, .error-box, .eval-btn, .download-btn,
+  .tab-row { display: none !important; }
+  body { background: #fff; font-size: 13px; }
+  .page { padding: 0; max-width: 100%; }
+  .result-header, .framework-card, .tab-panel { display: block !important; border: none; padding: 16px 0; }
+  .tab-panel { page-break-before: always; }
+  .detail-body { display: block !important; }
+}
 </style>
 </head>
 <body>
@@ -252,18 +240,16 @@ textarea#script-input:focus { border-color: #888; }
     <div class="app-sub">Financial education · Paid ads &amp; organic content</div>
   </div>
 
-  <!-- API KEY -->
   <div class="key-section">
     <div class="key-label">Anthropic API key</div>
     <div class="key-row">
       <input type="password" id="api-key-input" placeholder="sk-ant-api03-..." autocomplete="off" />
       <button onclick="saveKey()">Save key</button>
     </div>
-    <div class="key-hint" id="key-hint">Your key is stored in your browser only and never sent anywhere except the Anthropic API.</div>
+    <div class="key-hint" id="key-hint">Stored in your browser only — never sent anywhere except the Anthropic API.</div>
   </div>
 
-  <!-- HISTORY PANEL -->
-  <div class="history-panel" id="history-panel">
+  <div class="history-panel">
     <div class="history-header" onclick="toggleHistory()">
       <div class="history-title">📋 Script history <span class="history-count" id="history-count"></span></div>
       <span class="history-chev" id="history-chev">▼</span>
@@ -274,8 +260,7 @@ textarea#script-input:focus { border-color: #888; }
     </div>
   </div>
 
-  <!-- INPUT SECTION -->
-  <div class="input-section" id="input-section">
+  <div class="input-section">
     <div class="meta-grid">
       <div class="meta-field">
         <label class="field-label">Script name</label>
@@ -329,26 +314,21 @@ textarea#script-input:focus { border-color: #888; }
       </div>
     </div>
 
-    <div class="field-label" style="margin-bottom:8px;margin-top:20px;">Script</div>
-    <textarea id="script-input" placeholder="Paste your full script here...&#10;&#10;The evaluator will score it across 12 criteria, check compliance, generate rewrites, and map the emotional arc."></textarea>
+    <div class="field-label" style="margin-bottom:8px;margin-top:18px;">Script</div>
+    <textarea id="script-input" placeholder="Paste your full script here..."></textarea>
     <div class="eval-row">
       <button class="eval-btn" id="eval-btn" onclick="runEval()">Evaluate script →</button>
       <div class="char-count" id="char-count"></div>
     </div>
   </div>
 
-  <!-- PROGRESS -->
   <div class="progress-wrap" id="progress-wrap" style="display:none;">
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progress-fill"></div>
-    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill"></div></div>
     <div class="progress-label" id="progress-label">Starting evaluation...</div>
   </div>
 
-  <!-- ERROR -->
   <div class="error-box" id="error-box" style="display:none;"></div>
 
-  <!-- RESULTS -->
   <div id="results" style="display:none;">
 
     <div class="result-header">
@@ -359,12 +339,9 @@ textarea#script-input:focus { border-color: #888; }
         <div class="verdict-text" id="verdict-text"></div>
       </div>
       <div class="result-header-right">
-        <div class="score-num-wrap">
-          <span class="score-num" id="score-num">—</span>
-          <span class="score-denom">/60</span>
-        </div>
+        <div><span class="score-num" id="score-num">—</span><span class="score-denom">/60</span></div>
         <div class="score-label">overall score</div>
-        <button class="download-btn" onclick="downloadReport()">↓ Download report</button>
+        <button class="download-btn" onclick="downloadPDF()">↓ Save as PDF</button>
       </div>
     </div>
 
@@ -380,184 +357,109 @@ textarea#script-input:focus { border-color: #888; }
       <div class="tab" onclick="switchTab(this,'performance')">Performance</div>
     </div>
 
-    <div id="tab-overview" class="tab-panel active"><div id="overview-content"></div></div>
-
-    <div id="tab-scores" class="tab-panel">
-      <div class="score-grid" id="score-grid"></div>
-    </div>
-
-    <div id="tab-breakdown" class="tab-panel">
-      <div id="breakdown-blocks"></div>
-    </div>
-
-    <div id="tab-issues" class="tab-panel">
-      <div id="issues-content"></div>
-    </div>
-
-    <div id="tab-compliance" class="tab-panel">
-      <div id="compliance-content"></div>
-    </div>
-
-    <div id="tab-rewrites" class="tab-panel">
-      <div id="rewrites-content"></div>
-    </div>
-
-    <div id="tab-performance" class="tab-panel">
+    <div id="tab-overview"     class="tab-panel active"><div id="overview-content"></div></div>
+    <div id="tab-scores"       class="tab-panel"><div class="score-grid" id="score-grid"></div></div>
+    <div id="tab-breakdown"    class="tab-panel"><div id="breakdown-blocks"></div></div>
+    <div id="tab-issues"       class="tab-panel"><div id="issues-content"></div></div>
+    <div id="tab-compliance"   class="tab-panel"><div id="compliance-content"></div></div>
+    <div id="tab-rewrites"     class="tab-panel"><div id="rewrites-content"></div></div>
+    <div id="tab-performance"  class="tab-panel">
       <div class="sec-label">Emotional arc</div>
       <div id="arc-summary"></div>
       <div id="arc-timeline"></div>
-      <div class="sec-label" style="margin-top:28px;">Drop-off risk map</div>
+      <div class="sec-label" style="margin-top:26px;">Drop-off risk map</div>
       <div id="drop-map"></div>
-      <div class="sec-label" style="margin-top:28px;">Cold audience test</div>
+      <div class="sec-label" style="margin-top:26px;">Cold audience test</div>
       <div id="cold-score"></div>
       <div id="cold-criteria"></div>
     </div>
 
   </div>
-
 </div>
-<script>
-// ======================================================================
-// CONSTANTS
-// ======================================================================
 
-const API_URL = 'https://api.anthropic.com/v1/messages';
-const MODEL = 'claude-haiku-4-5-20251001';
+<script>
+// ─── CONSTANTS ────────────────────────────────────────────────────────────────
+
+const API_URL    = 'https://api.anthropic.com/v1/messages';
+const MODEL      = 'claude-haiku-4-5-20251001';
 const HISTORY_KEY = 'vse_history_v2';
 const MAX_HISTORY = 10;
 
-const PLATFORM_LABELS = {
-  any: 'Any platform',
-  tiktok: 'TikTok / Reels',
-  facebook: 'Facebook / Instagram',
-  youtube: 'YouTube'
-};
-
-const PLATFORM_NOTES = {
+const PLATFORM_LABELS = { any:'Any platform', tiktok:'TikTok / Reels', facebook:'Facebook / Instagram', youtube:'YouTube' };
+const PLATFORM_NOTES  = {
   any: '',
-  tiktok: 'Hook in first 1–2 seconds is critical. Fast pacing, pattern interrupts, strong sound-on delivery.',
-  facebook: 'Strict ad review. Avoid personal attribute language and before/after claims. Captions matter for sound-off viewing.',
-  youtube: 'Longer retention patterns acceptable. Credibility and depth matter more here.'
+  tiktok:   'Hook in first 1–2 seconds is critical. Fast pacing, pattern interrupts, sound-on delivery.',
+  facebook: 'Strict ad review — avoid personal attribute language and before/after claims. Captions matter for sound-off.',
+  youtube:  'Longer retention patterns acceptable. Credibility and depth matter more here.'
 };
-
 const PLATFORM_PROMPT = {
-  any: 'Any platform (no specific optimisation)',
-  tiktok: 'TikTok / Reels — short-form vertical, hook in first 1-2 seconds is make-or-break, fast pacing, strong sound-on delivery, pattern interrupts critical, younger audience expects raw authenticity',
-  facebook: 'Facebook / Instagram — mixed sound-off viewing (captions important), feed and stories, ad review system is strict on personal attribute language, before/after financial transformation claims, and income-related framing',
-  youtube: 'YouTube — longer-form tolerated, pre-roll or in-feed ads, pattern breaks needed every 30-60s, credibility and depth are more valued, stronger retention expectations'
+  any:      'Any platform (no specific optimisation)',
+  tiktok:   'TikTok / Reels — short-form vertical, hook in first 1-2 seconds is make-or-break, fast pacing, sound-on delivery, pattern interrupts critical',
+  facebook: 'Facebook / Instagram — mixed sound-off viewing (captions important), ad review strict on personal attribute language, before/after financial transformation claims, income-related framing',
+  youtube:  'YouTube — longer-form tolerated, pattern breaks every 30-60s, credibility and depth more valued'
 };
-
 const PLATFORM_PRESETS = {
-  any: { paid: {}, organic: {} },
-  tiktok: {
-    paid: { paidHook: 5, paidCuriosity: 4, paidRetention: 4, paidHuman: 4 },
-    organic: { orgHook: 5, orgRetention: 4, orgShare: 4, orgComment: 4, orgHuman: 4 }
-  },
-  facebook: {
-    paid: { paidAudience: 4, paidLeadQuality: 5, paidCred: 4, paidBridge: 4 },
-    organic: { orgHook: 4, orgRelatability: 4, orgTrust: 4 }
-  },
-  youtube: {
-    paid: { paidRetention: 5, paidCred: 4, paidOffer: 4, paidCTA: 4 },
-    organic: { orgRetention: 5, orgEducation: 4, orgTrust: 4, orgSeries: 4 }
-  }
+  any:      { paid:{}, organic:{} },
+  tiktok:   { paid:{ paidHook:5, paidCuriosity:4, paidRetention:4, paidHuman:4 },
+              organic:{ orgHook:5, orgRetention:4, orgShare:4, orgComment:4, orgHuman:4 } },
+  facebook: { paid:{ paidAudience:4, paidLeadQuality:5, paidCred:4, paidBridge:4 },
+              organic:{ orgHook:4, orgRelatability:4, orgTrust:4 } },
+  youtube:  { paid:{ paidRetention:5, paidCred:4, paidOffer:4, paidCTA:4 },
+              organic:{ orgRetention:5, orgEducation:4, orgTrust:4, orgSeries:4 } }
 };
 
 const PAID_CRITERIA = {
-  keys: ['paidHook','paidAudience','paidLeadQuality','paidPain','paidReframe','paidCuriosity','paidOffer','paidCred','paidCTA','paidRetention','paidHuman','paidBridge'],
-  names: {
-    paidHook: 'Hook strength',
-    paidAudience: 'Audience targeting',
-    paidLeadQuality: 'Lead quality signal',
-    paidPain: 'Pain & problem clarity',
-    paidReframe: 'Reframe / insight',
-    paidCuriosity: 'Curiosity gap',
-    paidOffer: 'Offer clarity & bridge',
-    paidCred: 'Credibility & believability',
-    paidCTA: 'CTA strength',
-    paidRetention: 'Retention flow',
-    paidHuman: 'Human / non-AI tone',
-    paidBridge: 'Landing page bridge'
-  }
+  keys:  ['paidHook','paidAudience','paidLeadQuality','paidPain','paidReframe','paidCuriosity','paidOffer','paidCred','paidCTA','paidRetention','paidHuman','paidBridge'],
+  names: { paidHook:'Hook strength', paidAudience:'Audience targeting', paidLeadQuality:'Lead quality signal',
+           paidPain:'Pain & problem clarity', paidReframe:'Reframe / insight', paidCuriosity:'Curiosity gap',
+           paidOffer:'Offer clarity & bridge', paidCred:'Credibility & believability', paidCTA:'CTA strength',
+           paidRetention:'Retention flow', paidHuman:'Human / non-AI tone', paidBridge:'Landing page bridge' }
 };
-
 const ORGANIC_CRITERIA = {
-  keys: ['orgHook','orgRelatability','orgPain','orgReframe','orgEducation','orgCuriosity','orgTrust','orgRetention','orgHuman','orgShare','orgComment','orgSeries'],
-  names: {
-    orgHook: 'Hook strength',
-    orgRelatability: 'Audience relatability',
-    orgPain: 'Pain & problem clarity',
-    orgReframe: 'Reframe / insight',
-    orgEducation: 'Education & value delivery',
-    orgCuriosity: 'Curiosity gap',
-    orgTrust: 'Trust & credibility',
-    orgRetention: 'Retention flow',
-    orgHuman: 'Human / non-AI tone',
-    orgShare: 'Share / save motivation',
-    orgComment: 'Comment hook',
-    orgSeries: 'Follow / series motivation'
-  }
+  keys:  ['orgHook','orgRelatability','orgPain','orgReframe','orgEducation','orgCuriosity','orgTrust','orgRetention','orgHuman','orgShare','orgComment','orgSeries'],
+  names: { orgHook:'Hook strength', orgRelatability:'Audience relatability', orgPain:'Pain & problem clarity',
+           orgReframe:'Reframe / insight', orgEducation:'Education & value delivery', orgCuriosity:'Curiosity gap',
+           orgTrust:'Trust & credibility', orgRetention:'Retention flow', orgHuman:'Human / non-AI tone',
+           orgShare:'Share / save motivation', orgComment:'Comment hook', orgSeries:'Follow / series motivation' }
 };
 
 const EMOTION_COLORS = {
-  pain: '#e05a20',
-  tension: '#c0392b',
-  curiosity: '#8e44ad',
-  reframe: '#2980b9',
-  hope: '#27ae60',
-  urgency: '#e67e22',
-  excitement: '#d4ac0d',
-  neutral: '#7f8c8d'
+  pain:'#e05a20', tension:'#c0392b', curiosity:'#8e44ad',
+  reframe:'#2980b9', hope:'#27ae60', urgency:'#e67e22',
+  excitement:'#d4ac0d', neutral:'#7f8c8d'
 };
 
-// ======================================================================
-// STATE
-// ======================================================================
+// ─── STATE ────────────────────────────────────────────────────────────────────
 
-let _mode = 'paid';
-let _weights = {};
-let _evalData = null;
-let _historyOpen = false;
-let _weightsOpen = false;
+let _mode = 'paid', _weights = {}, _evalData = null;
+let _historyOpen = false, _weightsOpen = false;
 
-// ======================================================================
-// INIT
-// ======================================================================
+// ─── INIT ─────────────────────────────────────────────────────────────────────
 
 window.addEventListener('DOMContentLoaded', () => {
-  const savedKey = localStorage.getItem('anthropic_key');
-  if (savedKey) {
-    document.getElementById('api-key-input').value = savedKey;
-    document.getElementById('key-hint').textContent = '✓ Key loaded from browser storage.';
-  }
+  const k = localStorage.getItem('anthropic_key');
+  if (k) { document.getElementById('api-key-input').value = k; document.getElementById('key-hint').textContent = '✓ Key loaded from browser storage.'; }
   setMode('paid', false);
   renderHistory();
-  document.getElementById('script-input').addEventListener('input', updateCharCount);
+  document.getElementById('script-input').addEventListener('input', () => {
+    const l = document.getElementById('script-input').value.length;
+    document.getElementById('char-count').textContent = l ? l.toLocaleString() + ' chars' : '';
+  });
 });
 
-function updateCharCount() {
-  const len = document.getElementById('script-input').value.length;
-  document.getElementById('char-count').textContent = len > 0 ? len.toLocaleString() + ' chars' : '';
-}
-
-// ======================================================================
-// API KEY
-// ======================================================================
+// ─── API KEY ──────────────────────────────────────────────────────────────────
 
 function saveKey() {
-  const val = document.getElementById('api-key-input').value.trim();
-  if (!val) { document.getElementById('key-hint').textContent = '⚠ Please enter an API key.'; return; }
-  localStorage.setItem('anthropic_key', val);
-  document.getElementById('key-hint').textContent = '✓ Saved to browser storage.';
+  const v = document.getElementById('api-key-input').value.trim();
+  if (!v) return;
+  localStorage.setItem('anthropic_key', v);
+  document.getElementById('key-hint').textContent = '✓ Saved.';
 }
-
 function getKey() {
   return document.getElementById('api-key-input').value.trim() || localStorage.getItem('anthropic_key') || '';
 }
 
-// ======================================================================
-// MODE & WEIGHTS
-// ======================================================================
+// ─── MODE & WEIGHTS ───────────────────────────────────────────────────────────
 
 function setMode(m, applyPreset) {
   _mode = m;
@@ -566,26 +468,22 @@ function setMode(m, applyPreset) {
   const crit = m === 'paid' ? PAID_CRITERIA : ORGANIC_CRITERIA;
   _weights = {};
   crit.keys.forEach(k => _weights[k] = 3);
-  if (applyPreset !== false) {
-    const platform = document.getElementById('platform').value;
-    applyPlatformPreset(platform, m);
-  }
+  if (applyPreset !== false) applyPlatformPreset(document.getElementById('platform').value, m);
   renderWeightsGrid();
 }
 
 function onPlatformChange() {
-  const platform = document.getElementById('platform').value;
-  document.getElementById('platform-note').textContent = PLATFORM_NOTES[platform] || '';
-  applyPlatformPreset(platform, _mode);
+  const p = document.getElementById('platform').value;
+  document.getElementById('platform-note').textContent = PLATFORM_NOTES[p] || '';
+  applyPlatformPreset(p, _mode);
   renderWeightsGrid();
 }
 
 function applyPlatformPreset(platform, mode) {
-  const preset = (PLATFORM_PRESETS[platform] || {})[mode] || {};
-  Object.entries(preset).forEach(([k, v]) => { if (k in _weights) _weights[k] = v; });
-  const hasPreset = Object.keys(preset).length > 0;
-  document.getElementById('weights-preset-label').textContent = hasPreset
-    ? '(' + (PLATFORM_LABELS[platform] || '') + ' preset applied)' : '';
+  const preset = ((PLATFORM_PRESETS[platform] || {})[mode]) || {};
+  Object.entries(preset).forEach(([k,v]) => { if (k in _weights) _weights[k] = v; });
+  const hasP = Object.keys(preset).length > 0;
+  document.getElementById('weights-preset-label').textContent = hasP ? '(' + (PLATFORM_LABELS[platform]||'') + ' preset applied)' : '';
 }
 
 function renderWeightsGrid() {
@@ -594,74 +492,51 @@ function renderWeightsGrid() {
   grid.innerHTML = '';
   crit.keys.forEach(k => {
     const w = _weights[k] || 3;
-    const row = document.createElement('div');
-    row.className = 'weight-row';
-    row.innerHTML = '<div class="weight-name">' + esc(crit.names[k]) + '</div>' +
-      '<div class="weight-controls">' +
-      '<input type="range" min="1" max="5" value="' + w + '" oninput="updateWeight(\'' + k + '\',this.value)" />' +
-      '<span class="weight-val" id="wv-' + k + '">' + w + '</span>' +
-      '</div>';
-    grid.appendChild(row);
+    const r = document.createElement('div'); r.className = 'weight-row';
+    r.innerHTML = '<div class="weight-name">' + esc(crit.names[k]) + '</div>' +
+      '<div class="weight-controls"><input type="range" min="1" max="5" value="' + w + '" oninput="updateWeight(\'' + k + '\',this.value)" />' +
+      '<span class="weight-val" id="wv-' + k + '">' + w + '</span></div>';
+    grid.appendChild(r);
   });
 }
-
-function updateWeight(k, v) {
-  _weights[k] = parseInt(v);
-  const el = document.getElementById('wv-' + k);
-  if (el) el.textContent = v;
-}
-
+function updateWeight(k, v) { _weights[k] = parseInt(v); const el = document.getElementById('wv-' + k); if (el) el.textContent = v; }
 function toggleWeights() {
   _weightsOpen = !_weightsOpen;
   document.getElementById('weights-body').style.display = _weightsOpen ? 'block' : 'none';
   document.getElementById('weights-chev').textContent = _weightsOpen ? '▼' : '▶';
 }
 
-// ======================================================================
-// HISTORY
-// ======================================================================
+// ─── HISTORY ──────────────────────────────────────────────────────────────────
 
-function loadHistory() {
-  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); }
-  catch(e) { return []; }
-}
+function loadHistory() { try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch(e) { return []; } }
 
 function saveToHistory(data) {
-  let hist = loadHistory();
-  const entry = { id: Date.now(), ts: new Date().toISOString() };
-  // Store compact version of data
-  Object.assign(entry, data);
-  hist.unshift(entry);
-  if (hist.length > MAX_HISTORY) hist = hist.slice(0, MAX_HISTORY);
-  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(hist)); } catch(e) {}
+  let h = loadHistory();
+  h.unshift(Object.assign({ id: Date.now(), ts: new Date().toISOString() }, data));
+  if (h.length > MAX_HISTORY) h = h.slice(0, MAX_HISTORY);
+  try { localStorage.setItem(HISTORY_KEY, JSON.stringify(h)); } catch(e) {}
   renderHistory();
 }
 
 function renderHistory() {
-  const hist = loadHistory();
-  const countEl = document.getElementById('history-count');
-  if (countEl) countEl.textContent = hist.length > 0 ? '(' + hist.length + ')' : '';
+  const h = loadHistory();
+  const ce = document.getElementById('history-count');
+  if (ce) ce.textContent = h.length ? '(' + h.length + ')' : '';
   const list = document.getElementById('history-list');
   if (!list) return;
-  if (hist.length === 0) {
-    list.innerHTML = '<div class="history-empty">No evaluations yet. Run your first evaluation above.</div>';
-    return;
-  }
+  if (!h.length) { list.innerHTML = '<div class="history-empty">No evaluations yet.</div>'; return; }
   list.innerHTML = '';
-  hist.forEach((entry, idx) => {
-    const item = document.createElement('div');
-    item.className = 'history-item';
+  h.forEach(entry => {
+    const el = document.createElement('div'); el.className = 'history-item';
     const dt = new Date(entry.ts);
-    const dateStr = dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const totalScore = (entry.s && entry.s.totalScore) ? entry.s.totalScore : '—';
-    const snippet = (entry.scriptName || (entry.script || '').slice(0, 55) + ((entry.script || '').length > 55 ? '…' : '')) || 'Untitled';
-    const modeLabel = entry.mode === 'organic' ? 'Organic' : 'Paid';
-    const platLabel = PLATFORM_LABELS[entry.platform] || 'Any';
-    item.innerHTML =
-      '<div class="history-item-top"><div class="history-item-name">' + esc(snippet) + '</div><div class="history-item-score">' + totalScore + '/60</div></div>' +
-      '<div class="history-item-meta">' + dateStr + ' · ' + modeLabel + ' · ' + platLabel + '</div>';
-    item.onclick = function() { restoreFromHistory(entry); };
-    list.appendChild(item);
+    const ds = dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const sc = entry.s && entry.s.totalScore ? entry.s.totalScore : '—';
+    const sn = entry.scriptName || (entry.script||'').slice(0,55) + ((entry.script||'').length > 55 ? '…':'');
+    el.innerHTML = '<div class="history-item-top"><div class="history-item-name">' + esc(sn||'Untitled') +
+      '</div><div class="history-item-score">' + sc + '/60</div></div>' +
+      '<div class="history-item-meta">' + ds + ' · ' + (entry.mode==='organic'?'Organic':'Paid') + ' · ' + (PLATFORM_LABELS[entry.platform]||'Any') + '</div>';
+    el.onclick = () => restoreFromHistory(entry);
+    list.appendChild(el);
   });
 }
 
@@ -670,29 +545,23 @@ function toggleHistory() {
   document.getElementById('history-body').style.display = _historyOpen ? 'block' : 'none';
   document.getElementById('history-chev').textContent = _historyOpen ? '▲' : '▼';
 }
-
 function clearHistory() {
-  if (!confirm('Clear all evaluation history?')) return;
-  localStorage.removeItem(HISTORY_KEY);
-  renderHistory();
+  if (!confirm('Clear all history?')) return;
+  localStorage.removeItem(HISTORY_KEY); renderHistory();
+}
+function restoreFromHistory(e) {
+  _evalData = e;
+  if (e.script) document.getElementById('script-input').value = e.script;
+  if (e.mode) setMode(e.mode, false);
+  renderResults(e);
+  document.getElementById('results').scrollIntoView({ behavior:'smooth' });
 }
 
-function restoreFromHistory(entry) {
-  if (!entry) return;
-  _evalData = entry;
-  if (entry.script) document.getElementById('script-input').value = entry.script;
-  if (entry.mode) setMode(entry.mode, false);
-  renderResults(entry);
-  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-}
+// ─── API ──────────────────────────────────────────────────────────────────────
 
-// ======================================================================
-// API
-// ======================================================================
-
-async function callClaude(prompt) {
+async function callClaude(prompt, maxTokens) {
   const key = getKey();
-  if (!key) throw new Error('No API key set. Please enter your Anthropic API key above and click Save key.');
+  if (!key) throw new Error('No API key. Enter your Anthropic API key above and click Save key.');
   const res = await fetch(API_URL, {
     method: 'POST',
     headers: {
@@ -703,77 +572,76 @@ async function callClaude(prompt) {
     },
     body: JSON.stringify({
       model: MODEL,
-      max_tokens: 2400,
-      messages: [{ role: 'user', content: prompt }]
+      max_tokens: maxTokens || 2048,
+      messages: [{ role:'user', content: prompt }]
     })
   });
-  if (!res.ok) {
-    let errText = '';
-    try { errText = await res.text(); } catch(e) {}
-    throw new Error('API error ' + res.status + ': ' + errText);
-  }
+  if (!res.ok) { let t=''; try{t=await res.text();}catch(e){} throw new Error('API error ' + res.status + ': ' + t); }
   const data = await res.json();
   return (data.content && data.content[0] && data.content[0].text) || '';
 }
 
+// Robust JSON parser — handles truncated responses by attempting to close open structures
 function parseJSON(text) {
-  let clean = text.replace(/```json\s*/gi, '').replace(/```\s*/gi, '').trim();
+  let clean = text.replace(/```json\s*/gi,'').replace(/```\s*/gi,'').trim();
   const start = clean.indexOf('{');
+  if (start === -1) throw new Error('No JSON object found in API response. Raw: ' + clean.slice(0,200));
+  clean = clean.slice(start);
+  // Try direct parse first
+  try { return JSON.parse(clean); } catch(e) {}
+  // Try finding last complete closing brace
   const end = clean.lastIndexOf('}');
-  if (start === -1 || end === -1) throw new Error('No JSON object found in API response. Raw: ' + clean.slice(0, 200));
-  clean = clean.slice(start, end + 1);
-  return JSON.parse(clean);
+  if (end !== -1) {
+    try { return JSON.parse(clean.slice(0, end+1)); } catch(e) {}
+  }
+  // Attempt to patch truncated JSON by closing open strings and brackets
+  try {
+    // Count open quotes (rough heuristic)
+    let patched = clean;
+    const openStrings = (patched.match(/(?<!\\)"/g) || []).length % 2;
+    if (openStrings) patched += '"';
+    patched += '}}'; // close any open objects
+    return JSON.parse(patched);
+  } catch(e) {}
+  throw new Error('Could not parse API response as JSON. Raw: ' + clean.slice(0,300));
 }
 
-// ======================================================================
-// PROGRESS
-// ======================================================================
+// ─── PROGRESS ─────────────────────────────────────────────────────────────────
 
 function setProgress(pct, label) {
   document.getElementById('progress-fill').style.width = pct + '%';
   document.getElementById('progress-label').textContent = label;
 }
-
 function showProgress() {
   document.getElementById('progress-wrap').style.display = 'block';
   document.getElementById('error-box').style.display = 'none';
   document.getElementById('results').style.display = 'none';
-  setProgress(0, 'Starting evaluation...');
+  setProgress(0,'Starting evaluation...');
 }
-
-function hideProgress() {
-  document.getElementById('progress-wrap').style.display = 'none';
-}
-
+function hideProgress() { document.getElementById('progress-wrap').style.display = 'none'; }
 function showError(msg) {
-  const box = document.getElementById('error-box');
-  box.textContent = '⚠ ' + msg;
-  box.style.display = 'block';
-  hideProgress();
+  const b = document.getElementById('error-box');
+  b.textContent = '⚠ ' + msg; b.style.display = 'block'; hideProgress();
 }
 
-// ======================================================================
-// MAIN EVALUATION — 5 API CALLS
-// ======================================================================
+// ─── MAIN EVAL (5 calls) ──────────────────────────────────────────────────────
 
 async function runEval() {
   const script = document.getElementById('script-input').value.trim();
-  if (!script) { alert('Please paste a script first.'); return; }
-  if (!getKey()) { alert('Please enter your Anthropic API key and click Save key.'); return; }
+  if (!script) { alert('Paste a script first.'); return; }
+  if (!getKey()) { alert('Enter your Anthropic API key first.'); return; }
 
-  const mode = _mode;
-  const crit = mode === 'paid' ? PAID_CRITERIA : ORGANIC_CRITERIA;
-  const evalKeys = crit.keys;
-  const evalNames = crit.names;
-
-  const platform = document.getElementById('platform').value;
-  const platformLabel = PLATFORM_PROMPT[platform];
-  const platformDisplayLabel = PLATFORM_LABELS[platform];
-
-  const ctEl = document.getElementById('content-type');
-  const ctLabel = ctEl.options[ctEl.selectedIndex].text;
-  const hasLP = document.getElementById('has-lp').value === 'yes';
-  const lpSection = hasLP ? 'Yes — this script bridges to a landing page.' : 'No — standalone script.';
+  const mode       = _mode;
+  const crit       = mode === 'paid' ? PAID_CRITERIA : ORGANIC_CRITERIA;
+  const evalKeys   = crit.keys;
+  const evalNames  = crit.names;
+  const platform   = document.getElementById('platform').value;
+  const platPrompt = PLATFORM_PROMPT[platform];
+  const platLabel  = PLATFORM_LABELS[platform];
+  const ctEl       = document.getElementById('content-type');
+  const ctLabel    = ctEl.options[ctEl.selectedIndex].text;
+  const hasLP      = document.getElementById('has-lp').value === 'yes';
+  const lpSection  = hasLP ? 'Yes — bridges to a landing page.' : 'No — standalone.';
   const scriptName = document.getElementById('script-name').value.trim();
 
   document.getElementById('eval-btn').disabled = true;
@@ -782,129 +650,117 @@ async function runEval() {
   let s, d, c, r, p;
 
   try {
-    // ---- CALL 1: Scores + Framework ----
+    // ── Call 1: Scores + Framework (2048 tokens) ──────────────────────────────
     setProgress(5, 'Step 1 of 5 — scoring and framework analysis...');
-
-    const scoresLines = evalKeys.map((k, i) => (i+1) + '. ' + evalNames[k] + ': score 1-5 as "' + k + '"').join('\n');
+    const scoresLines = evalKeys.map((k,i) => (i+1)+'. '+evalNames[k]+': score 1-5 as "'+k+'"').join('\n');
 
     s = parseJSON(await callClaude(
-      'You are evaluating a financial education video script for use as a ' +
-      (mode === 'organic' ? 'organic social media post' : 'paid advertisement') + '.\n' +
-      'Platform: ' + platformLabel + '\n' +
-      'Content type: ' + ctLabel + '\n' +
-      'Landing page: ' + lpSection + '\n\n' +
-      'Score each criterion 1-5. Return ONLY raw JSON, no markdown fences.\n\n' +
-      'Criteria:\n' + scoresLines + '\n\n' +
-      'Also return:\n' +
-      '"totalScore": integer sum of all criterion scores\n' +
-      '"verdict": one of "weak"|"average"|"good"|"strong"\n' +
-      '"verdictText": honest 2-3 sentence summary of overall script quality and what must change\n' +
-      '"selectedFramework": the specific copywriting framework this script uses or best fits — e.g. PAS, AIDA, HVT, PASTOR, Hook-Value-CTA, Problem-Agitate-Solve, etc. NEVER write "Auto-recommend" — always name the actual framework\n' +
-      '"fwRationale": one sentence explaining why this framework was identified\n\n' +
-      'Script:\n' + script
+      'You are evaluating a financial education video script for use as a '+(mode==='organic'?'organic social media post':'paid advertisement')+'.\n'+
+      'Platform: '+platPrompt+'\nContent type: '+ctLabel+'\nLanding page: '+lpSection+'\n\n'+
+      'Score each criterion 1-5. Return ONLY raw JSON — no markdown.\n\nCriteria:\n'+scoresLines+'\n\n'+
+      'Also return:\n'+
+      '"totalScore": integer sum of all 12 scores\n'+
+      '"verdict": "weak"|"average"|"good"|"strong"\n'+
+      '"verdictText": honest 2-3 sentence summary of quality and what must change\n'+
+      '"selectedFramework": the SPECIFIC framework this script uses or best fits — e.g. PAS, AIDA, HVT, PASTOR, Hook-Value-CTA. NEVER write "Auto-recommend". Always name the actual framework.\n'+
+      '"fwRationale": one sentence explaining why\n\n'+
+      'Script:\n'+script,
+      2048
     ));
 
-    // ---- CALL 2: Detailed breakdown (numbered keys — avoids Haiku camelCase drift) ----
-    setProgress(22, 'Step 2 of 5 — detailed criterion evaluation...');
+    // ── Call 2: Detailed breakdown — SPLIT into 6 + 6 to avoid truncation ────
+    setProgress(18, 'Step 2 of 5 — evaluating criteria 1–6...');
+    const critList = evalKeys.map((k,i) => (i+1)+'. '+evalNames[k]).join('\n');
 
-    const critListForCall2 = evalKeys.map((k, i) => (i+1) + '. ' + evalNames[k]).join('\n');
-
-    d = parseJSON(await callClaude(
-      'Detailed evaluation of each criterion for this ' + (mode === 'organic' ? 'organic' : 'paid ad') + ' script.\n' +
-      'Platform: ' + platformLabel + '\n' +
-      'Return ONLY raw JSON. No markdown fences.\n\n' +
-      'Criteria (12 total):\n' + critListForCall2 + '\n\n' +
-      'Return EXACTLY this structure — c1 through c12 matching the criteria order above:\n' +
-      '{"c1works":"<what works in the script for criterion 1>","c1weak":"<what is weak or missing>","c1fix":"<specific how-to-improve action>",' +
-      '"c2works":"<str>","c2weak":"<str>","c2fix":"<str>",' +
-      '"c3works":"<str>","c3weak":"<str>","c3fix":"<str>",' +
-      '"c4works":"<str>","c4weak":"<str>","c4fix":"<str>",' +
-      '"c5works":"<str>","c5weak":"<str>","c5fix":"<str>",' +
-      '"c6works":"<str>","c6weak":"<str>","c6fix":"<str>",' +
-      '"c7works":"<str>","c7weak":"<str>","c7fix":"<str>",' +
-      '"c8works":"<str>","c8weak":"<str>","c8fix":"<str>",' +
-      '"c9works":"<str>","c9weak":"<str>","c9fix":"<str>",' +
-      '"c10works":"<str>","c10weak":"<str>","c10fix":"<str>",' +
-      '"c11works":"<str>","c11weak":"<str>","c11fix":"<str>",' +
-      '"c12works":"<str>","c12weak":"<str>","c12fix":"<str>"}\n\n' +
-      'Be direct and specific. Point out what will hurt performance. Do not be overly positive.\n\n' +
-      'Script:\n' + script
+    // First half: c1–c6
+    const d1 = parseJSON(await callClaude(
+      'Detailed evaluation for criteria 1-6 of this '+(mode==='organic'?'organic':'paid ad')+' script.\n'+
+      'Platform: '+platPrompt+'\nReturn ONLY raw JSON. No markdown.\n\n'+
+      'All 12 criteria for context:\n'+critList+'\n\n'+
+      'Return EXACTLY this JSON for criteria 1-6:\n'+
+      '{"c1works":"<what works>","c1weak":"<what is weak or missing>","c1fix":"<how to improve>",'+
+      '"c2works":"<str>","c2weak":"<str>","c2fix":"<str>",'+
+      '"c3works":"<str>","c3weak":"<str>","c3fix":"<str>",'+
+      '"c4works":"<str>","c4weak":"<str>","c4fix":"<str>",'+
+      '"c5works":"<str>","c5weak":"<str>","c5fix":"<str>",'+
+      '"c6works":"<str>","c6weak":"<str>","c6fix":"<str>"}\n\n'+
+      'Be direct. Point out what will hurt performance. 1-3 sentences per field.\n\nScript:\n'+script,
+      3000
     ));
 
-    // ---- CALL 3: Compliance + Ad risk + Visual ----
-    setProgress(42, 'Step 3 of 5 — compliance, ad risk, and production audit...');
+    setProgress(30, 'Step 2 of 5 — evaluating criteria 7–12...');
 
+    // Second half: c7–c12
+    const d2 = parseJSON(await callClaude(
+      'Detailed evaluation for criteria 7-12 of this '+(mode==='organic'?'organic':'paid ad')+' script.\n'+
+      'Platform: '+platPrompt+'\nReturn ONLY raw JSON. No markdown.\n\n'+
+      'All 12 criteria for context:\n'+critList+'\n\n'+
+      'Return EXACTLY this JSON for criteria 7-12:\n'+
+      '{"c7works":"<what works>","c7weak":"<what is weak or missing>","c7fix":"<how to improve>",'+
+      '"c8works":"<str>","c8weak":"<str>","c8fix":"<str>",'+
+      '"c9works":"<str>","c9weak":"<str>","c9fix":"<str>",'+
+      '"c10works":"<str>","c10weak":"<str>","c10fix":"<str>",'+
+      '"c11works":"<str>","c11weak":"<str>","c11fix":"<str>",'+
+      '"c12works":"<str>","c12weak":"<str>","c12fix":"<str>"}\n\n'+
+      'Be direct. Point out what will hurt performance. 1-3 sentences per field.\n\nScript:\n'+script,
+      3000
+    ));
+
+    d = Object.assign({}, d1, d2); // merge both halves
+
+    // ── Call 3: Compliance + Ad risk + Visual (2048 tokens) ──────────────────
+    setProgress(46, 'Step 3 of 5 — compliance, ad risk, and production audit...');
     c = parseJSON(await callClaude(
-      'Evaluate this financial education script for compliance and ad approval risk.\n' +
-      'Platform: ' + platformLabel + '\n' +
-      'Mode: ' + (mode === 'paid' ? 'Paid advertisement' : 'Organic content') + '\n' +
-      'Return ONLY raw JSON. No markdown fences.\n\n' +
-      '{"complianceRisk":"low|medium|high",' +
-      '"complianceFlags":["<list compliance issues: guaranteed returns, specific income claims, misleading statements, etc — empty array if none>"],' +
-      '"complianceSummary":"<2 sentences on overall compliance health>",' +
-      '"adRisk":"low|medium|high",' +
-      '"adRiskFlags":["<specific phrases or claims likely to trigger ad rejection: personal attributes language, before/after transformation, income guarantees, misleading financial claims — empty array if none>"],' +
-      '"adRiskSummary":"<2 sentences on ad approval risk>",' +
-      '"visualSuggestions":["<3-5 specific B-roll, on-screen text, or visual overlay recommendations>"],' +
-      '"productionNotes":"<2-3 sentences on pacing, delivery, and production recommendations>"}\n\n' +
-      'Script:\n' + script
+      'Evaluate this financial education script for compliance and ad approval risk.\n'+
+      'Platform: '+platPrompt+'\nMode: '+(mode==='paid'?'Paid advertisement':'Organic content')+'\n'+
+      'Return ONLY raw JSON. No markdown.\n\n'+
+      '{"complianceRisk":"low|medium|high","complianceFlags":["<issues or empty array>"],"complianceSummary":"<2 sentences>",'+
+      '"adRisk":"low|medium|high","adRiskFlags":["<phrases likely to trigger rejection or empty array>"],"adRiskSummary":"<2 sentences>",'+
+      '"visualSuggestions":["<3-5 B-roll / on-screen text recommendations>"],"productionNotes":"<2-3 sentences on pacing and delivery>"}\n\n'+
+      'Script:\n'+script,
+      2048
     ));
 
-    // ---- CALL 4: Rewrites ----
+    // ── Call 4: Rewrites (3000 tokens) ───────────────────────────────────────
     setProgress(62, 'Step 4 of 5 — generating rewrites...');
-
     r = parseJSON(await callClaude(
-      'Generate improved versions of this ' + (mode === 'organic' ? 'organic' : 'paid ad') + ' script.\n' +
-      'Platform: ' + platformLabel + '\n' +
-      'Content type: ' + ctLabel + '\n' +
-      'Return ONLY raw JSON. No markdown fences.\n\n' +
-      '{"hookOptions":[' +
-      '{"label":"<style e.g. Loss specificity>","text":"<rewritten hook — first 3-6 lines only>"},' +
-      '{"label":"<style>","text":"<hook>"},' +
-      '{"label":"<style>","text":"<hook>"}],' +
-      '"fullRewrite":"<complete improved script — use \\n for line breaks>",' +
-      '"rewriteNotes":"<2-3 sentences explaining the key changes made and why>",' +
-      '"ctaOptions":[' +
-      '{"label":"<style>","text":"<rewritten CTA — last 3-5 lines>"},' +
-      '{"label":"<style>","text":"<CTA>"}]}\n\n' +
-      'Script:\n' + script
+      'Generate improved versions of this '+(mode==='organic'?'organic':'paid ad')+' script.\n'+
+      'Platform: '+platPrompt+'\nContent type: '+ctLabel+'\nReturn ONLY raw JSON. No markdown.\n\n'+
+      '{"hookOptions":[{"label":"<style>","text":"<3-6 line hook>"},{"label":"<style>","text":"<hook>"},{"label":"<style>","text":"<hook>"}],'+
+      '"fullRewrite":"<complete improved script — use \\n for line breaks>",'+
+      '"rewriteNotes":"<2-3 sentences on key changes and why>",'+
+      '"ctaOptions":[{"label":"<style>","text":"<3-5 line CTA>"},{"label":"<style>","text":"<CTA>"}]}\n\n'+
+      'Script:\n'+script,
+      3000
     ));
 
-    // ---- CALL 5: Emotional arc + Drop-off + Cold audience ----
-    setProgress(82, 'Step 5 of 5 — emotional arc, drop-off map, cold audience test...');
-
+    // ── Call 5: Performance (3500 tokens) ────────────────────────────────────
+    setProgress(80, 'Step 5 of 5 — emotional arc, drop-off map, cold audience test...');
     p = parseJSON(await callClaude(
-      'Analyse this script for emotional arc, drop-off risk, and cold audience clarity.\n' +
-      'Content type: ' + ctLabel + ' | Platform: ' + platformLabel + '\n' +
-      'Return ONLY raw JSON. No markdown fences.\n\n' +
-      '{"arcSeg1excerpt":"<first ~20 chars of segment 1>","arcSeg1emotion":"<pain|tension|curiosity|reframe|hope|urgency|excitement|neutral>","arcSeg1note":"<10-12 word description of emotional beat>",' +
-      '"arcSeg2excerpt":"<str>","arcSeg2emotion":"<str>","arcSeg2note":"<str>",' +
-      '"arcSeg3excerpt":"<str>","arcSeg3emotion":"<str>","arcSeg3note":"<str>",' +
-      '"arcSeg4excerpt":"<str>","arcSeg4emotion":"<str>","arcSeg4note":"<str>",' +
-      '"arcSeg5excerpt":"<str>","arcSeg5emotion":"<str>","arcSeg5note":"<str>",' +
-      '"arcSeg6excerpt":"<str>","arcSeg6emotion":"<str>","arcSeg6note":"<str>",' +
-      '"arcSeg7excerpt":"<str>","arcSeg7emotion":"<str>","arcSeg7note":"<str>",' +
-      '"arcSeg8excerpt":"<str>","arcSeg8emotion":"<str>","arcSeg8note":"<str>",' +
-      '"arcSegCount":6,' +
-      '"arcPattern":"<e.g. pain → tension → curiosity → reframe → hope → action>",' +
-      '"arcMissing":"<what emotional stage is absent, weak, or comes too late>",' +
-      '"arcScore":3,' +
-      '"arcDiagnosis":"<2-3 sentences on arc quality>",' +
-      '"drop1excerpt":"<first 35 chars>","drop1risk":"<high|medium|low>","drop1reason":"<why viewers leave>","drop1fix":"<how to fix>",' +
-      '"drop2excerpt":"<str>","drop2risk":"<str>","drop2reason":"<str>","drop2fix":"<str>",' +
-      '"drop3excerpt":"<str>","drop3risk":"<str>","drop3reason":"<str>","drop3fix":"<str>",' +
-      '"drop4excerpt":"<str>","drop4risk":"<str>","drop4reason":"<str>","drop4fix":"<str>",' +
-      '"drop5excerpt":"<str>","drop5risk":"<str>","drop5reason":"<str>","drop5fix":"<str>",' +
-      '"drop6excerpt":"<str>","drop6risk":"<str>","drop6reason":"<str>","drop6fix":"<str>",' +
-      '"dropCount":5,' +
-      '"coldScore":3,' +
-      '"coldBrand":"<yes|partial|no>","coldBrandNote":"<str>",' +
-      '"coldOffer":"<yes|partial|no>","coldOfferNote":"<str>",' +
-      '"coldJargon":"<yes|partial|no>","coldJargonNote":"<str>","coldJargonTerms":"<comma-separated jargon terms or empty string>",' +
-      '"coldPain":"<yes|partial|no>","coldPainNote":"<str>",' +
-      '"coldTrust":"<yes|partial|no>","coldTrustNote":"<str>",' +
-      '"coldDiagnosis":"<2-3 sentences on cold audience readiness>"}\n\n' +
-      'Script:\n' + script
+      'Analyse this script for emotional arc, drop-off risk, and cold audience clarity.\n'+
+      'Content type: '+ctLabel+' | Platform: '+platPrompt+'\nReturn ONLY raw JSON. No markdown.\n\n'+
+      '{"arcSeg1excerpt":"<~20 chars>","arcSeg1emotion":"pain|tension|curiosity|reframe|hope|urgency|excitement|neutral","arcSeg1note":"<10-12 word beat description>",'+
+      '"arcSeg2excerpt":"<str>","arcSeg2emotion":"<str>","arcSeg2note":"<str>",'+
+      '"arcSeg3excerpt":"<str>","arcSeg3emotion":"<str>","arcSeg3note":"<str>",'+
+      '"arcSeg4excerpt":"<str>","arcSeg4emotion":"<str>","arcSeg4note":"<str>",'+
+      '"arcSeg5excerpt":"<str>","arcSeg5emotion":"<str>","arcSeg5note":"<str>",'+
+      '"arcSeg6excerpt":"<str>","arcSeg6emotion":"<str>","arcSeg6note":"<str>",'+
+      '"arcSegCount":6,"arcPattern":"<e.g. pain → reframe → hope → action>",'+
+      '"arcMissing":"<absent or late emotional stage>","arcScore":3,"arcDiagnosis":"<2-3 sentences>",'+
+      '"drop1excerpt":"<35 chars>","drop1risk":"high|medium|low","drop1reason":"<why viewers leave>","drop1fix":"<fix>",'+
+      '"drop2excerpt":"<str>","drop2risk":"<str>","drop2reason":"<str>","drop2fix":"<str>",'+
+      '"drop3excerpt":"<str>","drop3risk":"<str>","drop3reason":"<str>","drop3fix":"<str>",'+
+      '"drop4excerpt":"<str>","drop4risk":"<str>","drop4reason":"<str>","drop4fix":"<str>",'+
+      '"drop5excerpt":"<str>","drop5risk":"<str>","drop5reason":"<str>","drop5fix":"<str>",'+
+      '"dropCount":5,'+
+      '"coldScore":3,'+
+      '"coldBrand":"yes|partial|no","coldBrandNote":"<str>",'+
+      '"coldOffer":"yes|partial|no","coldOfferNote":"<str>",'+
+      '"coldJargon":"yes|partial|no","coldJargonNote":"<str>","coldJargonTerms":"<comma-separated or empty>",'+
+      '"coldPain":"yes|partial|no","coldPainNote":"<str>",'+
+      '"coldTrust":"yes|partial|no","coldTrustNote":"<str>",'+
+      '"coldDiagnosis":"<2-3 sentences>"}\n\nScript:\n'+script,
+      3500
     ));
 
     setProgress(100, 'Done ✓');
@@ -912,396 +768,280 @@ async function runEval() {
     const fwLabel = (s.selectedFramework && s.selectedFramework !== 'Auto-recommend')
       ? s.selectedFramework : 'Framework identified';
 
-    _evalData = {
-      s, d, c, r, p, script, scriptName, mode,
-      evalKeys, evalNames,
-      hasLP, lpSection, ctLabel, fwLabel,
-      platform, platformLabel: platformDisplayLabel
-    };
+    _evalData = { s, d, c, r, p, script, scriptName, mode, evalKeys, evalNames,
+                  hasLP, lpSection, ctLabel, fwLabel, platform, platformLabel: platLabel };
 
     saveToHistory(_evalData);
     renderResults(_evalData);
+    setTimeout(hideProgress, 500);
 
-    setTimeout(hideProgress, 600);
-
-  } catch (err) {
+  } catch(err) {
     showError(err.message || String(err));
   } finally {
     document.getElementById('eval-btn').disabled = false;
   }
 }
 
-// ======================================================================
-// RENDER RESULTS
-// ======================================================================
+// ─── RENDER ───────────────────────────────────────────────────────────────────
 
 function renderResults(data) {
-  const { s, d, c, r, p, evalKeys, evalNames } = data;
-
+  const { s, evalKeys, evalNames } = data;
   document.getElementById('results').style.display = 'block';
 
-  // Header
-  const name = data.scriptName || (data.script || '').slice(0, 60) + ((data.script || '').length > 60 ? '…' : '');
+  const name = data.scriptName || (data.script||'').slice(0,60) + ((data.script||'').length>60?'…':'');
   document.getElementById('result-script-name').textContent = name || 'Script evaluation';
   document.getElementById('result-script-label').textContent =
-    'Video Script Evaluation · ' + (data.mode === 'paid' ? 'Paid Ad' : 'Organic') +
-    (data.platformLabel ? ' · ' + data.platformLabel : '');
+    'Video Script Evaluation · '+(data.mode==='paid'?'Paid Ad':'Organic')+
+    (data.platformLabel?' · '+data.platformLabel:'');
 
-  const totalScore = (s && s.totalScore) ? s.totalScore :
-    evalKeys.reduce((sum, k) => sum + (s ? (s[k] || 0) : 0), 0);
+  const totalScore = (s && s.totalScore) ? s.totalScore
+    : evalKeys.reduce((sum,k) => sum + (s ? (s[k]||0) : 0), 0);
   document.getElementById('score-num').textContent = totalScore;
 
-  const verdictMap = {
-    weak:    { cls: 'verdict-weak',    label: 'Needs significant work' },
-    average: { cls: 'verdict-avg',     label: 'Average — weak retention or conversion likely' },
-    good:    { cls: 'verdict-good',    label: 'Good script — strong in most areas' },
-    strong:  { cls: 'verdict-strong',  label: 'Strong script — ready to film' }
-  };
-  const vd = verdictMap[(s && s.verdict)] || verdictMap.average;
-  document.getElementById('verdict-pill-wrap').innerHTML =
-    '<div class="verdict-pill ' + vd.cls + '">' + vd.label + '</div>';
-  document.getElementById('verdict-text').textContent = (s && s.verdictText) || '';
+  const vm = { weak:{cls:'verdict-weak',label:'Needs significant work'},
+               average:{cls:'verdict-avg',label:'Average — weak retention or conversion likely'},
+               good:{cls:'verdict-good',label:'Good script — strong in most areas'},
+               strong:{cls:'verdict-strong',label:'Strong script — ready to film'} };
+  const vd = vm[(s&&s.verdict)] || vm.average;
+  document.getElementById('verdict-pill-wrap').innerHTML = '<div class="verdict-pill '+vd.cls+'">'+vd.label+'</div>';
+  document.getElementById('verdict-text').textContent = (s&&s.verdictText)||'';
 
-  // Framework card
-  const fwName = (s && s.selectedFramework && s.selectedFramework !== 'Auto-recommend')
-    ? s.selectedFramework : (data.fwLabel || 'Framework identified');
+  const fwName = (s&&s.selectedFramework&&s.selectedFramework!=='Auto-recommend')
+    ? s.selectedFramework : (data.fwLabel||'Framework identified');
   document.getElementById('framework-card').innerHTML =
-    '<div class="fw-label">Framework identified</div>' +
-    '<div class="fw-name">' + esc(fwName) + '</div>' +
-    '<div class="fw-rationale">' + esc((s && s.fwRationale) || '') + '</div>';
+    '<div class="fw-label">Framework identified</div>'+
+    '<div class="fw-name">'+esc(fwName)+'</div>'+
+    '<div class="fw-rationale">'+esc((s&&s.fwRationale)||'')+'</div>';
 
-  // Tabs
-  renderOverview(data);
-  renderScores(data);
-  renderBreakdown(data);
-  renderIssues(data);
-  renderCompliance(data);
-  renderRewrites(data);
-  renderPerformance(data);
+  renderOverview(data); renderScores(data); renderBreakdown(data);
+  renderIssues(data); renderCompliance(data); renderRewrites(data); renderPerformance(data);
 
-  // Reset to overview
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelector('.tab[onclick*="overview"]').classList.add('active');
   document.getElementById('tab-overview').classList.add('active');
-
-  document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
 }
 
-// ---- Overview ----
 function renderOverview(data) {
   const { s, evalKeys, evalNames } = data;
-  if (!s) { document.getElementById('overview-content').innerHTML = '<div>No data.</div>'; return; }
-
-  const scored = evalKeys.map(k => ({ k, name: evalNames[k], score: s[k] || 0 }))
-    .sort((a, b) => a.score - b.score);
-  const weakest = scored.slice(0, 3);
-  const strongest = scored.slice(-3).reverse();
-
-  let html =
-    '<div class="overview-grid">' +
-    '<div class="overview-card"><div class="ov-label">3 biggest weaknesses</div>' +
-    weakest.map(x => '<div class="ov-item ov-weak"><span class="ov-score">' + x.score + '/5</span> ' + esc(x.name) + '</div>').join('') +
-    '</div>' +
-    '<div class="overview-card"><div class="ov-label">3 strongest areas</div>' +
-    strongest.map(x => '<div class="ov-item ov-strong"><span class="ov-score">' + x.score + '/5</span> ' + esc(x.name) + '</div>').join('') +
-    '</div></div>' +
-    '<div class="ov-verdict-text">' + esc(s.verdictText || '') + '</div>';
-
+  if (!s) return;
+  const scored = evalKeys.map(k=>({k, name:evalNames[k], score:s[k]||0})).sort((a,b)=>a.score-b.score);
+  const html =
+    '<div class="overview-grid">'+
+    '<div class="overview-card"><div class="ov-label">3 biggest weaknesses</div>'+
+    scored.slice(0,3).map(x=>'<div class="ov-item ov-weak"><span class="ov-score">'+x.score+'/5</span>'+esc(x.name)+'</div>').join('')+'</div>'+
+    '<div class="overview-card"><div class="ov-label">3 strongest areas</div>'+
+    scored.slice(-3).reverse().map(x=>'<div class="ov-item ov-strong"><span class="ov-score">'+x.score+'/5</span>'+esc(x.name)+'</div>').join('')+'</div>'+
+    '</div><div class="ov-verdict-text">'+esc((s&&s.verdictText)||'')+'</div>';
   document.getElementById('overview-content').innerHTML = html;
 }
 
-// ---- Scores ----
 function renderScores(data) {
   const { s, evalKeys, evalNames } = data;
-  const grid = document.getElementById('score-grid');
-  grid.innerHTML = '';
+  const grid = document.getElementById('score-grid'); grid.innerHTML = '';
   if (!s) return;
   evalKeys.forEach(k => {
-    const score = s[k] || 0;
-    const cc = score >= 5 ? 'filled-5' : score >= 4 ? 'filled-4' : score >= 3 ? 'filled-3' : score >= 2 ? 'filled-2' : 'filled-1';
-    const dots = Array.from({ length: 5 }, (_, i) => '<div class="dot ' + (i < score ? cc : '') + '"></div>').join('');
-    const card = document.createElement('div');
-    card.className = 'score-card';
-    card.innerHTML = '<div class="score-card-name">' + esc(evalNames[k]) + '</div><div class="dots">' + dots + '<span class="score-val">' + score + '/5</span></div>';
+    const sc = s[k]||0;
+    const cc = sc>=5?'f5':sc>=4?'f4':sc>=3?'f3':sc>=2?'f2':'f1';
+    const dots = Array.from({length:5},(_,i)=>'<div class="dot '+(i<sc?cc:'')+'"></div>').join('');
+    const card = document.createElement('div'); card.className='score-card';
+    card.innerHTML='<div class="score-card-name">'+esc(evalNames[k])+'</div><div class="dots">'+dots+'<span class="score-val">'+sc+'/5</span></div>';
     grid.appendChild(card);
   });
 }
 
-// ---- Breakdown (FIXED: uses c1works/c1weak/c1fix numbered keys) ----
 function renderBreakdown(data) {
   const { s, d, evalKeys, evalNames } = data;
-  const container = document.getElementById('breakdown-blocks');
-  container.innerHTML = '';
-  if (!s || !d) { container.innerHTML = '<div style="color:#888;font-size:14px;">Breakdown data not available.</div>'; return; }
-
-  evalKeys.forEach((k, i) => {
-    const score = s[k] || 0;
-    const badgeClass = score >= 5 ? 'badge-5' : score >= 4 ? 'badge-4' : score >= 3 ? 'badge-3' : 'badge-2';
-    const num = i + 1;
-    // FIXED: use numbered keys c1works, c1weak, c1fix (not camelCase short names)
-    const works   = d['c' + num + 'works'] || '—';
-    const weak    = d['c' + num + 'weak']  || '—';
-    const improve = d['c' + num + 'fix']   || '—';
-
-    const block = document.createElement('div');
-    block.className = 'detail-block';
-    block.innerHTML =
-      '<div class="detail-header" onclick="toggleDetail(\'bd-' + i + '\')">' +
-      '<span class="detail-crit-name">' + esc(evalNames[k]) + '</span>' +
-      '<span style="display:flex;align-items:center;gap:10px;">' +
-      '<span class="detail-score-badge ' + badgeClass + '">' + score + '/5</span>' +
-      '<span class="chevron" id="chev-bd-' + i + '">▼</span>' +
-      '</span></div>' +
-      '<div class="detail-body" id="body-bd-' + i + '">' +
-      '<div class="detail-subsection"><div class="detail-sublabel">What works</div><div class="detail-text">' + esc(works) + '</div></div>' +
-      '<div class="detail-subsection"><div class="detail-sublabel">What is weak or missing</div><div class="detail-text">' + esc(weak) + '</div></div>' +
-      '<div class="detail-subsection"><div class="detail-sublabel">How to improve</div><div class="detail-text">' + esc(improve) + '</div></div>' +
+  const container = document.getElementById('breakdown-blocks'); container.innerHTML='';
+  if (!s || !d) { container.innerHTML='<div style="color:#888;font-size:14px;">Breakdown data not available.</div>'; return; }
+  evalKeys.forEach((k,i) => {
+    const sc = s[k]||0;
+    const bc = sc>=5?'b5':sc>=4?'b4':sc>=3?'b3':'b2';
+    const n = i+1;
+    const works   = d['c'+n+'works'] || '—';
+    const weak    = d['c'+n+'weak']  || '—';
+    const improve = d['c'+n+'fix']   || '—';
+    const block = document.createElement('div'); block.className='detail-block';
+    block.innerHTML=
+      '<div class="detail-header" onclick="toggleDetail(\'bd-'+i+'\')">'+
+      '<span class="detail-crit-name">'+esc(evalNames[k])+'</span>'+
+      '<span style="display:flex;align-items:center;gap:10px;">'+
+      '<span class="detail-score-badge '+bc+'">'+sc+'/5</span>'+
+      '<span class="chevron" id="chev-bd-'+i+'">▼</span></span></div>'+
+      '<div class="detail-body" id="body-bd-'+i+'">'+
+      '<div class="detail-subsection"><div class="detail-sublabel">What works</div><div class="detail-text">'+esc(works)+'</div></div>'+
+      '<div class="detail-subsection"><div class="detail-sublabel">What is weak or missing</div><div class="detail-text">'+esc(weak)+'</div></div>'+
+      '<div class="detail-subsection"><div class="detail-sublabel">How to improve</div><div class="detail-text">'+esc(improve)+'</div></div>'+
       '</div>';
     container.appendChild(block);
   });
 }
 
-// ---- Issues ----
 function renderIssues(data) {
   const { s, d, evalKeys, evalNames } = data;
-  if (!s || !d) { document.getElementById('issues-content').innerHTML = '<div style="color:#888;font-size:14px;">Issues data not available.</div>'; return; }
-
-  const scored = evalKeys.map((k, i) => ({ k, name: evalNames[k], score: s[k] || 0, idx: i }))
-    .sort((a, b) => a.score - b.score);
-  const top3 = scored.slice(0, 3);
-
+  if (!s||!d) { document.getElementById('issues-content').innerHTML='<div style="color:#888;font-size:14px;">Data not available.</div>'; return; }
+  const top3 = evalKeys.map((k,i)=>({k,name:evalNames[k],score:s[k]||0,idx:i})).sort((a,b)=>a.score-b.score).slice(0,3);
   let html = '<div class="sec-label">Top issues to fix</div>';
-  top3.forEach((x, n) => {
-    const weak = d['c' + (x.idx + 1) + 'weak'] || '—';
-    html += '<div class="issue-card"><strong>' + (n+1) + '. ' + esc(x.name) + ' (' + x.score + '/5)</strong> — ' + esc(weak) + '</div>';
-  });
-
-  html += '<div class="sec-label" style="margin-top:28px;">Highest-impact improvements</div>';
-  top3.forEach((x, n) => {
-    const improve = d['c' + (x.idx + 1) + 'fix'] || '—';
-    html += '<div class="improve-card"><strong>' + (n+1) + '. ' + esc(x.name) + '</strong> — ' + esc(improve) + '</div>';
-  });
-
+  top3.forEach((x,n)=>{ html+='<div class="issue-card"><strong>'+(n+1)+'. '+esc(x.name)+' ('+x.score+'/5)</strong> — '+esc(d['c'+(x.idx+1)+'weak']||'—')+'</div>'; });
+  html+='<div class="sec-label" style="margin-top:26px;">Highest-impact improvements</div>';
+  top3.forEach((x,n)=>{ html+='<div class="improve-card"><strong>'+(n+1)+'. '+esc(x.name)+'</strong> — '+esc(d['c'+(x.idx+1)+'fix']||'—')+'</div>'; });
   document.getElementById('issues-content').innerHTML = html;
 }
 
-// ---- Compliance ----
 function renderCompliance(data) {
   const { c } = data;
-  if (!c) { document.getElementById('compliance-content').innerHTML = '<div class="flag-ok">Compliance data not available.</div>'; return; }
-
-  const riskClass = { low: 'flag-ok', medium: 'flag-warn flag-medium', high: 'flag-warn' };
-
-  let html =
-    '<div class="sec-label">Compliance risk</div>' +
-    '<div class="' + (riskClass[c.complianceRisk] || 'flag-ok') + '">Risk level: <strong>' +
-    (c.complianceRisk || 'unknown').toUpperCase() + '</strong><br>' + esc(c.complianceSummary || '') + '</div>';
-
-  if (c.complianceFlags && c.complianceFlags.length) {
-    c.complianceFlags.forEach(f => { if (f) html += '<div class="flag-warn">⚠ ' + esc(f) + '</div>'; });
-  }
-
-  html +=
-    '<div class="sec-label" style="margin-top:28px;">Ad approval risk</div>' +
-    '<div class="' + (riskClass[c.adRisk] || 'flag-ok') + '">Ad risk: <strong>' +
-    (c.adRisk || 'unknown').toUpperCase() + '</strong><br>' + esc(c.adRiskSummary || '') + '</div>';
-
-  if (c.adRiskFlags && c.adRiskFlags.length) {
-    c.adRiskFlags.forEach(f => { if (f) html += '<div class="flag-warn">⚠ ' + esc(f) + '</div>'; });
-  }
-
-  html += '<div class="sec-label" style="margin-top:28px;">Visual & production notes</div>';
-
-  if (c.productionNotes) {
-    html += '<div class="rewrite-block" style="margin-bottom:12px;"><div class="detail-text">' + esc(c.productionNotes) + '</div></div>';
-  }
-
-  if (c.visualSuggestions && c.visualSuggestions.length) {
-    c.visualSuggestions.forEach((s, i) => {
-      if (s) html += '<div class="visual-item">' + (i+1) + '. ' + esc(s) + '</div>';
-    });
-  }
-
+  if (!c) { document.getElementById('compliance-content').innerHTML='<div class="flag-ok">Compliance data not available.</div>'; return; }
+  const rc = {low:'flag-ok',medium:'flag-med',high:'flag-warn'};
+  let html=
+    '<div class="sec-label">Compliance risk</div>'+
+    '<div class="'+(rc[c.complianceRisk]||'flag-ok')+'">Risk: <strong>'+((c.complianceRisk||'unknown').toUpperCase())+'</strong><br>'+esc(c.complianceSummary||'')+'</div>';
+  (c.complianceFlags||[]).filter(Boolean).forEach(f=>{ html+='<div class="flag-warn">⚠ '+esc(f)+'</div>'; });
+  html+=
+    '<div class="sec-label" style="margin-top:26px;">Ad approval risk</div>'+
+    '<div class="'+(rc[c.adRisk]||'flag-ok')+'">Ad risk: <strong>'+((c.adRisk||'unknown').toUpperCase())+'</strong><br>'+esc(c.adRiskSummary||'')+'</div>';
+  (c.adRiskFlags||[]).filter(Boolean).forEach(f=>{ html+='<div class="flag-warn">⚠ '+esc(f)+'</div>'; });
+  html+=
+    '<div class="sec-label" style="margin-top:26px;">Visual & production notes</div>'+
+    (c.productionNotes?'<div class="rewrite-block" style="margin-bottom:12px;"><div class="detail-text">'+esc(c.productionNotes)+'</div></div>':'');
+  (c.visualSuggestions||[]).filter(Boolean).forEach((s,i)=>{ html+='<div class="visual-item">'+(i+1)+'. '+esc(s)+'</div>'; });
   document.getElementById('compliance-content').innerHTML = html;
 }
 
-// ---- Rewrites ----
 function renderRewrites(data) {
   const { r } = data;
-  if (!r) { document.getElementById('rewrites-content').innerHTML = '<div style="color:#888;font-size:14px;">Rewrites not available.</div>'; return; }
-
-  let html = '<div class="sec-label">Hook options to A/B test</div>';
-
-  if (r.hookOptions && r.hookOptions.length) {
-    r.hookOptions.forEach(h => {
-      html += '<div class="hook-card"><div class="hook-num">' + esc(h.label || '') + '</div>' +
-        '<div class="hook-text">' + esc(h.text || '') + '</div></div>';
-    });
+  if (!r) { document.getElementById('rewrites-content').innerHTML='<div style="color:#888;font-size:14px;">Rewrites not available.</div>'; return; }
+  let html='<div class="sec-label">Hook options to A/B test</div>';
+  (r.hookOptions||[]).forEach(h=>{
+    html+='<div class="hook-card"><div class="hook-num">'+esc(h.label||'')+'</div><div class="hook-text">'+esc(h.text||'')+'</div></div>';
+  });
+  if(r.ctaOptions&&r.ctaOptions.length){
+    html+='<div class="sec-label" style="margin-top:26px;">CTA options</div>';
+    r.ctaOptions.forEach(ct=>{ html+='<div class="hook-card"><div class="hook-num">'+esc(ct.label||'')+'</div><div class="hook-text">'+esc(ct.text||'')+'</div></div>'; });
   }
-
-  if (r.ctaOptions && r.ctaOptions.length) {
-    html += '<div class="sec-label" style="margin-top:28px;">CTA options</div>';
-    r.ctaOptions.forEach(ct => {
-      html += '<div class="hook-card"><div class="hook-num">' + esc(ct.label || '') + '</div>' +
-        '<div class="hook-text">' + esc(ct.text || '') + '</div></div>';
-    });
-  }
-
-  html += '<div class="sec-label" style="margin-top:28px;">Full improved script</div>' +
-    '<div class="rewrite-block"><div class="rewrite-text">' + esc(r.fullRewrite || '') + '</div>' +
-    (r.rewriteNotes ? '<div class="rewrite-note"><strong>What changed:</strong> ' + esc(r.rewriteNotes) + '</div>' : '') +
+  html+=
+    '<div class="sec-label" style="margin-top:26px;">Full improved script</div>'+
+    '<div class="rewrite-block"><div class="rewrite-text">'+esc(r.fullRewrite||'')+'</div>'+
+    (r.rewriteNotes?'<div class="rewrite-note"><strong>What changed:</strong> '+esc(r.rewriteNotes)+'</div>':'')+
     '</div>';
-
   document.getElementById('rewrites-content').innerHTML = html;
 }
 
-// ---- Performance ----
 function renderPerformance(data) {
   const { p } = data;
-  if (!p) {
-    document.getElementById('arc-summary').innerHTML = '<div style="color:#888;font-size:14px;">Performance data not available.</div>';
-    return;
+  if (!p) { document.getElementById('arc-summary').innerHTML='<div style="color:#888;font-size:14px;">Performance data not available.</div>'; return; }
+
+  const ac = p.arcScore>=4?'#1a6e3c':p.arcScore>=3?'#a05c00':'#a02020';
+  document.getElementById('arc-summary').innerHTML=
+    '<div class="arc-summary">'+
+    '<div class="arc-score-row"><span class="arc-score-label">Arc score</span>'+
+    '<span class="arc-score-val" style="color:'+ac+'">'+(p.arcScore||'—')+'/5</span>'+
+    '<span class="arc-pattern">'+esc(p.arcPattern||'')+'</span></div>'+
+    (p.arcMissing?'<div class="arc-missing">⚠ Missing: '+esc(p.arcMissing)+'</div>':'')+
+    '<div class="arc-diagnosis">'+esc(p.arcDiagnosis||'')+'</div></div>';
+
+  const segCount = Math.min(p.arcSegCount||6, 8);
+  let tl='<div class="arc-timeline">';
+  for(let i=1;i<=segCount;i++){
+    const em = (p['arcSeg'+i+'emotion']||'neutral').toLowerCase();
+    const ex = p['arcSeg'+i+'excerpt']||'';
+    const nt = p['arcSeg'+i+'note']||'';
+    if(!ex&&!nt) continue;
+    const col = EMOTION_COLORS[em]||'#7f8c8d';
+    if(i>1) tl+='<div class="arc-arrow">→</div>';
+    tl+='<div class="arc-seg" style="background:'+col+'18;border-left:3px solid '+col+'">'+
+      '<div class="arc-emotion" style="color:'+col+'">'+esc(em)+'</div>'+
+      '<div class="arc-excerpt">'+esc(ex)+'</div>'+
+      '<div class="arc-note">'+esc(nt)+'</div></div>';
   }
+  tl+='</div>';
+  document.getElementById('arc-timeline').innerHTML = tl;
 
-  // Arc summary
-  const arcCol = p.arcScore >= 4 ? '#1a6e3c' : p.arcScore >= 3 ? '#a05c00' : '#a02020';
-  document.getElementById('arc-summary').innerHTML =
-    '<div class="arc-summary">' +
-    '<div class="arc-score-row">' +
-    '<span class="arc-score-label">Arc score</span>' +
-    '<span class="arc-score-val" style="color:' + arcCol + '">' + (p.arcScore || '—') + '/5</span>' +
-    '<span class="arc-pattern">' + esc(p.arcPattern || '') + '</span>' +
-    '</div>' +
-    (p.arcMissing ? '<div class="arc-missing">⚠ Missing: ' + esc(p.arcMissing) + '</div>' : '') +
-    '<div class="arc-diagnosis">' + esc(p.arcDiagnosis || '') + '</div>' +
-    '</div>';
-
-  // Arc timeline
-  const segCount = Math.min(p.arcSegCount || 6, 8);
-  let timelineHtml = '<div class="arc-timeline">';
-  for (let i = 1; i <= segCount; i++) {
-    const emotion = (p['arcSeg' + i + 'emotion'] || 'neutral').toLowerCase();
-    const excerpt = p['arcSeg' + i + 'excerpt'] || '';
-    const note    = p['arcSeg' + i + 'note']    || '';
-    if (!excerpt && !note) continue;
-    const color = EMOTION_COLORS[emotion] || '#7f8c8d';
-    if (i > 1) timelineHtml += '<div class="arc-arrow">→</div>';
-    timelineHtml +=
-      '<div class="arc-seg" style="background:' + color + '18;border-left:3px solid ' + color + '">' +
-      '<div class="arc-emotion" style="color:' + color + '">' + esc(emotion) + '</div>' +
-      '<div class="arc-excerpt">' + esc(excerpt) + '</div>' +
-      '<div class="arc-note">' + esc(note) + '</div>' +
-      '</div>';
+  const dc = Math.min(p.dropCount||5, 8);
+  let dm='';
+  for(let i=1;i<=dc;i++){
+    const risk = (p['drop'+i+'risk']||'low').toLowerCase();
+    const ex   = p['drop'+i+'excerpt']||'';
+    const rs   = p['drop'+i+'reason']||'';
+    const fx   = p['drop'+i+'fix']||'';
+    if(!ex&&!rs) continue;
+    const bc2 = risk==='high'?'drb-high':risk==='medium'?'drb-medium':'drb-low';
+    dm+='<div class="drop-seg drop-'+risk+'">'+
+      '<div class="drop-risk-badge '+bc2+'">'+risk.toUpperCase()+' RISK</div>'+
+      '<div class="drop-excerpt">"'+esc(ex)+'"</div>'+
+      '<div class="drop-reason">Why viewers leave: '+esc(rs)+'</div>'+
+      '<div class="drop-fix">Fix: '+esc(fx)+'</div></div>';
   }
-  timelineHtml += '</div>';
-  document.getElementById('arc-timeline').innerHTML = timelineHtml;
+  document.getElementById('drop-map').innerHTML = dm || '<div style="color:#888;font-size:14px;">No drop-off data.</div>';
 
-  // Drop-off map
-  const dropCount = Math.min(p.dropCount || 5, 8);
-  let dropHtml = '';
-  for (let i = 1; i <= dropCount; i++) {
-    const risk    = (p['drop' + i + 'risk']   || 'low').toLowerCase();
-    const excerpt = p['drop' + i + 'excerpt'] || '';
-    const reason  = p['drop' + i + 'reason']  || '';
-    const fix     = p['drop' + i + 'fix']     || '';
-    if (!excerpt && !reason) continue;
-    dropHtml +=
-      '<div class="drop-seg drop-' + risk + '">' +
-      '<div class="drop-risk-badge drop-risk-' + risk + '">' + risk.toUpperCase() + ' RISK</div>' +
-      '<div class="drop-excerpt">"' + esc(excerpt) + '"</div>' +
-      '<div class="drop-reason">Why viewers leave: ' + esc(reason) + '</div>' +
-      '<div class="drop-fix">Fix: ' + esc(fix) + '</div>' +
-      '</div>';
-  }
-  document.getElementById('drop-map').innerHTML = dropHtml || '<div style="color:#888;font-size:14px;">No drop-off data.</div>';
+  const cc2 = p.coldScore>=4?'#1a6e3c':p.coldScore>=3?'#a05c00':'#a02020';
+  document.getElementById('cold-score').innerHTML=
+    '<div class="cold-score-card"><div class="cold-score-row">'+
+    '<span class="cold-score-label">Cold audience score</span>'+
+    '<span class="cold-score-val" style="color:'+cc2+'">'+(p.coldScore||'—')+'/5</span></div>'+
+    '<div class="cold-diagnosis">'+esc(p.coldDiagnosis||'')+'</div></div>';
 
-  // Cold audience score
-  const coldCol = p.coldScore >= 4 ? '#1a6e3c' : p.coldScore >= 3 ? '#a05c00' : '#a02020';
-  document.getElementById('cold-score').innerHTML =
-    '<div class="cold-score-card">' +
-    '<div class="cold-score-row">' +
-    '<span class="cold-score-label">Cold audience score</span>' +
-    '<span class="cold-score-val" style="color:' + coldCol + '">' + (p.coldScore || '—') + '/5</span>' +
-    '</div>' +
-    '<div class="cold-diagnosis">' + esc(p.coldDiagnosis || '') + '</div>' +
-    '</div>';
-
-  // Cold criteria
-  const coldItems = [
-    { key: 'coldBrand',  label: 'Brand clarity',             noteKey: 'coldBrandNote' },
-    { key: 'coldOffer',  label: 'Offer clarity',             noteKey: 'coldOfferNote' },
-    { key: 'coldJargon', label: 'No unexplained jargon',     noteKey: 'coldJargonNote', termsKey: 'coldJargonTerms' },
-    { key: 'coldPain',   label: 'Universal pain hook',       noteKey: 'coldPainNote' },
-    { key: 'coldTrust',  label: 'Trust signals present',     noteKey: 'coldTrustNote' }
+  const coldItems=[
+    {key:'coldBrand',label:'Brand clarity',nk:'coldBrandNote'},
+    {key:'coldOffer',label:'Offer clarity',nk:'coldOfferNote'},
+    {key:'coldJargon',label:'No unexplained jargon',nk:'coldJargonNote',tk:'coldJargonTerms'},
+    {key:'coldPain',label:'Universal pain hook',nk:'coldPainNote'},
+    {key:'coldTrust',label:'Trust signals present',nk:'coldTrustNote'}
   ];
-
-  let coldHtml = '';
-  coldItems.forEach(cr => {
-    const verdict = (p[cr.key] || 'partial').toLowerCase();
-    const note    = p[cr.noteKey] || '';
-    const vc      = verdict === 'yes' ? 'cold-yes' : verdict === 'no' ? 'cold-no' : 'cold-partial';
-    const vl      = verdict === 'yes' ? '✓ Pass' : verdict === 'no' ? '✗ Fail' : '~ Partial';
-    const terms   = cr.termsKey ? (p[cr.termsKey] || '') : '';
-    coldHtml +=
-      '<div class="cold-card">' +
-      '<div class="cold-label">' + esc(cr.label) + '</div>' +
-      '<div class="cold-verdict ' + vc + '">' + vl + '</div>' +
-      '<div class="cold-note">' + esc(note) + '</div>' +
-      (terms ? '<div class="cold-jargon-list">' + terms.split(',').map(t => t.trim()).filter(Boolean).map(t => '<span class="cold-jargon-tag">' + esc(t) + '</span>').join('') + '</div>' : '') +
+  let cold='';
+  coldItems.forEach(cr=>{
+    const v=(p[cr.key]||'partial').toLowerCase();
+    const vc=v==='yes'?'cv-yes':v==='no'?'cv-no':'cv-partial';
+    const vl=v==='yes'?'✓ Pass':v==='no'?'✗ Fail':'~ Partial';
+    const terms=cr.tk?(p[cr.tk]||''):'';
+    cold+='<div class="cold-card"><div class="cold-label">'+esc(cr.label)+'</div>'+
+      '<div class="cold-verdict '+vc+'">'+vl+'</div>'+
+      '<div class="cold-note">'+esc(p[cr.nk]||'')+'</div>'+
+      (terms?'<div class="cold-jargon-list">'+terms.split(',').map(t=>t.trim()).filter(Boolean).map(t=>'<span class="cold-jargon-tag">'+esc(t)+'</span>').join('')+'</div>':'')+
       '</div>';
   });
-  document.getElementById('cold-criteria').innerHTML = coldHtml;
+  document.getElementById('cold-criteria').innerHTML = cold;
 }
 
-// ======================================================================
-// UI HELPERS
-// ======================================================================
+// ─── UI HELPERS ───────────────────────────────────────────────────────────────
 
 function toggleDetail(id) {
-  const body = document.getElementById('body-' + id);
-  const chev = document.getElementById('chev-' + id);
+  const body = document.getElementById('body-'+id);
+  const chev = document.getElementById('chev-'+id);
   if (!body) return;
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  if (chev) chev.classList.toggle('open', !isOpen);
+  const open = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  if (chev) chev.classList.toggle('open', !open);
 }
 
 function switchTab(el, name) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   if (el) el.classList.add('active');
-  const panel = document.getElementById('tab-' + name);
+  const panel = document.getElementById('tab-'+name);
   if (panel) panel.classList.add('active');
 }
 
 function esc(str) {
-  if (str === null || str === undefined) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/\n/g, '<br>');
+  if (str===null||str===undefined) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/\n/g,'<br>');
 }
 
-// ======================================================================
-// DOWNLOAD REPORT
-// ======================================================================
+// ─── PDF DOWNLOAD ─────────────────────────────────────────────────────────────
 
-function downloadReport() {
+function downloadPDF() {
   if (!_evalData) { alert('Run an evaluation first.'); return; }
-  const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-  const blob = new Blob([html], { type: 'text/html' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  const safeName = (_evalData.scriptName || 'script').replace(/[^a-z0-9]/gi, '-').toLowerCase();
-  a.download = 'evaluation-' + safeName + '-' + Date.now() + '.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  // Expand all breakdown sections before printing
+  document.querySelectorAll('.detail-body').forEach(b => b.classList.add('open'));
+  // Show all tab panels for print
+  document.querySelectorAll('.tab-panel').forEach(p => p.style.display = 'block');
+  window.print();
+  // Restore after print dialog closes
+  setTimeout(() => {
+    document.querySelectorAll('.tab-panel').forEach(p => p.style.display = '');
+    document.querySelectorAll('.tab-panel.active').forEach(p => p.style.display = 'block');
+    document.querySelectorAll('.detail-body').forEach(b => b.classList.remove('open'));
+  }, 1000);
 }
 </script>
 </body>
